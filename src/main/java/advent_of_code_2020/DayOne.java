@@ -16,16 +16,24 @@ public class DayOne {
         Path path = Paths.get(DayOne.class.getClassLoader()
                 .getResource("day_one.txt").toURI());
         List<String> lines = Files.readAllLines(path);
+        int iterations = 0;
 
         for (int i = 0; i < lines.size(); i++) {
             for (int j = i + 1; j < lines.size(); j++) {
-                int firstNumber = Integer.parseInt(lines.get(i));
-                int secondNumber = Integer.parseInt(lines.get(j));
-                if(firstNumber+secondNumber == 2020){
-                    System.out.println(i + " " + j + firstNumber + " " + secondNumber + ": " + firstNumber * secondNumber);
+                for (int k = j + 1; k < lines.size(); k++) {
+                    int firstNumber = Integer.parseInt(lines.get(i));
+                    int secondNumber = Integer.parseInt(lines.get(j));
+                    int thirdNumber = Integer.parseInt(lines.get(k));
+                    if (firstNumber + secondNumber + thirdNumber == 2020) {
+                        System.out.println(i + " " + j + " " + k + " "
+                                + firstNumber + " " + secondNumber + " " + thirdNumber
+                                + ": " + firstNumber * secondNumber * thirdNumber);
 //                    System.exit(0);
+                    }
+                    iterations++;
                 }
             }
         }
+        System.out.println(iterations);
     }
 }
