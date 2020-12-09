@@ -6,10 +6,14 @@ package advent_of_code_2020;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 class DaySevenTest {
     @Test
     public void test() {
-        String parseLine = DaySeven.parseLine("plaid fuchsia bags contain 5 light violet bags, 1 light yellow bag.");
-        assertThat(parseLine).isEqualTo("plaid fuchsia");
+        List<String> parseLine = DaySeven.parseLine("plaid fuchsia bags contain 5 light violet bags, 1 light yellow bag.");
+        //assertThat(parseLine).containsExactly("plaid fuchsia", "light violet");
+        System.out.println(parseLine.get(0));
+        System.out.println(parseLine.get(1));
     }
 }

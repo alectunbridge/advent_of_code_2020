@@ -1,0 +1,594 @@
+plaid fuchsia,light violet,light yellow
+striped aqua,striped teal
+clear coral,plaid green,mirrored gold
+dull tan,faded blue,faded olive,dull salmon
+plaid green,faded green
+light tomato,drab chartreuse,dotted tomato,striped red,vibrant violet
+dim tomato,striped gold,bright lavender,pale beige,pale tan
+vibrant green,faded teal
+shiny crimson,dull green
+vibrant black,dark beige,dark bronze
+light tan,striped tomato
+vibrant teal,shiny silver
+pale chartreuse,dotted plum
+plaid coral,pale green,faded tomato,dark salmon,vibrant magenta
+dull gray,dark tan,dotted tan
+muted gray,bright indigo,dotted purple
+vibrant red,bright tomato,shiny orange
+faded tan,dull crimson,faded red
+pale magenta,posh chartreuse,vibrant purple
+shiny gray,wavy purple
+light crimson,clear teal
+striped turquoise,pale tomato,posh teal
+striped purple,dark silver,vibrant gray,dim bronze,clear aqua
+muted magenta,striped tomato
+light teal,faded brown,posh purple,faded olive
+clear cyan,clear coral,clear aqua
+dull cyan,wavy crimson,pale orange
+shiny tan,bright red,plaid cyan
+light brown,dim yellow,dull orange,vibrant yellow
+pale tan,striped orange,dull plum
+wavy salmon,dark blue,dim plum
+mirrored cyan,plaid turquoise,dull plum,muted indigo,plaid white
+dark aqua,bright red,wavy purple,plaid tan
+wavy purple,wavy brown
+clear magenta,muted green,dull cyan,striped teal,faded blue
+bright red,vibrant tomato,dull orange
+pale purple,plaid turquoise,light tan,faded black,light yellow
+bright orange,mirrored orange,faded bronze,wavy turquoise,bright yellow
+faded lavender,plaid brown
+dark salmon,dotted crimson,posh bronze
+mirrored coral,dark red,dull fuchsia,drab magenta,dull indigo
+clear black,mirrored salmon,drab gold,muted fuchsia
+faded fuchsia,shiny silver,posh orange,plaid bronze
+dotted red,faded yellow,dull brown,clear red
+light purple,plaid magenta,vibrant coral,wavy black
+faded beige 
+dull fuchsia,dim lavender,dull aqua,pale fuchsia
+wavy olive,dotted cyan,dull lime
+dim teal,dull green
+dull orange,striped tomato,drab blue,faded blue,pale brown
+muted brown,dotted orange,bright tan
+vibrant coral,wavy turquoise
+clear aqua,posh bronze,dim orange,posh chartreuse
+dull plum,drab tan
+wavy tomato,wavy cyan,bright silver,dotted gray,dark tomato
+shiny fuchsia,dotted silver,dull lime,drab teal
+pale fuchsia,pale beige
+plaid plum,dotted plum,mirrored brown,dim yellow,vibrant bronze
+posh green,plaid indigo,wavy red,dim indigo,wavy indigo
+muted aqua,bright tan,dull yellow,faded blue
+mirrored white,dark coral,plaid red,dull violet,clear gray
+dotted aqua,drab aqua,faded tomato
+bright indigo,faded tan,clear turquoise,plaid indigo,bright gray
+posh silver,striped red,faded blue,dim plum,vibrant beige
+bright olive,dull silver,drab tomato
+muted beige,drab crimson
+shiny beige,clear blue
+wavy brown,striped coral,light purple
+wavy black,faded beige,striped red,pale brown,dull yellow
+faded salmon,light indigo,plaid cyan,pale salmon
+dark gold,mirrored plum,dark tomato,dull green,light lime
+mirrored lavender,muted brown,shiny blue,dull blue,wavy indigo
+wavy beige,mirrored purple,posh yellow,plaid green
+striped fuchsia,drab bronze,posh tomato,drab maroon,dim beige
+faded blue,striped tomato,dark olive,drab tan
+drab gray,posh teal
+dim cyan,dark fuchsia,wavy maroon,posh silver,posh chartreuse
+dotted purple,wavy white
+shiny brown,light silver,light turquoise,posh bronze
+vibrant tomato,dotted cyan,posh teal,clear magenta,dull lime
+dark bronze,vibrant maroon,mirrored olive
+wavy silver,striped magenta,dim fuchsia
+striped yellow,faded black,light beige,vibrant beige,mirrored beige
+faded chartreuse,clear gray,dotted gray
+faded tomato,faded gray,faded fuchsia,drab teal
+dull gold,dark plum,striped black
+muted turquoise,mirrored bronze,shiny aqua,clear plum
+dotted lime,dark black,pale brown
+vibrant violet,faded lime,pale fuchsia,dull plum
+faded black,striped teal,faded beige,wavy black,striped lavender
+drab teal,clear gold,muted crimson,light teal
+dull purple,posh crimson,clear blue
+dotted teal,dark tan
+dark red,dotted cyan,posh red,bright red,faded magenta
+light black,dull yellow
+light salmon,faded beige
+dull brown,light indigo,mirrored yellow,faded silver
+dark black,dull yellow,dull lime,posh aqua
+faded crimson,light fuchsia,muted chartreuse
+drab yellow,drab indigo,shiny brown,muted lime
+muted tomato,posh salmon,plaid indigo,striped aqua
+pale teal,muted red,mirrored brown,mirrored tan
+posh violet,posh tomato
+dim plum,faded magenta,drab silver,pale brown
+light fuchsia,dotted silver,dotted lavender,shiny gold,clear magenta
+vibrant orange,shiny blue,dull maroon
+shiny white,mirrored yellow,pale fuchsia,shiny turquoise
+drab green,mirrored lavender,posh tan
+faded silver,vibrant coral,striped lavender,dotted cyan,plaid turquoise
+faded gold,faded magenta
+dark coral,light maroon,drab silver
+striped olive,dotted maroon,wavy brown,wavy crimson,shiny silver
+wavy lavender,mirrored yellow,shiny crimson,dark indigo
+bright fuchsia,vibrant green,drab blue
+dotted turquoise,striped red
+drab black,faded tan
+pale silver,faded yellow,drab tan,muted salmon,shiny white
+striped magenta,dark turquoise,shiny blue,shiny crimson
+dotted beige,mirrored black,faded brown,bright red,clear coral
+clear maroon,bright bronze
+shiny olive,dull blue
+pale violet,light purple,pale tomato,plaid aqua,light magenta
+dotted white,bright purple,dull orange,plaid salmon
+plaid blue,faded blue,muted green,bright bronze
+mirrored lime,faded green,striped black,mirrored purple
+wavy violet,muted bronze
+light silver,dull cyan,drab tan
+dark tomato,vibrant tomato,striped tomato
+wavy teal,wavy red,drab brown,posh olive
+dim green,striped teal,drab blue
+wavy crimson 
+mirrored aqua,posh tan,muted teal,light violet
+light cyan,vibrant chartreuse,faded lime,drab purple,shiny white
+shiny gold,drab blue,posh purple,drab silver,wavy turquoise
+plaid chartreuse,mirrored olive,vibrant orange,shiny purple
+dim yellow,faded green,wavy fuchsia
+pale turquoise,drab turquoise
+clear red,pale bronze,drab tan
+shiny teal,bright aqua
+dotted tomato,dotted orange,light silver,dull green,wavy chartreuse
+striped tan,light turquoise,dotted salmon,shiny orange,clear red
+dim bronze,wavy gold
+posh crimson,posh aqua
+plaid salmon,dull tan
+mirrored salmon,muted aqua,muted salmon
+striped blue,wavy white,drab blue,drab chartreuse,dull orange
+pale red,striped red
+muted black,faded gold
+clear orange,faded red
+mirrored maroon,plaid tan
+dull aqua,pale gold
+posh coral,striped gold
+posh purple,pale orange,dull salmon,striped teal
+muted tan,clear coral,pale salmon
+mirrored orange,pale bronze
+striped teal 
+dark blue 
+clear bronze,vibrant gray
+light magenta,dim green
+drab coral,dotted chartreuse,vibrant crimson,muted green
+drab brown,dull tomato,vibrant bronze
+bright coral,posh plum,wavy gold,drab lavender,muted lavender
+dim white,shiny aqua
+plaid bronze,drab tan,plaid salmon,striped coral
+faded teal,vibrant white,wavy purple
+drab turquoise,pale tomato,bright indigo
+muted white,striped brown,light blue
+clear crimson,dark magenta
+shiny magenta,wavy tomato,shiny bronze,vibrant coral,bright lime
+bright magenta,wavy brown
+bright tomato,vibrant fuchsia,clear aqua
+wavy coral,striped gold,light purple,vibrant purple
+muted indigo,posh purple,light gold,striped lavender
+clear violet,wavy cyan,pale brown,faded magenta,bright purple
+dull white,wavy olive,mirrored olive,faded magenta,dull green
+dull magenta,dim beige
+dotted blue,posh beige,pale purple,shiny red
+dotted lavender,posh purple
+light white,striped lavender
+dark turquoise,light teal
+faded turquoise,striped violet,dull crimson,dim purple,light silver
+striped chartreuse,pale white,dim fuchsia
+pale gold,clear teal,wavy turquoise,light gold
+posh blue,muted yellow,dull crimson,wavy violet,mirrored fuchsia
+dotted gray,wavy fuchsia
+plaid magenta,plaid black
+pale beige,pale white,dim salmon,mirrored gold
+striped bronze,dull yellow,dark blue
+dark lime,pale magenta,clear cyan
+bright turquoise,light white,plaid salmon,clear aqua,dull silver
+posh salmon,drab turquoise
+muted bronze,pale bronze,clear maroon
+faded coral,clear gray,plaid gray,bright silver,posh yellow
+mirrored gray,dark coral,plaid blue,mirrored coral,mirrored olive
+vibrant olive,pale chartreuse,plaid green,dark coral
+dotted magenta,light chartreuse,plaid indigo,dull tan
+light violet,muted green
+dim fuchsia,dim tan,faded black,drab white
+dotted black,bright gold,faded gold
+striped indigo,posh aqua
+posh cyan,dull fuchsia
+vibrant turquoise,muted chartreuse,clear magenta,drab chartreuse
+mirrored magenta,dull lime
+mirrored violet,posh magenta,plaid white,wavy turquoise,dull salmon
+pale tomato,wavy maroon,clear aqua,striped lavender
+clear fuchsia,dark cyan,plaid cyan
+drab orange,mirrored purple,striped orange
+bright blue,bright cyan,plaid green
+muted chartreuse,faded beige,faded green
+plaid teal,mirrored orange,plaid plum
+light blue,faded silver,light turquoise,dim aqua,posh silver
+bright tan,striped coral,dark fuchsia
+shiny black,light green
+plaid violet,faded magenta,shiny bronze,vibrant tomato
+posh bronze,shiny gold,bright yellow,dull cyan
+light red,dotted black,pale coral
+striped red 
+clear tan,faded brown,bright brown,bright gold
+dull turquoise,mirrored yellow,wavy red,faded purple,clear green
+plaid yellow,dark red,dull tomato,faded violet
+dotted gold,dotted lime,faded gray,clear coral
+dull bronze,pale red,dim indigo
+shiny green,pale red,mirrored silver,bright lime,pale indigo
+bright black,striped plum,clear black,clear olive
+bright gold,wavy cyan,dotted magenta,muted salmon,light maroon
+muted violet,wavy cyan,dim tan,posh gray,vibrant brown
+dim turquoise,pale tomato,dotted silver,mirrored coral
+drab lime,shiny gold
+wavy bronze,shiny red,dotted cyan
+vibrant purple,drab chartreuse,dotted yellow
+plaid purple,drab beige,pale aqua,muted magenta
+faded brown,faded beige,light chartreuse,mirrored gold
+pale lavender,mirrored tomato,wavy maroon,wavy lime
+posh fuchsia,posh orange
+drab fuchsia,dim plum,dark coral,dark red
+striped crimson,pale orange,faded beige,faded brown
+wavy lime,dull crimson
+vibrant fuchsia,wavy white
+vibrant plum,dim salmon,plaid tan,dull blue
+muted cyan,striped beige
+clear teal,wavy aqua,dotted plum
+dark maroon,light violet,clear plum,dotted fuchsia,vibrant tomato
+dull black,muted olive
+light yellow,dull white,dark aqua,light purple,dim green
+pale bronze,wavy aqua
+plaid red,pale plum,muted brown,dull bronze
+dim gray,muted lavender
+plaid gray,muted aqua
+vibrant blue,light tomato,plaid beige
+clear blue,clear plum,drab chartreuse
+dotted green,plaid white,vibrant turquoise,drab silver
+dull crimson,mirrored yellow,posh red,faded brown
+striped maroon,shiny magenta,light brown,dull green
+dark yellow,faded silver,shiny lavender,dim crimson,plaid bronze
+pale indigo,plaid salmon,striped purple,pale magenta,dotted lime
+faded maroon,light silver,dim bronze,faded tan,striped crimson
+pale green,vibrant white
+muted maroon,light black,mirrored fuchsia
+pale yellow,dull bronze,bright maroon,wavy cyan,dotted lavender
+posh white,mirrored turquoise,shiny aqua,striped blue,faded coral
+wavy orange,wavy crimson,bright brown,bright magenta,dotted gold
+dark beige,muted white
+dotted salmon,dim bronze,striped orange
+dotted fuchsia,striped red,bright purple
+pale cyan,dull blue
+mirrored purple,light turquoise,faded silver
+drab violet,vibrant turquoise,muted chartreuse,pale bronze
+wavy gray,dark purple,muted green
+wavy magenta,dark white,vibrant black,muted coral
+pale plum,mirrored brown,pale red
+light plum,dark tomato,wavy gold
+pale aqua,striped red,dim crimson,mirrored orange
+muted green,mirrored yellow
+bright purple,light violet,clear magenta,faded lime
+dark green,shiny aqua
+dark orange,striped coral
+dotted chartreuse,bright lime,light olive,muted red,posh chartreuse
+shiny chartreuse,bright salmon,plaid indigo
+clear gold,dull lime,shiny brown,dull plum,dull salmon
+shiny salmon,muted salmon,dotted lavender
+striped cyan,drab tan,dotted cyan,posh aqua,plaid magenta
+dark plum,clear orange,striped black
+vibrant magenta,plaid tan,muted bronze,bright chartreuse
+clear beige,muted tan,clear turquoise,mirrored turquoise,bright silver
+drab lavender,dotted cyan,clear plum
+shiny coral,drab beige
+light bronze,mirrored plum,light black
+vibrant yellow,vibrant coral,mirrored olive,light lime,muted crimson
+vibrant salmon,faded beige,faded olive,pale brown
+dim tan,faded beige,light tan
+vibrant silver,dark tomato
+striped salmon,faded brown
+shiny purple,pale lavender,plaid black,drab indigo
+light turquoise,dark silver
+dark chartreuse,dark silver
+mirrored indigo,mirrored gold,dotted white
+faded olive,pale brown,faded beige,light chartreuse
+mirrored black,posh purple
+clear green,dark magenta,faded gold,striped teal,dark purple
+bright beige,light olive,wavy orange,dotted lavender
+plaid brown,dull lavender,drab gold
+vibrant chartreuse,bright bronze,wavy crimson
+posh aqua,muted green,dim green,dim crimson,posh red
+vibrant gold,wavy chartreuse,drab gold,striped blue,posh yellow
+posh tan,shiny chartreuse,drab bronze
+bright violet,pale lavender,mirrored olive,posh turquoise
+faded lime,pale brown,faded black,faded beige
+vibrant gray,vibrant chartreuse,bright purple
+dull silver,pale tomato,shiny turquoise,mirrored yellow
+pale maroon,posh red,plaid bronze,striped red
+dull lavender,vibrant violet,bright yellow,bright aqua
+light aqua,vibrant turquoise
+striped violet,drab silver,posh magenta,wavy turquoise
+bright green,drab teal
+light coral,dotted violet,pale chartreuse
+muted salmon,vibrant turquoise,clear chartreuse,dark fuchsia,bright bronze
+wavy cyan,dim orange,dull orange,plaid indigo,dim salmon
+shiny red,dim blue,clear plum
+vibrant beige,posh red
+shiny maroon,striped tomato,faded lime
+shiny aqua,bright yellow
+bright aqua,wavy lavender,striped coral,dotted cyan,drab cyan
+dim olive,posh blue,vibrant violet,drab brown,dull purple
+shiny silver,dim green,dull cyan
+dim brown,wavy brown,drab black
+dotted brown,drab crimson,shiny red
+striped coral,striped red,dotted cyan
+dotted plum,faded lime,striped lavender,wavy crimson,faded brown
+light gold,light silver,posh teal,dark orange,bright bronze
+dark tan,drab black,plaid cyan,faded yellow,dim blue
+posh olive,drab olive,dull tan,wavy chartreuse,muted magenta
+dull red,vibrant teal,dim salmon,bright violet,dark lavender
+plaid turquoise,faded green,wavy crimson
+plaid cyan,dull yellow,dotted cyan,light chartreuse,faded green
+dull indigo,faded silver
+pale brown 
+striped plum,dull lime,muted white,striped teal
+dotted coral,faded silver,wavy aqua,light chartreuse,posh indigo
+mirrored beige,plaid black,plaid tan,pale bronze
+vibrant cyan,wavy beige,shiny orange
+wavy fuchsia,pale maroon,drab violet,shiny orange
+drab silver,dark blue,light chartreuse,mirrored gold
+wavy turquoise,posh red,striped teal
+bright cyan,bright silver,muted gray,faded aqua,wavy aqua
+wavy green,clear violet,dark olive,clear magenta,mirrored black
+mirrored gold,dark olive
+wavy gold,plaid indigo
+dotted yellow,dull orange,faded green
+light beige,dull cyan
+bright crimson,faded tan,faded chartreuse,vibrant brown
+dotted bronze,striped white
+mirrored yellow,wavy crimson,dark olive,drab tan
+plaid lavender,light tomato,dull blue,wavy indigo,bright gray
+drab purple,dotted plum,drab olive,drab tan,dark black
+shiny lime,plaid bronze,shiny gold
+drab chartreuse,bright bronze,light teal,mirrored yellow
+bright plum,drab turquoise
+light orange,shiny lavender,dark fuchsia,muted olive,wavy olive
+striped beige,dull crimson,dotted fuchsia
+wavy chartreuse,bright salmon,faded green,mirrored black
+striped tomato 
+plaid aqua,light magenta,pale white,clear blue,dull crimson
+plaid tan,dull green,light silver,dim orange,dark blue
+dotted cyan,wavy black,striped teal
+dull green,plaid magenta,dull plum,dim green
+faded purple,mirrored cyan,dull beige,vibrant purple
+dotted maroon,vibrant beige,plaid magenta
+faded aqua,plaid gold,plaid yellow,bright lime
+pale lime,light blue
+dark indigo,light gold
+shiny orange,plaid black,faded brown,plaid indigo
+muted olive,wavy chartreuse
+muted purple,dotted silver
+plaid black,drab silver
+striped lavender,wavy crimson
+posh chartreuse,drab chartreuse
+clear purple,faded green,bright gold
+dark crimson,plaid teal,muted cyan
+clear silver,pale beige,mirrored tomato
+dotted indigo,dark plum,clear magenta,light olive
+dull chartreuse,light turquoise,drab brown
+bright brown,light purple,vibrant coral
+dim salmon,dull salmon
+muted lime,muted violet,shiny white
+vibrant lime,mirrored bronze,dotted crimson,dim yellow,mirrored gold
+muted silver,striped orange,drab purple
+mirrored bronze,dull bronze
+light olive,mirrored olive,dim lime,clear magenta
+vibrant tan,shiny teal
+posh red,bright bronze,striped teal,faded beige,faded olive
+faded red,striped lavender,posh red
+mirrored brown,dim salmon,drab chartreuse,wavy tomato
+dark gray,muted tan,faded blue,dim chartreuse
+dark white,vibrant lime,pale olive
+striped silver,dim cyan
+clear salmon,pale magenta,mirrored salmon
+pale white,wavy crimson,plaid indigo,striped crimson,drab violet
+vibrant indigo,mirrored gold,striped turquoise,posh beige
+drab aqua,faded crimson,wavy gold,striped tomato
+clear brown,bright lavender
+posh indigo,mirrored red,clear coral
+posh black,dim fuchsia,muted olive,mirrored red
+shiny lavender,muted aqua,striped black,wavy salmon,mirrored purple
+vibrant bronze,bright tan,faded beige,pale red,plaid cyan
+clear chartreuse,shiny gold,wavy turquoise,muted crimson
+drab tan 
+posh gold,dotted beige,striped crimson,drab purple,bright gray
+clear olive,dark tomato
+dim aqua,wavy black,clear chartreuse,clear aqua
+pale coral,shiny orange,dark black,vibrant coral
+drab blue,dull salmon
+vibrant white,mirrored yellow
+faded indigo,clear aqua
+posh turquoise,light purple,mirrored salmon
+dotted orange,dark blue,shiny lavender,dim plum,clear violet
+muted crimson,wavy crimson,light magenta,clear plum
+dim coral,vibrant red,vibrant magenta
+mirrored plum,light olive
+dull violet,dim aqua
+faded violet,clear violet,muted indigo,clear red,posh tan
+vibrant crimson,shiny crimson
+muted plum,drab beige,posh maroon
+dim orange,bright salmon
+dim blue,mirrored black,faded blue
+mirrored tan,plaid plum
+pale crimson,dim green,pale fuchsia
+bright white,drab gold,shiny maroon,mirrored lime
+dim indigo,mirrored cyan,wavy purple,drab brown
+dotted violet,bright teal,vibrant plum
+wavy indigo,drab silver,muted chartreuse,drab aqua,mirrored teal
+dark cyan,muted magenta,vibrant violet,mirrored aqua,drab violet
+posh maroon,muted chartreuse,dark olive
+drab tomato,plaid tan,posh purple,posh beige
+wavy tan,light cyan,muted brown,mirrored coral,light chartreuse
+faded bronze,dotted magenta
+pale blue,pale purple
+dim magenta,posh aqua,dim crimson,wavy gold,shiny orange
+dark fuchsia,drab silver
+wavy white,vibrant turquoise,clear violet,dull salmon
+drab maroon,pale tomato,dim chartreuse,mirrored orange,drab violet
+muted fuchsia,muted bronze,plaid brown,faded white
+plaid gold,vibrant bronze,striped chartreuse
+faded green,dull cyan,posh purple
+light indigo,mirrored tomato
+striped white,clear plum
+posh magenta,wavy crimson,striped coral
+drab olive,striped orange
+plaid indigo,plaid turquoise
+dark brown,faded tan,wavy green
+faded cyan,bright violet,mirrored salmon
+dim lavender,mirrored fuchsia,pale magenta,dotted tan,posh bronze
+dull maroon,dark silver,dim plum
+dull teal,pale green
+shiny yellow,dotted fuchsia
+mirrored crimson,dotted plum
+drab beige,faded orange,dark orange,clear orange
+dull olive,vibrant bronze,shiny chartreuse
+wavy red,wavy brown,wavy olive,striped cyan
+light gray,pale salmon,plaid bronze,dull yellow
+faded gray,muted green,faded red,muted magenta,bright magenta
+drab indigo,posh gold,dull lime,pale orange
+bright yellow,posh red,shiny gold
+drab bronze,dark indigo
+striped gold,faded yellow,mirrored tomato,bright lime
+muted gold,dim violet
+plaid olive,wavy fuchsia
+bright gray,bright bronze,plaid white,pale bronze
+clear turquoise,mirrored purple,light gold,dim cyan,wavy olive
+wavy plum,bright yellow
+dull blue,dotted lavender
+posh gray,faded blue,dull brown,clear cyan
+pale black,dim cyan,bright white
+wavy blue,faded olive,bright lavender,wavy black,posh magenta
+posh beige,light cyan,wavy violet,muted olive
+clear plum,dull cyan
+drab cyan,plaid green
+vibrant aqua,posh maroon
+dim silver,shiny gold,posh magenta,light white
+posh brown,plaid salmon,vibrant blue,posh olive
+dark teal,faded brown
+clear white,vibrant tan,light purple,posh tan,faded beige
+dim maroon,plaid chartreuse,dim gray,drab gold,light white
+dull salmon,striped teal,dark blue,drab tan,wavy crimson
+dull coral,faded red,shiny teal,bright gray,pale brown
+dark violet,clear cyan,mirrored beige,vibrant turquoise
+vibrant maroon,muted magenta,muted olive,shiny turquoise
+posh orange,dark black,pale maroon,dull plum
+clear indigo,faded tan,clear orange,vibrant aqua
+clear gray,dull salmon,dark magenta
+shiny turquoise,muted green,vibrant beige,mirrored cyan,striped blue
+pale salmon,dark silver,dim green
+striped gray,dark lavender
+dull yellow,dark blue,striped tomato,striped red,pale brown
+posh yellow,dull green,dull plum
+plaid white,plaid turquoise,dotted cyan,shiny gold,clear plum
+faded orange,dull silver,clear gray,posh tomato,wavy yellow
+dim violet,drab silver,dull yellow,faded blue
+light green,drab gold,wavy purple
+dark magenta,light gold,drab violet
+dark purple,plaid beige
+mirrored blue,plaid tan
+dim lime,dotted beige,striped white,dim blue,wavy blue
+bright chartreuse,clear orange
+vibrant brown,mirrored violet,dull green,pale magenta
+drab salmon,muted magenta
+muted teal,dark black,light gold
+striped lime,dim orange
+plaid crimson,dim teal,dull salmon
+posh plum,pale gray
+light maroon,drab violet,faded brown,striped black,striped coral
+pale gray,dark aqua,mirrored tomato
+light chartreuse 
+dim crimson,faded blue,dark blue,striped teal
+dim beige,wavy silver,wavy orange,dim lime,mirrored lime
+bright teal,dull violet,faded beige,faded orange
+striped green,drab gold,posh olive,light indigo,clear yellow
+striped black,striped crimson,pale red
+plaid beige,pale tomato
+drab plum,striped coral,dotted crimson
+plaid orange,bright aqua
+wavy maroon,dim orange,dim violet,posh chartreuse,plaid tan
+dim purple,mirrored black,plaid plum,striped teal,posh aqua
+mirrored red,shiny salmon,bright salmon,vibrant salmon
+striped brown,light lime,drab black,dull white,drab lavender
+dim red,mirrored black
+clear lavender,pale fuchsia
+bright bronze,striped teal,clear plum,dim crimson,faded black
+shiny violet,dark gold,posh maroon
+bright lime,clear magenta,dark blue,striped lavender,dull crimson
+mirrored silver,vibrant tomato,dull salmon,plaid green,wavy brown
+dotted olive,faded beige
+posh tomato,faded purple
+posh teal,drab tan,striped red,dull salmon,striped lavender
+shiny tomato,posh indigo
+dotted crimson,pale gray
+shiny indigo,pale beige
+plaid lime,light maroon
+mirrored turquoise,faded bronze
+drab crimson,vibrant plum
+dim black,muted tan,drab silver,dull white
+faded yellow,faded black
+faded white,wavy lavender,shiny orange
+plaid tomato,shiny brown,clear red
+drab white,dark yellow
+mirrored tomato,light gold,mirrored gold,dim plum
+plaid maroon,mirrored lime,plaid salmon,shiny chartreuse
+drab gold,dim plum,mirrored violet
+muted orange,mirrored lime,muted maroon,drab violet,posh green
+mirrored fuchsia,dim plum,muted olive,wavy white,dotted cyan
+plaid silver,pale violet,striped purple,dull purple
+dotted silver,vibrant coral
+shiny cyan,mirrored teal,faded magenta,bright lime,vibrant teal
+clear yellow,muted brown,wavy lime
+muted red,muted coral,light violet,muted indigo,dotted tan
+dull beige,plaid black,pale white,light violet,pale crimson
+vibrant lavender,dark chartreuse,bright lavender
+posh lime,shiny cyan,dotted blue,mirrored chartreuse
+shiny blue,dotted magenta
+muted yellow,plaid salmon,dull tomato
+muted blue,wavy magenta,vibrant gray
+dotted tan,wavy green,dim plum
+drab red,dark olive,mirrored tan,dull coral,plaid yellow
+dull tomato,clear aqua,dark fuchsia,light teal
+bright salmon,dark blue
+pale olive,light violet,shiny bronze,dotted magenta,posh silver
+mirrored teal,posh chartreuse,vibrant bronze
+mirrored chartreuse,striped olive,mirrored maroon,faded black,pale plum
+pale orange,mirrored gold,faded brown,dark olive
+dark olive 
+faded plum,bright green,shiny beige,vibrant indigo,mirrored orange
+drab magenta,dark fuchsia,striped salmon
+dark lavender,mirrored red,vibrant aqua,dotted tan
+shiny bronze,clear aqua,dull salmon,plaid turquoise,plaid bronze
+faded magenta,mirrored gold,dim orange
+light lavender,striped magenta,light yellow
+clear tomato,dark bronze,plaid aqua,faded lime,bright salmon
+clear lime,mirrored lavender,bright silver,pale teal
+light lime,dim crimson,vibrant tomato,posh red
+wavy yellow,muted chartreuse,drab teal,striped tomato
+dark silver,posh magenta,plaid black,faded brown
+bright maroon,dotted turquoise,wavy silver,dotted lime
+striped orange,striped coral,posh teal
+bright silver,mirrored violet,striped gold,striped white,clear chartreuse
+mirrored olive,light silver,muted crimson
+dim gold,clear magenta
+shiny plum,muted olive,dark turquoise,dull green,plaid magenta
+mirrored green,striped magenta,light lime,dim cyan
+wavy aqua,dull tan,vibrant beige
+posh lavender,muted black
+dull lime,plaid black
+dim chartreuse,bright red
+muted lavender,faded red,drab brown,clear bronze
+muted coral,clear red,vibrant maroon
+bright lavender,striped blue
