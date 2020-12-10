@@ -19,7 +19,7 @@ public class DaySeven {
             bags.add(colours);
         }
         for (List<String> bag : bags) {
-            if(bag.size()==1){
+            if(bag.contains("shiny gold") && !"shiny gold".equals(bag.get(0))){
                 System.out.println(bag);
             }
         }
