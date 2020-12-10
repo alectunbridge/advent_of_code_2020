@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,9 +13,15 @@ public class DaySeven {
     public static void main(String[] args) throws IOException {
         Path path = Paths.get("/home/codespace/advent_of_code_2020/src/main/resources/day_seven_stripped.txt");
         List<String> lines = Files.readAllLines(path);
+        List<List<String>> bags = new ArrayList<>();
         for(String line:lines){
             List<String> colours = parseLine(line);
-            System.out.println(colours);
+            bags.add(colours);
+        }
+        for (List<String> bag : bags) {
+            if(bag.size()==1){
+                System.out.println(bag);
+            }
         }
     }
 
