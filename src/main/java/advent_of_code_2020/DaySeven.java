@@ -26,26 +26,24 @@ public class DaySeven {
             bags.add(colours);
         }
         var daySeven = new DaySeven(bags);
-        Set<String> answer = new HashSet<>();
-        daySeven.recurse(answer, Arrays.asList("shiny gold"));
+        var answer = daySeven.findContainingBags(Collections.singleton("shiny gold"));
         System.out.println(answer);
         System.out.println(answer.size());
     }
 
-    private void recurse(Set<String> answer, List<String> foundBags) {
-        if(foundBags.isEmpty()) {
-            return;
+    private Set<String> findContainingBags(Set<String> bagsToFind) {
+        Set<String> result = new HashSet<>();
+        for(String bag: bagsToFind) {
+            Set<String> containingBags = findContainingBags(bag);
+            result.addAll(containingBags);
+            result.addAll(findContainingBags(containingBags));
         }
-        for(String bag: foundBags) {
-            List<String> containingBags = findContainingBags(bag);
-            answer.addAll(containingBags);
-            recurse(answer, containingBags);
-        }
+        return result;
     }
 
-    private List<String> findContainingBags(String colour) {
+    private Set<String> findContainingBags(String colour) {
         System.out.println(colour);
-        List<String> result = new ArrayList<>();
+        Set<String> result = new HashSet<>();
         for (List<String> bag : bags) {
             if(bag.contains(colour) && !colour.equals(bag.get(0))){
                 result.add(bag.get(0));
