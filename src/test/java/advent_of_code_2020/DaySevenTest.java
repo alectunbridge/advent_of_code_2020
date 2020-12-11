@@ -6,14 +6,24 @@ package advent_of_code_2020;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.List;
 
 class DaySevenTest {
     @Test
-    public void test() {
-        List<String> parseLine = DaySeven.parseLine("plaid fuchsia bags contain 5 light violet bags, 1 light yellow bag.");
+    public void testParseLine() {
+        List<Bag> parseLine = DaySeven.parseLine("dark olive bags contain no other bags.");
         //assertThat(parseLine).containsExactly("plaid fuchsia", "light violet");
-        System.out.println(parseLine.get(0));
-        System.out.println(parseLine.get(1));
+        System.out.println(parseLine.size());
+        parseLine.stream().forEach(System.out::println);
     }
+
+    @Test
+    public void testFindContainingBags() throws IOException {
+        DaySeven daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test.txt");
+        System.out.println(daySeven.findContainingBags("shiny gold"));
+
+    }
+
+
 }
