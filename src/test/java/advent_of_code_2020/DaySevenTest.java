@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,21 +21,33 @@ class DaySevenTest {
     }
 
     @Test
-    public void testFindContainingBags() throws IOException {
-        DaySeven daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test.txt");
+    public void testFindContainingBags() throws IOException, URISyntaxException {
+        DaySeven daySeven = new DaySeven("day_seven_test.txt");
         System.out.println(daySeven.findContainingBags("shiny gold"));
 
     }
 
     @Test
-    public void testFindShinyGoldBag() throws IOException {
-        DaySeven daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test.txt");
+    public void testFindShinyGoldBag() throws IOException, URISyntaxException {
+        DaySeven daySeven = new DaySeven("day_seven_test.txt");
         System.out.println(daySeven.findBagByColour("shiny gold"));
     }
 
     @Test
-    public void testGetPart2Answer() throws IOException {
-        DaySeven daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test.txt");
+    public void getNumberOfBagsInside() throws IOException, URISyntaxException {
+        DaySeven daySeven = new DaySeven("day_seven_test.txt");
         assertThat(daySeven.getNumberOfBagsInside(Collections.singletonList(new Bag("shiny gold")))).isEqualTo(32);
+    }
+
+    @Test
+    public void getNumberOfBagsInside2() throws IOException, URISyntaxException {
+        DaySeven daySeven = new DaySeven("day_seven_test_2.txt");
+        assertThat(daySeven.getNumberOfBagsInside(Collections.singletonList(new Bag("shiny gold")))).isEqualTo(126);
+    }
+
+    @Test
+    public void getNumberOfBagsInsidePart2Answer() throws IOException, URISyntaxException {
+        DaySeven daySeven = new DaySeven("day_seven.txt");
+        assertThat(daySeven.getNumberOfBagsInside(Collections.singletonList(new Bag("shiny gold")))).isEqualTo(80902);
     }
 }

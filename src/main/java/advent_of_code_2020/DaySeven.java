@@ -1,6 +1,7 @@
 package advent_of_code_2020;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 class Bag {
     String colour;
-    int number;
+    int number = 1;
     Bag(String line){
         Pattern pattern = Pattern.compile("(\\d)? ?([^\\d]*)");
         Matcher matcher = pattern.matcher(line);
@@ -40,10 +41,11 @@ public class DaySeven {
 
     private List<List<Bag>> bags;
 
-    public DaySeven(String filePath) throws IOException {
+    public DaySeven(String fileName) throws IOException, URISyntaxException {
         //        Path path = Paths.get("/home/codespace/advent_of_code_2020/src/main/resources/day_seven_stripped.txt");
         //        Path path = Paths.get("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test_stripped.txt");
-        Path path = Paths.get(filePath);
+        Path path = Paths.get(DayOne.class.getClassLoader()
+                        .getResource(fileName).toURI());
         List<String> lines = Files.readAllLines(path);
         List<List<Bag>> bags = new ArrayList<>();
         for(String line:lines){
@@ -53,8 +55,8 @@ public class DaySeven {
         this.bags = bags;
     }
 
-    public static void main(String[] args) throws IOException {
-        var daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven.txt");
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        var daySeven = new DaySeven("day_seven.txt");
         var answer = daySeven.findContainingBags(Collections.singleton("shiny gold"));
         daySeven.bags.stream().forEach(System.out::println);
         System.out.println(answer);
@@ -97,7 +99,7 @@ public class DaySeven {
         List<Bag> bagsInsideShinyGold = findBagByColour(bag.get(0).colour);
         total = bagsInsideShinyGold.stream()
                 .skip(1)
-                .mapToInt(internalBag -> internalBag.number + getNumberOfBagsInside(findBagByColour(internalBag.colour))).sum();
+                .mapToInt(internalBag -> internalBag.number + internalBag.number * getNumberOfBagsInside(findBagByColour(internalBag.colour))).sum();
         return total;
     }
 }
