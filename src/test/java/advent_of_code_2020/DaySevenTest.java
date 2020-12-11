@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 class DaySevenTest {
@@ -25,5 +26,15 @@ class DaySevenTest {
 
     }
 
+    @Test
+    public void testFindShinyGoldBag() throws IOException {
+        DaySeven daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test.txt");
+        System.out.println(daySeven.findBagByColour("shiny gold"));
+    }
 
+    @Test
+    public void testGetPart2Answer() throws IOException {
+        DaySeven daySeven = new DaySeven("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test.txt");
+        assertThat(daySeven.getNumberOfBagsInside(Collections.singletonList(new Bag("shiny gold")))).isEqualTo(32);
+    }
 }

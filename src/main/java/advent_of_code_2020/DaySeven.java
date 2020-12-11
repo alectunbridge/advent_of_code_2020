@@ -38,16 +38,16 @@ class Bag {
 
 public class DaySeven {
 
-    private List<List<String>> bags;
+    private List<List<Bag>> bags;
 
     public DaySeven(String filePath) throws IOException {
         //        Path path = Paths.get("/home/codespace/advent_of_code_2020/src/main/resources/day_seven_stripped.txt");
         //        Path path = Paths.get("/home/alec/sourcecode/advent_of_code_2020/src/main/resources/day_seven_test_stripped.txt");
         Path path = Paths.get(filePath);
         List<String> lines = Files.readAllLines(path);
-        List<List<String>> bags = new ArrayList<>();
+        List<List<Bag>> bags = new ArrayList<>();
         for(String line:lines){
-            List<String> colours = parseLine(line).stream().map(Bag::getColour).collect(Collectors.toList());
+            List<Bag> colours = parseLine(line);
             bags.add(colours);
         }
         this.bags = bags;
@@ -73,10 +73,8 @@ public class DaySeven {
 
     public Set<String> findContainingBags(String colour) {
         Set<String> result = new HashSet<>();
-        for (List<String> bag : bags) {
-            if(bag.contains(colour) && !colour.equals(bag.get(0))){
-                result.add(bag.get(0));
-            }
+        for (List<Bag> bag : bags) {
+            bag.stream().skip(1).map(Bag::getColour).filter(colour::equals).findFirst().ifPresent(result::add);
         }
         return result;
     }
@@ -89,4 +87,17 @@ public class DaySeven {
         return Arrays.stream(line.split(",")).map(Bag::new).collect(Collectors.toList());
     }
 
+    public List<Bag> findBagByColour(String bagColour) {
+        return bags.stream().filter(b-> bagColour.equals(b.get(0).colour)).findFirst().get();
+    }
+
+    public int getNumberOfBagsInside(List<Bag> bag) {
+        System.out.println(bag.get(0).colour);
+        int total;
+        List<Bag> bagsInsideShinyGold = findBagByColour(bag.get(0).colour);
+        total = bagsInsideShinyGold.stream()
+                .skip(1)
+                .mapToInt(internalBag -> internalBag.number + getNumberOfBagsInside(findBagByColour(internalBag.colour))).sum();
+        return total;
+    }
 }
