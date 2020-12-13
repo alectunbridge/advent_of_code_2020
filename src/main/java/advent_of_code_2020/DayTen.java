@@ -5,11 +5,13 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DayTen {
+
+    private static Map<Integer, Long> visited;
+
     public static void main(String[] args) throws URISyntaxException, IOException {
         Path path = Paths.get(DayOne.class.getClassLoader()
                 .getResource("day_ten.txt").toURI());
@@ -17,22 +19,44 @@ public class DayTen {
         List<Integer> jolts = Files.readAllLines(path).stream().map(Integer::valueOf).sorted().collect(Collectors.toList());
         jolts.add(0,0);
         System.out.println(jolts);
-        int stepsOfOne = 0;
-        int stepsOfTree = 0;
+
+        Map<Integer,Set<Integer>> joltToPossibleJoltMap = new TreeMap<>();
+
         for (int i = 0; i < jolts.size(); i++) {
-            if(i+1 == jolts.size()){
-                break;
+            int jolt = jolts.get(i);
+            Set<Integer> possibleNextJolts = new TreeSet<>();
+            if(jolts.contains(jolt+1)){
+                possibleNextJolts.add(jolt+1);
             }
-            int difference = jolts.get(i + 1) - jolts.get(i);
-            if(difference == 1){
-                stepsOfOne++;
-            } else if (difference == 3){
-                stepsOfTree++;
+            if(jolts.contains(jolt+2)){
+                possibleNextJolts.add(jolt+2);
             }
+            if(jolts.contains(jolt+3)){
+                possibleNextJolts.add(jolt+3);
+            }
+            joltToPossibleJoltMap.put(jolt,possibleNextJolts);
         }
-        stepsOfTree++;
-        System.out.println(stepsOfOne);
-        System.out.println(stepsOfTree);
-        System.out.println(stepsOfOne*stepsOfTree);
+
+        System.out.println(joltToPossibleJoltMap);
+
+        visited = new HashMap<>();
+        walkTheTree(joltToPossibleJoltMap, 0);
+    }
+
+    private static long walkTheTree(Map<Integer, Set<Integer>> joltToPossibleJoltMap, int i) {
+        long pathsFromHere = 0;
+        if(visited.containsKey(i)){
+            return visited.get(i);
+        }
+        Set<Integer> possibleNextJolts = joltToPossibleJoltMap.get(i);
+        if(possibleNextJolts.isEmpty()){
+            return 1;
+        }
+        for(Integer possibleNextJolt: possibleNextJolts){
+            pathsFromHere += walkTheTree(joltToPossibleJoltMap, possibleNextJolt);
+        }
+        System.out.printf("number: %d, pathsFromHere: %d\n",i,pathsFromHere);
+        visited.put(i,pathsFromHere);
+        return pathsFromHere;
     }
 }
