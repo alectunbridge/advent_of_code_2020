@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DayElevenTest {
     @Test
-    void testExampleMove1() {
+    void testExampleRound1() {
         DayEleven dayEleven = new DayEleven(
                    "L.LL.LL.LL" + "\n" +
                         "LLLLLLL.LL" + "\n" +
@@ -20,7 +20,7 @@ public class DayElevenTest {
                         "L.LLLLL.LL"
         );
 
-        String output = dayEleven.takeTurn();
+        String output = dayEleven.nextRound();
 
         assertThat(output).isEqualTo(
                         "#.##.##.##" + "\n" +
@@ -33,6 +33,37 @@ public class DayElevenTest {
                         "##########" + "\n" +
                         "#.######.#" + "\n" +
                         "#.#####.##"
+        );
+    }
+
+    @Test
+    void testExampleRound2() {
+        DayEleven dayEleven = new DayEleven(
+                   "#.##.##.##" + "\n" +
+                        "#######.##" + "\n" +
+                        "#.#.#..#.." + "\n" +
+                        "####.##.##" + "\n" +
+                        "#.##.##.##" + "\n" +
+                        "#.#####.##" + "\n" +
+                        "..#.#....." + "\n" +
+                        "##########" + "\n" +
+                        "#.######.#" + "\n" +
+                        "#.#####.##"
+        );
+
+        String output = dayEleven.nextRound();
+
+        assertThat(output).isEqualTo(
+                       "#.LL.L#.##" + "\n" +
+                       "#LLLLLL.L#" + "\n" +
+                       "L.L.L..L.." + "\n" +
+                       "#LLL.LL.L#" + "\n" +
+                       "#.LL.LL.LL" + "\n" +
+                       "#.LLLL#.##" + "\n" +
+                       "..L.L....." + "\n" +
+                       "#LLLLLLLL#" + "\n" +
+                       "#.LLLLLL.L" + "\n" +
+                       "#.#LLLL.##"
         );
     }
 }
