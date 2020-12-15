@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DayEleven {
-    private final char[][] grid;
+    private char[][] grid;
 
     public DayEleven(String input) {
         List<String> lines = Arrays.asList(input.split("\n"));
@@ -13,6 +13,8 @@ public class DayEleven {
             grid[rowNumber] = lines.get(rowNumber).toCharArray();
         }
     }
+
+
 
     public String nextRound() {
         char[][] newGrid = new char[grid.length][];
@@ -30,26 +32,27 @@ public class DayEleven {
                 }
             }
         }
+        grid = newGrid;
         return toString(newGrid);
     }
 
     private int countNeighbours(int rowNumber, int columnNumber) {
         int neighbourCount = 0;
         
-        neighbourCount += getNeighbourCount(rowNumber - 1, columnNumber - 1);
-        neighbourCount += getNeighbourCount(rowNumber - 1,columnNumber + 0);
-        neighbourCount += getNeighbourCount(rowNumber - 1,columnNumber + 1);
-        neighbourCount += getNeighbourCount(rowNumber + 0,columnNumber + 1);
+        neighbourCount += isThereANeighbour(rowNumber - 1, columnNumber - 1);
+        neighbourCount += isThereANeighbour(rowNumber - 1,columnNumber + 0);
+        neighbourCount += isThereANeighbour(rowNumber - 1,columnNumber + 1);
+        neighbourCount += isThereANeighbour(rowNumber + 0,columnNumber + 1);
 
-        neighbourCount += getNeighbourCount(rowNumber + 1,columnNumber + 1);
-        neighbourCount += getNeighbourCount(rowNumber + 1,columnNumber + 0);
-        neighbourCount += getNeighbourCount(rowNumber + 1,columnNumber - 1);
-        neighbourCount += getNeighbourCount(rowNumber + 0,columnNumber - 1);
+        neighbourCount += isThereANeighbour(rowNumber + 1,columnNumber + 1);
+        neighbourCount += isThereANeighbour(rowNumber + 1,columnNumber + 0);
+        neighbourCount += isThereANeighbour(rowNumber + 1,columnNumber - 1);
+        neighbourCount += isThereANeighbour(rowNumber + 0,columnNumber - 1);
         
         return neighbourCount;
     }
 
-    private int getNeighbourCount(int rowNumber, int columnNumber) {
+    private int isThereANeighbour(int rowNumber, int columnNumber) {
         if (rowNumber >= 0 && rowNumber < grid.length && columnNumber >= 0 && columnNumber < grid[rowNumber].length) {
             return grid[rowNumber][columnNumber] == '#' ? 1 : 0;
         }
@@ -70,5 +73,23 @@ public class DayEleven {
             result.append("\n");
         }
         return result.toString().trim();
+    }
+
+    public int findNumberOfOccupiedSeats() {
+        int result = 0;
+        String lastRound = "";
+        String thisRound = nextRound();
+        while(!lastRound.equals(thisRound)){
+            lastRound = thisRound;
+            thisRound = nextRound();
+        }
+        for (int rowNumber = 0; rowNumber < grid.length; rowNumber++) {
+            for (int columnNumber = 0; columnNumber < grid[rowNumber].length; columnNumber++) {
+                if('#' == grid[rowNumber][columnNumber]){
+                    result++;
+                }
+            }
+        }
+        return result;
     }
 }
