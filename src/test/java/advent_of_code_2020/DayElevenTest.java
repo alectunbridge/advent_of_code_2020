@@ -129,4 +129,20 @@ public class DayElevenTest {
                 .findNumberOfOccupiedSeats()).isEqualTo(2093);
     }
 
+    @Test
+    void countNeighboursPart2() {
+        DayEleven dayEleven = new DayEleven(
+                ".......#." + "\n" +
+                        "...#....." + "\n" +
+                        ".#......." + "\n" +
+                        "........." + "\n" +
+                        "..#L....#" + "\n" +
+                        "....#...." + "\n" +
+                        "........." + "\n" +
+                        "#........" + "\n" +
+                        "...#....."
+        );
+
+        assertThat(dayEleven.countNeighboursPart2(4,3)).isEqualTo(8);
+    }
 }
