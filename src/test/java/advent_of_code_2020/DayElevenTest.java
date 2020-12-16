@@ -126,7 +126,7 @@ public class DayElevenTest {
     @Test
     public void answerPart1() throws URISyntaxException, IOException {
         assertThat(new DayEleven(Files.readString(Path.of(this.getClass().getClassLoader().getResource("day_eleven.txt").toURI())))
-                .findNumberOfOccupiedSeats()).isEqualTo(-1);
+                .findNumberOfOccupiedSeats()).isEqualTo(2093);
     }
 
 }
