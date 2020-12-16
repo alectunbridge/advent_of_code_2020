@@ -3,13 +3,19 @@ package advent_of_code_2020;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class DayEleven {
     public static final char EMPTY = 'L';
     public static final char OCCUPIED = '#';
+    private static final char FLOOR = '.';
 
+    private int maxNumberOfNeighbours = 4;
     private char[][] grid;
+
+    public DayEleven(String input, int maxNumberOfNeighbours) {
+        this(input);
+        this.maxNumberOfNeighbours = maxNumberOfNeighbours;
+    }
 
     public DayEleven(String input) {
         List<String> lines = Arrays.asList(input.split("\n"));
@@ -24,11 +30,11 @@ public class DayEleven {
         for (int rowNumber = 0; rowNumber < grid.length; rowNumber++) {
             newGrid[rowNumber] = new char[grid[rowNumber].length];
             for (int columnNumber = 0; columnNumber < grid[rowNumber].length; columnNumber++) {
-                int neighbours = countNeighbours(rowNumber, columnNumber);
+                int neighbours = countNeighboursPart2(rowNumber, columnNumber);
                 char currentSeat = grid[rowNumber][columnNumber];
                 if (neighbours == 0 && currentSeat == EMPTY) {
                     newGrid[rowNumber][columnNumber] = OCCUPIED;
-                } else if (neighbours >= 4 && currentSeat == OCCUPIED) {
+                } else if (neighbours >= maxNumberOfNeighbours && currentSeat == OCCUPIED) {
                     newGrid[rowNumber][columnNumber] = EMPTY;
                 } else {
                     newGrid[rowNumber][columnNumber] = currentSeat;
@@ -78,7 +84,7 @@ public class DayEleven {
         return result.toString().trim();
     }
 
-    public int findNumberOfOccupiedSeats() {
+    public int findNumberOfOccupiedSeats(){
         int result = 0;
         String lastRound = "";
         String thisRound = nextRound();
@@ -114,17 +120,19 @@ public class DayEleven {
         return neighbourCount;
     }
 
-    private int incrementRowsAndColumns(int rowNumber, int columnNumber, Function<Integer,Integer> rowSupplier, Function<Integer,Integer> columnSupplier) {
+    private int incrementRowsAndColumns(int rowNumber, int columnNumber, Function<Integer,Integer> nextRow, Function<Integer,Integer> nextColumn) {
         int neighbourCount = 0;
-        int rowIndex = rowSupplier.apply(rowNumber);
-        int columnIndex = columnSupplier.apply(columnNumber);
+        int rowIndex = nextRow.apply(rowNumber);
+        int columnIndex = nextColumn.apply(columnNumber);
         LOOP: while(rowIndex>=0 && rowIndex<grid.length && columnIndex>=0 && columnIndex<grid[rowIndex].length) {
             switch (grid[rowIndex][columnIndex]){
-                case EMPTY: break LOOP;
-                case OCCUPIED: neighbourCount++; break;
+                case EMPTY: {break LOOP;}
+                case OCCUPIED: {neighbourCount++; break LOOP;}
+                case FLOOR: break;
+                default: {throw new RuntimeException("we shouldn't get here");}
             }
-            rowIndex = rowSupplier.apply(rowIndex);
-            columnIndex = columnSupplier.apply(columnIndex);
+            rowIndex = nextRow.apply(rowIndex);
+            columnIndex = nextColumn.apply(columnIndex);
         }
         return neighbourCount;
     }
