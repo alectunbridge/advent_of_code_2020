@@ -19,7 +19,7 @@ public class DayTwelve {
     public static void main(String[] args) {
         List<String> commands = new ArrayList<>();
         try {
-            File file = new File(DayTwelve.class.getClassLoader().getResource("day_twelve_test.txt").getFile());
+            File file = new File(DayTwelve.class.getClassLoader().getResource("day_twelve.txt").getFile());
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
@@ -66,41 +66,29 @@ public class DayTwelve {
     }
 
     private static void moveShip(int numberOfMoves) {
-        //vector from ship to waypoint
-        long eastingDelta = -shipEasting + waypointEasting;
-        long southingDelta = -shipSouthing + waypointSouthing;
-
-        shipEasting += numberOfMoves*eastingDelta;
-        shipSouthing += numberOfMoves*southingDelta;
-
-        waypointEasting = shipEasting + eastingDelta;
-        waypointSouthing = shipSouthing + southingDelta;
+        shipEasting += numberOfMoves*waypointEasting;
+        shipSouthing += numberOfMoves*waypointSouthing;
     }
 
     private static void rotateWaypoint(String directionChange, int valueToMove) {
-        //translate waypoint so that ship is at the origin
-        long tempWaypointEasting=waypointEasting-shipEasting;
-        long tempWaypointSouthing=waypointSouthing-shipSouthing;
-        //rotate waypoint correct number of times
-        //TODO multiple rotations are WRONG!
         for(int i=0; i<valueToMove/90; i++) {
+            long tempWaypointEasting=waypointEasting;
+            long tempWaypointSouthing=waypointSouthing;
             switch (directionChange) {
-                case RIGHT:
-                    waypointEasting = -tempWaypointSouthing;
-                    waypointSouthing = tempWaypointEasting;
-                    break;
                 case LEFT:
                     waypointEasting = tempWaypointSouthing;
                     waypointSouthing = -tempWaypointEasting;
+                    break;
+                case RIGHT:
+                    waypointEasting = -tempWaypointSouthing;
+                    waypointSouthing = tempWaypointEasting;
                     break;
                 default:
                     throw new IllegalArgumentException(String.format("erm wasn't expecting direction of: %s", directionChange));
             }
         }
-        //translate waypoint back to start location
-        waypointEasting += shipEasting;
-        waypointSouthing += shipSouthing;
     }
 
     //23986 too low
+    //30388 too low
 }
