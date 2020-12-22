@@ -9,17 +9,16 @@ public class DayThirteen {
     private int arrivalTime;
     private List<Integer> buses;
 
-    public DayThirteen(String input) {
-        String[] lines = input.split("\n");
-        arrivalTime = Integer.parseInt(lines[0]);
-        buses = Arrays.stream(lines[1].split(","))
+    public DayThirteen(String line1, String line2) {
+        arrivalTime = Integer.parseInt(line1);
+        buses = Arrays.stream(line2.split(","))
                 .filter(field ->!"x".equals(field))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
-        DayThirteen dayThirteen = new DayThirteen("1004098\n" +
+        DayThirteen dayThirteen = new DayThirteen("1004098",
                 "23,x,x,x,x,x,x,x,x,x,x,x,x,41,x,x,x,x,x,x,x,x,x,509,x,x,x,x,x,x,x,x,x,x,x,x,13,17,x,x,x,x,x,x,x,x,x,x,x,x,x,x,29,x,401,x,x,x,x,x,37,x,x,x,x,x,x,x,x,x,x,x,x,19");
         System.out.println(dayThirteen.getAnswer());
     }
