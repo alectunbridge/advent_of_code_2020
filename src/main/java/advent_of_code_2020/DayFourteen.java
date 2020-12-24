@@ -137,4 +137,14 @@ class MemInstructionExecutorPart2 implements MemInstructionExecutor {
         return addresses;
     }
 
+    List<String> replaceXsRecursive(String paddedValueAsBits) {
+        if(!paddedValueAsBits.contains("X")){
+            return Collections.singletonList(paddedValueAsBits);
+        }
+        List<String> result = new ArrayList<>();
+        result.addAll(replaceXs(paddedValueAsBits.replaceFirst("X","0")));
+        result.addAll(replaceXs(paddedValueAsBits.replaceFirst("X","1")));
+        return result;
+    }
+
 }
