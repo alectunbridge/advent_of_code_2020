@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,5 +38,31 @@ public class DaySixteenTest {
                 Files.readAllLines(
                         Path.of(this.getClass().getClassLoader().getResource("day_sixteen.txt").toURI())).toArray(new String[0]));
         assertThat(daySixteen.partOneAnswer()).isEqualTo(0);
+    }
+
+    @Test
+    void partTwoExample() {
+        DaySixteen daySixteen = new DaySixteen(
+        "class: 0-1 or 4-19",
+        "row: 0-5 or 8-19",
+        "seat: 0-13 or 16-19",
+        "",
+        "your ticket:",
+        "11,12,13",
+        "",
+        "nearby tickets:",
+        "3,9,18",
+        "15,1,5",
+        "5,14,9");
+        assertThat(daySixteen.findFieldOrder()).containsExactly("row","class","seat");
+    }
+
+    @Test
+    void part2Answer() throws URISyntaxException, IOException {
+        DaySixteen daySixteen = new DaySixteen(
+                Files.readAllLines(
+                        Path.of(this.getClass().getClassLoader().getResource("day_sixteen.txt").toURI())).toArray(new String[0]));
+        assertThat(daySixteen.partTwoAnswer()).isEqualTo(0);
+        //1829028101861 too low
     }
 }
