@@ -43,18 +43,37 @@ public class DaySixteenTest {
     @Test
     void partTwoExample() {
         DaySixteen daySixteen = new DaySixteen(
-        "class: 0-1 or 4-19",
-        "row: 0-5 or 8-19",
-        "seat: 0-13 or 16-19",
-        "",
-        "your ticket:",
-        "11,12,13",
-        "",
-        "nearby tickets:",
-        "3,9,18",
-        "15,1,5",
-        "5,14,9");
-        assertThat(daySixteen.findFieldOrder()).containsExactly("row","class","seat");
+                "class: 0-1 or 4-19",
+                "row: 0-5 or 8-19",
+                "seat: 0-13 or 16-19",
+                "",
+                "your ticket:",
+                "11,12,13",
+                "",
+                "nearby tickets:",
+                "3,9,18",
+                "15,1,5",
+                "5,14,9");
+        assertThat(daySixteen.findFieldOrder()).containsExactly("row", "class", "seat");
+    }
+
+    @Test
+    void fieldOrderCheck() {
+        DaySixteen daySixteen = new DaySixteen(
+                "departure a: 1-3 or 10-10",
+                "departure b: 1-3 or 20-20",
+                "departure c: 1-3 or 30-30",
+                "",
+                "your ticket:",
+                "3,2,1",
+                "",
+                "nearby tickets:",
+                "1,1,20",
+                "2,2,20",
+                "3,10,20",
+                "99,99,99");
+        assertThat(daySixteen.findFieldOrder()).containsExactly("departure c","departure a","departure b");
+//        assertThat(daySixteen.partTwoAnswer()).isEqualTo(6);
     }
 
     @Test
@@ -62,7 +81,6 @@ public class DaySixteenTest {
         DaySixteen daySixteen = new DaySixteen(
                 Files.readAllLines(
                         Path.of(this.getClass().getClassLoader().getResource("day_sixteen.txt").toURI())).toArray(new String[0]));
-        assertThat(daySixteen.partTwoAnswer()).isEqualTo(0);
-        //1829028101861 too low
+        assertThat(daySixteen.partTwoAnswer()).isEqualTo(3021381607403L);
     }
 }

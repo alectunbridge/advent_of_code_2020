@@ -38,7 +38,7 @@ public class DaySixteen {
                 }
             } else if (readingYourTicket) {
                 yourTicket = Arrays.stream(line.split(",")).map(Integer::valueOf).collect(Collectors.toList());
-//                tickets.add(yourTicket);
+                tickets.add(yourTicket);
             }
         }
     }
@@ -64,9 +64,10 @@ public class DaySixteen {
             ticketFieldRanges.add(values);
         }
 
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<>(Collections.nCopies(fields.size(),""));
         while(!fields.isEmpty()) {
-            for (Set<Integer> ticketFieldRange : ticketFieldRanges) {
+            for (int i = 0, ticketFieldRangesSize = ticketFieldRanges.size(); i < ticketFieldRangesSize; i++) {
+                Set<Integer> ticketFieldRange = ticketFieldRanges.get(i);
                 int possibleFields = 0;
                 Field matchedField = null;
                 for (Field field : fields) {
@@ -76,14 +77,12 @@ public class DaySixteen {
                     }
                 }
                 if (possibleFields == 1) {
-                    result.add(matchedField.getName());
+                    result.set(i, matchedField.getName());
                     fields.remove(matchedField);
                 }
             }
         }
-
         return result;
-
     }
 
 
@@ -93,7 +92,6 @@ public class DaySixteen {
         for (int i = 0; i < fieldOrder.size(); i++) {
             if(fieldOrder.get(i).startsWith("departure")){
                 System.out.printf("index: %d, name: %s, value: %s\n", i, fieldOrder.get(i), yourTicket.get(i));
-                System.out.println(yourTicket.get(i));
                 result *= yourTicket.get(i);
             }
         }
