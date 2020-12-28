@@ -1,10 +1,11 @@
 package advent_of_code_2020;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class DaySeventeen {
-    private Map<Integer,char[][]> cube = new HashMap<>();
+    private TreeMap<Integer,char[][]> cube = new TreeMap<>();
 
     public DaySeventeen(String... input) {
         cube.put(0, new char[input.length][]);
@@ -19,10 +20,9 @@ public class DaySeventeen {
         StringBuilder result = new StringBuilder();
         cube.forEach((key, value) -> {
             result.append("z="+key+"\n");
-            char[][] chars = value;
-            for (int i = 0; i < chars.length; i++) {
-                for (int j = 0; j < chars[i].length; j++) {
-                    result.append(chars[i][j]);
+            for (int i = 0; i < value.length; i++) {
+                for (int j = 0; j < value[i].length; j++) {
+                    result.append(value[i][j]);
                 }
                 result.append('\n');
             }
@@ -35,13 +35,6 @@ public class DaySeventeen {
         for (int l = layer-1; l <= layer+1 ; l++) {
             char[][] chars = cube.get(l);
             if (chars == null) {
-//                chars = new char[grid.get(0).length][];
-//                for (int i = 0; i < chars.length; i++) {
-//                    char[] characters = new char[chars.length];
-//                    Arrays.fill(characters, '.');
-//                    chars[i] = characters;
-//                }
-//                grid.put(l,chars);
                 continue;
             }
             for (int i = -1; i <= 1; i++) {
@@ -63,8 +56,40 @@ public class DaySeventeen {
     }
 
     public void cycle() {
-        //make copy of cube one cell larger in all directions
+        //grow the cube one cell in all directions
+        growCube();
+
+        //make copy of cube
         //calculate new cube states
         //swap new cube and old cube
+    }
+
+    private void growCube() {
+        //grow each layer
+        int newSize = cube.get(0).length + 2;
+        for (Map.Entry<Integer, char[][]> layer : cube.entrySet()) {
+            char[][] largerLayer = new char[newSize][newSize];
+            for (char[] chars : largerLayer) {
+                Arrays.fill(chars,'.');
+            }
+            for (int i = 0; i < layer.getValue().length; i++) {
+                for (int j = 0; j < layer.getValue().length; j++) {
+                    largerLayer[i+1][j+1] = layer.getValue()[i][j];
+                }
+            }
+            cube.put(layer.getKey(),largerLayer);
+        }
+
+        char[][] newBottomLayer = new char[newSize][newSize];
+        for(char[] chars: newBottomLayer) {
+            Arrays.fill(chars, '.');
+        }
+        cube.put(cube.firstKey()-1,newBottomLayer);
+
+        char[][] newTopLayer = new char[newSize][newSize];
+        for(char[] chars: newTopLayer){
+            Arrays.fill(chars,'.');
+        }
+        cube.put(cube.lastKey()+1,newTopLayer);
     }
 }
