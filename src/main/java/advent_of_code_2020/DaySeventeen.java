@@ -1,5 +1,7 @@
 package advent_of_code_2020;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
@@ -56,12 +58,37 @@ public class DaySeventeen {
     }
 
     public void cycle() {
-        //grow the cube one cell in all directions
         growCube();
+        TreeMap<Integer,char[][]> copyOfCube = copyCube();
+        writeNewCubeStates(copyOfCube);
+        cube = copyOfCube;
+    }
 
-        //make copy of cube
-        //calculate new cube states
-        //swap new cube and old cube
+    private void writeNewCubeStates(TreeMap<Integer, char[][]> copyOfCube) {
+        for (Map.Entry<Integer, char[][]> layer : copyOfCube.entrySet()) {
+            for (int i = 0; i < layer.getValue().length ; i++) {
+                for (int j = 0; j < layer.getValue().length; j++) {
+                    int neighbourCount = countNeighbours(layer.getKey(), i, j);
+                    if(layer.getValue()[i][j] == '#'){
+                        if(neighbourCount == 2 || neighbourCount == 3){
+                            copyOfCube.get(layer.getKey())[i][j] = '#';
+                        } else {
+                            copyOfCube.get(layer.getKey())[i][j] = '.';
+                        }
+                    } else {
+                        if(neighbourCount == 3){
+                            copyOfCube.get(layer.getKey())[i][j] = '#';
+                        } else {
+                            copyOfCube.get(layer.getKey())[i][j] = '.';
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private TreeMap<Integer, char[][]> copyCube() {
+        return SerializationUtils.clone(cube);
     }
 
     private void growCube() {

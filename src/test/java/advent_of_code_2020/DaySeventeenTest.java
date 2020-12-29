@@ -2,6 +2,8 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DaySeventeenTest {
@@ -72,27 +74,200 @@ class DaySeventeenTest {
     }
 
     @Test
-    void cycle() {
+    void exampleCycle() {
         DaySeventeen daySeventeen = new DaySeventeen(
                 ".#.",
                 "..#",
                 "###");
         daySeventeen.cycle();
         assertThat(daySeventeen.toString()).isEqualTo(
-                        "z=-1\n" +
-                        "#..\n" +
-                        "..#\n" +
-                        ".#.\n" +
-                        "\n" +
-                        "z=0\n" +
-                        "#.#\n" +
-                        ".##\n" +
-                        ".#.\n" +
-                        "\n" +
-                        "z=1\n" +
-                        "#..\n" +
-                        "..#\n" +
-                        ".#."
+                "z=-1\n" +
+                ".....\n" +
+                ".....\n" +
+                ".#...\n" +
+                "...#.\n" +
+                "..#..\n" +
+                "z=0\n" +
+                ".....\n" +
+                ".....\n" +
+                ".#.#.\n" +
+                "..##.\n" +
+                "..#..\n" +
+                "z=1\n" +
+                ".....\n" +
+                ".....\n" +
+                ".#...\n" +
+                "...#.\n" +
+                "..#..\n"
         );
+
+        daySeventeen.cycle();
+        assertThat(daySeventeen.toString()).isEqualTo(
+                "z=-2\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        "...#...\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        "z=-1\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        "...#...\n" +
+                        "..#..#.\n" +
+                        ".....#.\n" +
+                        "..#....\n" +
+                        ".......\n" +
+                        "z=0\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        ".##....\n" +
+                        ".##....\n" +
+                        ".#.....\n" +
+                        ".....#.\n" +
+                        "..###..\n" +
+                        "z=1\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        "...#...\n" +
+                        "..#..#.\n" +
+                        ".....#.\n" +
+                        "..#....\n" +
+                        ".......\n" +
+                        "z=2\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        ".......\n" +
+                        "...#...\n" +
+                        ".......\n" +
+                        ".......\n"
+        );
+
+        daySeventeen.cycle();
+        assertThat(daySeventeen.toString()).isEqualTo(
+                "z=-3\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "z=-2\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "...##....\n" +
+                        "...###...\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "z=-1\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "...#.....\n" +
+                        "....#....\n" +
+                        ".#.......\n" +
+                        "......##.\n" +
+                        "..#...#..\n" +
+                        "...#.#...\n" +
+                        "....#....\n" +
+                        "z=0\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "....#....\n" +
+                        ".........\n" +
+                        ".#.......\n" +
+                        ".........\n" +
+                        "......##.\n" +
+                        "..##.#...\n" +
+                        "....#....\n" +
+                        "z=1\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "...#.....\n" +
+                        "....#....\n" +
+                        ".#.......\n" +
+                        "......##.\n" +
+                        "..#...#..\n" +
+                        "...#.#...\n" +
+                        "....#....\n" +
+                        "z=2\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "...##....\n" +
+                        "...###...\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        "z=3\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n" +
+                        ".........\n");
+    }
+
+    @Test
+    void testExampleAnswerPart1() {
+        DaySeventeen daySeventeen = new DaySeventeen(
+                ".#.",
+                "..#",
+                "###");
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+
+        int count=0;
+        for (Character c:daySeventeen.toString().toCharArray()) {
+            if('#'==c){
+                count++;
+            }
+        }
+        assertThat(count).isEqualTo(112);
+    }
+
+    @Test
+    void answerPart1() {
+        DaySeventeen daySeventeen = new DaySeventeen(
+                        "..#..##.",
+                        "#.....##",
+                        "##.#.#.#",
+                        "..#...#.",
+                        ".###....",
+                        "######..",
+                        ".###..#.",
+                        "..#..##."
+        );
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        int count=0;
+        for (Character c:daySeventeen.toString().toCharArray()) {
+            if('#'==c){
+                count++;
+            }
+        }
+        assertThat(count).isEqualTo(298);
+
     }
 }

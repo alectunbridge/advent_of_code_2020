@@ -24,6 +24,8 @@ dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.2-jre'
 
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
 
