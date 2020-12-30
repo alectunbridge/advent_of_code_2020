@@ -2,8 +2,6 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DaySeventeenTest {
@@ -82,23 +80,23 @@ class DaySeventeenTest {
         daySeventeen.cycle();
         assertThat(daySeventeen.toString()).isEqualTo(
                 "z=-1\n" +
-                ".....\n" +
-                ".....\n" +
-                ".#...\n" +
-                "...#.\n" +
-                "..#..\n" +
-                "z=0\n" +
-                ".....\n" +
-                ".....\n" +
-                ".#.#.\n" +
-                "..##.\n" +
-                "..#..\n" +
-                "z=1\n" +
-                ".....\n" +
-                ".....\n" +
-                ".#...\n" +
-                "...#.\n" +
-                "..#..\n"
+                        ".....\n" +
+                        ".....\n" +
+                        ".#...\n" +
+                        "...#.\n" +
+                        "..#..\n" +
+                        "z=0\n" +
+                        ".....\n" +
+                        ".....\n" +
+                        ".#.#.\n" +
+                        "..##.\n" +
+                        "..#..\n" +
+                        "z=1\n" +
+                        ".....\n" +
+                        ".....\n" +
+                        ".#...\n" +
+                        "...#.\n" +
+                        "..#..\n"
         );
 
         daySeventeen.cycle();
@@ -233,9 +231,9 @@ class DaySeventeenTest {
         daySeventeen.cycle();
         daySeventeen.cycle();
 
-        int count=0;
-        for (Character c:daySeventeen.toString().toCharArray()) {
-            if('#'==c){
+        int count = 0;
+        for (Character c : daySeventeen.toString().toCharArray()) {
+            if ('#' == c) {
                 count++;
             }
         }
@@ -245,14 +243,14 @@ class DaySeventeenTest {
     @Test
     void answerPart1() {
         DaySeventeen daySeventeen = new DaySeventeen(
-                        "..#..##.",
-                        "#.....##",
-                        "##.#.#.#",
-                        "..#...#.",
-                        ".###....",
-                        "######..",
-                        ".###..#.",
-                        "..#..##."
+                "..#..##.",
+                "#.....##",
+                "##.#.#.#",
+                "..#...#.",
+                ".###....",
+                "######..",
+                ".###..#.",
+                "..#..##."
         );
         daySeventeen.cycle();
         daySeventeen.cycle();
@@ -261,9 +259,9 @@ class DaySeventeenTest {
         daySeventeen.cycle();
         daySeventeen.cycle();
         daySeventeen.cycle();
-        int count=0;
-        for (Character c:daySeventeen.toString().toCharArray()) {
-            if('#'==c){
+        int count = 0;
+        for (Character c : daySeventeen.toString().toCharArray()) {
+            if ('#' == c) {
                 count++;
             }
         }

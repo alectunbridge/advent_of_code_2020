@@ -32,21 +32,21 @@ public class DaySeventeen {
         return result.toString();
     }
 
-    public int countNeighbours(int z, int row, int column) {
+    public int countNeighbours(int z, int y, int x) {
         int result = 0;
-        for (int l = z - 1; l <= z + 1; l++) {
+        for (int zDelta = -1; zDelta <= 1; zDelta++) {
             try {
-                char[][] chars = cube[l];
+                char[][] chars = cube[z + zDelta];
                 if (chars == null) {
                     continue;
                 }
-                for (int i = -1; i <= 1; i++) {
-                    for (int j = -1; j <= 1; j++) {
-                        if (i == 0 && j == 0 && l == z) {
+                for (int yDelta = -1; yDelta <= 1; yDelta++) {
+                    for (int xDelta = -1; xDelta <= 1; xDelta++) {
+                        if (yDelta == 0 && xDelta == 0 && zDelta == 0) {
                             continue;
                         }
                         try {
-                            if ('#' == chars[row + i][column + j]) {
+                            if ('#' == chars[y + yDelta][x + xDelta]) {
                                 result++;
                             }
                         } catch (ArrayIndexOutOfBoundsException e) {
