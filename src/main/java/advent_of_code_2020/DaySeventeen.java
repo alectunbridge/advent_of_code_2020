@@ -5,25 +5,25 @@ import org.apache.commons.lang3.SerializationUtils;
 import java.util.Arrays;
 
 public class DaySeventeen {
-    private char[][][] cube = new char[1][][];
+    private char[][][][] cube = new char[1][1][][];
+    private int w = 0;
 
     public DaySeventeen(String... input) {
-        cube[0] = new char[input.length][];
-        char[][] chars = cube[0];
-        for (int i = 0; i < input.length; i++) {
-            chars[i] = input[i].toCharArray();
+        cube[0][0] = new char[input.length][];
+        char[][] chars = cube[0][0];
+        for (int y = 0; y < input.length; y++) {
+            chars[y] = input[y].toCharArray();
         }
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int z = 0; z < cube.length; z++) {
-            char[][] chars = cube[z];
-            result.append("z=" + (z - cube.length/2) + "\n");
-            for (int i = 0; i < cube[z].length; i++) {
-                for (int j = 0; j < cube[z][i].length; j++) {
-                    result.append(cube[z][i][j]);
+        for (int z = 0; z < cube[w].length; z++) {
+            result.append("z=" + (z - cube[w].length/2) + "\n");
+            for (int y = 0; y < cube[w][z].length; y++) {
+                for (int x = 0; x < cube[w][z][y].length; x++) {
+                    result.append(cube[w][z][y][x]);
                 }
                 result.append('\n');
             }
@@ -36,7 +36,7 @@ public class DaySeventeen {
         int result = 0;
         for (int zDelta = -1; zDelta <= 1; zDelta++) {
             try {
-                char[][] chars = cube[z + zDelta];
+                char[][] chars = cube[w][z + zDelta];
                 if (chars == null) {
                     continue;
                 }
@@ -64,27 +64,27 @@ public class DaySeventeen {
 
     public void cycle() {
         growCube();
-        char[][][] copyOfCube = copyCube();
+        char[][][][] copyOfCube = copyCube();
         writeNewCubeStates(copyOfCube);
         cube = copyOfCube;
     }
 
-    private void writeNewCubeStates(char[][][] copyOfCube) {
-        for (int z = 0; z < cube.length; z++) {
-            for (int i = 0; i < cube[z].length; i++) {
-                for (int j = 0; j < cube[z].length; j++) {
-                    int neighbourCount = countNeighbours(z, i, j);
-                    if (cube[z][i][j] == '#') {
+    private void writeNewCubeStates(char[][][][] copyOfCube) {
+        for (int z = 0; z < cube[w].length; z++) {
+            for (int y = 0; y < cube[w][z].length; y++) {
+                for (int x = 0; x < cube[w][z].length; x++) {
+                    int neighbourCount = countNeighbours(z, y, x);
+                    if (cube[w][z][y][x] == '#') {
                         if (neighbourCount == 2 || neighbourCount == 3) {
-                            copyOfCube[z][i][j] = '#';
+                            copyOfCube[w][z][y][x] = '#';
                         } else {
-                            copyOfCube[z][i][j] = '.';
+                            copyOfCube[w][z][y][x] = '.';
                         }
                     } else {
                         if (neighbourCount == 3) {
-                            copyOfCube[z][i][j] = '#';
+                            copyOfCube[w][z][y][x] = '#';
                         } else {
-                            copyOfCube[z][i][j] = '.';
+                            copyOfCube[w][z][y][x] = '.';
                         }
                     }
                 }
@@ -92,45 +92,51 @@ public class DaySeventeen {
         }
     }
 
-    private char[][][] copyCube() {
+    private char[][][][] copyCube() {
         return SerializationUtils.clone(cube);
     }
 
     private void growCube() {
-        //grow in x-y
-        int newSize = cube[0].length + 2;
-        for (int z = 0; z < cube.length; z++) {
-            char[][] largerLayer = new char[newSize][newSize];
-            for (char[] chars : largerLayer) {
+        int newSize = growXY();
+        growZ(newSize);
+    }
+
+    private int growXY() {
+        int newSize = cube[w][0].length + 2;
+        for (int z = 0; z < cube[w].length; z++) {
+            char[][] largerXY = new char[newSize][newSize];
+            for (char[] chars : largerXY) {
                 Arrays.fill(chars, '.');
             }
-            for (int i = 0; i < cube[z].length; i++) {
-                for (int j = 0; j < cube[z].length; j++) {
-                    largerLayer[i + 1][j + 1] = cube[z][i][j];
+            for (int y = 0; y < cube[w][z].length; y++) {
+                for (int x = 0; x < cube[w][z].length; x++) {
+                    largerXY[y + 1][x + 1] = cube[w][z][y][x];
                 }
             }
-            cube[z] = largerLayer;
+            cube[w][z] = largerXY;
         }
+        return newSize;
+    }
 
-        //grow in z
-        int newZsize = cube.length + 2;
+    private void growZ(int newSize) {
+        int newZsize = cube[w].length + 2;
         //shift existing z-layers up one
         char[][][] newZ = new char[newZsize][][];
-        for( int i=0; i< cube.length; i++) {
-            newZ[i+1] = cube[i];
+        for( int z=0; z<cube[w].length; z++) {
+            newZ[z+1] = cube[w][z];
         }
 
-        char[][] newBottomLayer = new char[newSize][newSize];
-        for (char[] chars : newBottomLayer) {
+        char[][] newMinZ = new char[newSize][newSize];
+        for (char[] chars : newMinZ) {
             Arrays.fill(chars, '.');
         }
-        newZ[0] = newBottomLayer;
+        newZ[0] = newMinZ;
 
-        char[][] newTopLayer = new char[newSize][newSize];
-        for (char[] chars : newTopLayer) {
+        char[][] newMax = new char[newSize][newSize];
+        for (char[] chars : newMax) {
             Arrays.fill(chars, '.');
         }
-        newZ[newZsize - 1] = newTopLayer;
-        cube = newZ;
+        newZ[newZsize - 1] = newMax;
+        cube[w] = newZ;
     }
 }
