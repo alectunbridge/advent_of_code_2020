@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 public class DaySeventeen {
     private char[][][][] cube = new char[1][1][][];
-    private int w = 0;
 
     public DaySeventeen(String... input) {
         cube[0][0] = new char[input.length][];
@@ -19,40 +18,50 @@ public class DaySeventeen {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int z = 0; z < cube[w].length; z++) {
-            result.append("z=" + (z - cube[w].length/2) + "\n");
-            for (int y = 0; y < cube[w][z].length; y++) {
-                for (int x = 0; x < cube[w][z][y].length; x++) {
-                    result.append(cube[w][z][y][x]);
+        for (int w = 0; w < cube.length; w++) {
+            for (int z = 0; z < cube[w].length; z++) {
+                result.append("z=" + (z - cube[w].length / 2) + ", w=" + (w - cube.length / 2) + "\n");
+                for (int y = 0; y < cube[w][z].length; y++) {
+                    for (int x = 0; x < cube[w][z][y].length; x++) {
+                        result.append(cube[w][z][y][x]);
+                    }
+                    result.append('\n');
                 }
-                result.append('\n');
             }
         }
-        ;
         return result.toString();
     }
 
-    public int countNeighbours(int z, int y, int x) {
+    public int countNeighbours(int w, int z, int y, int x) {
         int result = 0;
-        for (int zDelta = -1; zDelta <= 1; zDelta++) {
+        for (int wDelta = -1; wDelta <= 1; wDelta++) {
             try {
-                char[][] chars = cube[w][z + zDelta];
-                if (chars == null) {
+                char[][][] zS = cube[w + wDelta];
+                if (zS == null) {
                     continue;
                 }
-                for (int yDelta = -1; yDelta <= 1; yDelta++) {
-                    for (int xDelta = -1; xDelta <= 1; xDelta++) {
-                        if (yDelta == 0 && xDelta == 0 && zDelta == 0) {
+                for (int zDelta = -1; zDelta <= 1; zDelta++) {
+                    try {
+                        char[][] chars = cube[w + wDelta][z + zDelta];
+                        if (chars == null) {
                             continue;
                         }
-                        try {
-                            if ('#' == chars[y + yDelta][x + xDelta]) {
-                                result++;
+                        for (int yDelta = -1; yDelta <= 1; yDelta++) {
+                            for (int xDelta = -1; xDelta <= 1; xDelta++) {
+                                if (yDelta == 0 && xDelta == 0 && zDelta == 0) {
+                                    continue;
+                                }
+                                try {
+                                    if ('#' == chars[y + yDelta][x + xDelta]) {
+                                        result++;
+                                    }
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    //do nowt
+                                }
                             }
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            //do nowt
                         }
-
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        //do nowt
                     }
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -70,21 +79,23 @@ public class DaySeventeen {
     }
 
     private void writeNewCubeStates(char[][][][] copyOfCube) {
-        for (int z = 0; z < cube[w].length; z++) {
-            for (int y = 0; y < cube[w][z].length; y++) {
-                for (int x = 0; x < cube[w][z].length; x++) {
-                    int neighbourCount = countNeighbours(z, y, x);
-                    if (cube[w][z][y][x] == '#') {
-                        if (neighbourCount == 2 || neighbourCount == 3) {
-                            copyOfCube[w][z][y][x] = '#';
+        for (int w = 0; w < cube.length; w++) {
+            for (int z = 0; z < cube[w].length; z++) {
+                for (int y = 0; y < cube[w][z].length; y++) {
+                    for (int x = 0; x < cube[w][z].length; x++) {
+                        int neighbourCount = countNeighbours(w, z, y, x);
+                        if (cube[w][z][y][x] == '#') {
+                            if (neighbourCount == 2 || neighbourCount == 3) {
+                                copyOfCube[w][z][y][x] = '#';
+                            } else {
+                                copyOfCube[w][z][y][x] = '.';
+                            }
                         } else {
-                            copyOfCube[w][z][y][x] = '.';
-                        }
-                    } else {
-                        if (neighbourCount == 3) {
-                            copyOfCube[w][z][y][x] = '#';
-                        } else {
-                            copyOfCube[w][z][y][x] = '.';
+                            if (neighbourCount == 3) {
+                                copyOfCube[w][z][y][x] = '#';
+                            } else {
+                                copyOfCube[w][z][y][x] = '.';
+                            }
                         }
                     }
                 }
@@ -102,28 +113,28 @@ public class DaySeventeen {
     }
 
     private int growXY() {
-        int newSize = cube[w][0].length + 2;
-        for (int z = 0; z < cube[w].length; z++) {
+        int newSize = cube[0][0].length + 2;
+        for (int z = 0; z < cube[0].length; z++) {
             char[][] largerXY = new char[newSize][newSize];
             for (char[] chars : largerXY) {
                 Arrays.fill(chars, '.');
             }
-            for (int y = 0; y < cube[w][z].length; y++) {
-                for (int x = 0; x < cube[w][z].length; x++) {
-                    largerXY[y + 1][x + 1] = cube[w][z][y][x];
+            for (int y = 0; y < cube[0][z].length; y++) {
+                for (int x = 0; x < cube[0][z].length; x++) {
+                    largerXY[y + 1][x + 1] = cube[0][z][y][x];
                 }
             }
-            cube[w][z] = largerXY;
+            cube[0][z] = largerXY;
         }
         return newSize;
     }
 
     private void growZ(int newSize) {
-        int newZsize = cube[w].length + 2;
+        int newZsize = cube[0].length + 2;
         //shift existing z-layers up one
         char[][][] newZ = new char[newZsize][][];
-        for( int z=0; z<cube[w].length; z++) {
-            newZ[z+1] = cube[w][z];
+        for (int z = 0; z < cube[0].length; z++) {
+            newZ[z + 1] = cube[0][z];
         }
 
         char[][] newMinZ = new char[newSize][newSize];
@@ -137,6 +148,6 @@ public class DaySeventeen {
             Arrays.fill(chars, '.');
         }
         newZ[newZsize - 1] = newMax;
-        cube[w] = newZ;
+        cube[0] = newZ;
     }
 }

@@ -19,7 +19,7 @@ class DaySeventeenTest {
                 "..#..##."
         );
         assertThat(daySeventeen.toString()).isEqualTo(
-                "z=0\n" +
+                "z=0, w=0\n" +
                         "..#..##.\n" +
                         "#.....##\n" +
                         "##.#.#.#\n" +
@@ -38,17 +38,17 @@ class DaySeventeenTest {
                 "..#",
                 "###");
 
-        assertThat(daySeventeen.countNeighbours(0, 0, 0)).isEqualTo(1);
-        assertThat(daySeventeen.countNeighbours(0, 0, 1)).isEqualTo(1);
-        assertThat(daySeventeen.countNeighbours(0, 0, 2)).isEqualTo(2);
+        assertThat(daySeventeen.countNeighbours(0, 0, 0, 0)).isEqualTo(1);
+        assertThat(daySeventeen.countNeighbours(0, 0, 0, 1)).isEqualTo(1);
+        assertThat(daySeventeen.countNeighbours(0, 0, 0, 2)).isEqualTo(2);
 
-        assertThat(daySeventeen.countNeighbours(0, 1, 0)).isEqualTo(3);
-        assertThat(daySeventeen.countNeighbours(0, 1, 1)).isEqualTo(5);
-        assertThat(daySeventeen.countNeighbours(0, 1, 2)).isEqualTo(3);
+        assertThat(daySeventeen.countNeighbours(0, 0, 1, 0)).isEqualTo(3);
+        assertThat(daySeventeen.countNeighbours(0, 0, 1, 1)).isEqualTo(5);
+        assertThat(daySeventeen.countNeighbours(0, 0, 1, 2)).isEqualTo(3);
 
-        assertThat(daySeventeen.countNeighbours(0, 2, 0)).isEqualTo(1);
-        assertThat(daySeventeen.countNeighbours(0, 2, 1)).isEqualTo(3);
-        assertThat(daySeventeen.countNeighbours(0, 2, 2)).isEqualTo(2);
+        assertThat(daySeventeen.countNeighbours(0, 0, 2, 0)).isEqualTo(1);
+        assertThat(daySeventeen.countNeighbours(0, 0, 2, 1)).isEqualTo(3);
+        assertThat(daySeventeen.countNeighbours(0, 0, 2, 2)).isEqualTo(2);
     }
 
     @Test
@@ -58,17 +58,17 @@ class DaySeventeenTest {
                 "..#",
                 "###");
 
-        assertThat(daySeventeen.countNeighbours(-1, 0, 0)).isEqualTo(1);
-        assertThat(daySeventeen.countNeighbours(-1, 0, 1)).isEqualTo(2);
-        assertThat(daySeventeen.countNeighbours(-1, 0, 2)).isEqualTo(2);
+        assertThat(daySeventeen.countNeighbours(0, -1, 0, 0)).isEqualTo(1);
+        assertThat(daySeventeen.countNeighbours(0, -1, 0, 1)).isEqualTo(2);
+        assertThat(daySeventeen.countNeighbours(0, -1, 0, 2)).isEqualTo(2);
 
-        assertThat(daySeventeen.countNeighbours(-1, 1, 0)).isEqualTo(3);
-        assertThat(daySeventeen.countNeighbours(-1, 1, 1)).isEqualTo(5);
-        assertThat(daySeventeen.countNeighbours(-1, 1, 2)).isEqualTo(4);
+        assertThat(daySeventeen.countNeighbours(0, -1, 1, 0)).isEqualTo(3);
+        assertThat(daySeventeen.countNeighbours(0, -1, 1, 1)).isEqualTo(5);
+        assertThat(daySeventeen.countNeighbours(0, -1, 1, 2)).isEqualTo(4);
 
-        assertThat(daySeventeen.countNeighbours(-1, 2, 0)).isEqualTo(2);
-        assertThat(daySeventeen.countNeighbours(-1, 2, 1)).isEqualTo(4);
-        assertThat(daySeventeen.countNeighbours(-1, 2, 2)).isEqualTo(3);
+        assertThat(daySeventeen.countNeighbours(0, -1, 2, 0)).isEqualTo(2);
+        assertThat(daySeventeen.countNeighbours(0, -1, 2, 1)).isEqualTo(4);
+        assertThat(daySeventeen.countNeighbours(0, -1, 2, 2)).isEqualTo(3);
     }
 
     @Test
@@ -79,19 +79,19 @@ class DaySeventeenTest {
                 "###");
         daySeventeen.cycle();
         assertThat(daySeventeen.toString()).isEqualTo(
-                "z=-1\n" +
+                "z=-1, w=0\n" +
                         ".....\n" +
                         ".....\n" +
                         ".#...\n" +
                         "...#.\n" +
                         "..#..\n" +
-                        "z=0\n" +
+                        "z=0, w=0\n" +
                         ".....\n" +
                         ".....\n" +
                         ".#.#.\n" +
                         "..##.\n" +
                         "..#..\n" +
-                        "z=1\n" +
+                        "z=1, w=0\n" +
                         ".....\n" +
                         ".....\n" +
                         ".#...\n" +
@@ -101,7 +101,7 @@ class DaySeventeenTest {
 
         daySeventeen.cycle();
         assertThat(daySeventeen.toString()).isEqualTo(
-                "z=-2\n" +
+                "z=-2, w=0\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -109,7 +109,7 @@ class DaySeventeenTest {
                         "...#...\n" +
                         ".......\n" +
                         ".......\n" +
-                        "z=-1\n" +
+                        "z=-1, w=0\n" +
                         ".......\n" +
                         ".......\n" +
                         "...#...\n" +
@@ -117,7 +117,7 @@ class DaySeventeenTest {
                         ".....#.\n" +
                         "..#....\n" +
                         ".......\n" +
-                        "z=0\n" +
+                        "z=0, w=0\n" +
                         ".......\n" +
                         ".......\n" +
                         ".##....\n" +
@@ -125,7 +125,7 @@ class DaySeventeenTest {
                         ".#.....\n" +
                         ".....#.\n" +
                         "..###..\n" +
-                        "z=1\n" +
+                        "z=1, w=0\n" +
                         ".......\n" +
                         ".......\n" +
                         "...#...\n" +
@@ -133,7 +133,7 @@ class DaySeventeenTest {
                         ".....#.\n" +
                         "..#....\n" +
                         ".......\n" +
-                        "z=2\n" +
+                        "z=2, w=0\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -145,7 +145,7 @@ class DaySeventeenTest {
 
         daySeventeen.cycle();
         assertThat(daySeventeen.toString()).isEqualTo(
-                "z=-3\n" +
+                "z=-3, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
@@ -155,7 +155,7 @@ class DaySeventeenTest {
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
-                        "z=-2\n" +
+                        "z=-2, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
@@ -165,7 +165,7 @@ class DaySeventeenTest {
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
-                        "z=-1\n" +
+                        "z=-1, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         "...#.....\n" +
@@ -175,7 +175,7 @@ class DaySeventeenTest {
                         "..#...#..\n" +
                         "...#.#...\n" +
                         "....#....\n" +
-                        "z=0\n" +
+                        "z=0, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         "....#....\n" +
@@ -185,7 +185,7 @@ class DaySeventeenTest {
                         "......##.\n" +
                         "..##.#...\n" +
                         "....#....\n" +
-                        "z=1\n" +
+                        "z=1, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         "...#.....\n" +
@@ -195,7 +195,7 @@ class DaySeventeenTest {
                         "..#...#..\n" +
                         "...#.#...\n" +
                         "....#....\n" +
-                        "z=2\n" +
+                        "z=2, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
@@ -205,7 +205,7 @@ class DaySeventeenTest {
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
-                        "z=3\n" +
+                        "z=3, w=0\n" +
                         ".........\n" +
                         ".........\n" +
                         ".........\n" +
