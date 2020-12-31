@@ -23,6 +23,7 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.2-jre'
+    implementation 'junit:junit:4.12'
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
 
