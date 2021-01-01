@@ -73,120 +73,46 @@ public class DaySeventeen {
     }
 
     public void cycle() {
-        growCube();
-        char[][][][] copyOfCube = copyCube();
+        char[][][][] copyOfCube = new char[hypercube.length + 2][hypercube[0].length + 2][hypercube[0][0].length + 2][hypercube[0][0].length + 2];
+        for (int w = 0; w < copyOfCube.length; w++) {
+            for (int z = 0; z < copyOfCube[w].length; z++) {
+                for (int y = 0; y < copyOfCube[w][z].length; y++) {
+                    Arrays.fill(copyOfCube[w][z][y], '.');
+                }
+            }
+        }
         writeNewCubeStates(copyOfCube);
         hypercube = copyOfCube;
     }
 
     private void writeNewCubeStates(char[][][][] copyOfCube) {
-        for (int w = 0; w < hypercube.length; w++) {
-            for (int z = 0; z < hypercube[w].length; z++) {
-                for (int y = 0; y < hypercube[w][z].length; y++) {
-                    for (int x = 0; x < hypercube[w][z].length; x++) {
+        for (int w = -1; w <= hypercube.length; w++) {
+            for (int z = -1; z <= hypercube[0].length; z++) {
+                for (int y = -1; y <= hypercube[0][0].length; y++) {
+                    for (int x = -1; x <= hypercube[0][0].length; x++) {
                         int neighbourCount = countNeighbours(w, z, y, x);
-                        if (hypercube[w][z][y][x] == '#') {
+                        char currentState;
+                        try {
+                            currentState = hypercube[w][z][y][x];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            currentState = '.';
+                        }
+                        if (currentState == '#') {
                             if (neighbourCount == 2 || neighbourCount == 3) {
-                                copyOfCube[w][z][y][x] = '#';
+                                copyOfCube[w + 1][z + 1][y + 1][x + 1] = '#';
                             } else {
-                                copyOfCube[w][z][y][x] = '.';
+                                copyOfCube[w + 1][z + 1][y + 1][x + 1] = '.';
                             }
                         } else {
                             if (neighbourCount == 3) {
-                                copyOfCube[w][z][y][x] = '#';
+                                copyOfCube[w + 1][z + 1][y + 1][x + 1] = '#';
                             } else {
-                                copyOfCube[w][z][y][x] = '.';
+                                copyOfCube[w + 1][z + 1][y + 1][x + 1] = '.';
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    private char[][][][] copyCube() {
-        return SerializationUtils.clone(hypercube);
-    }
-
-    private void growCube() {
-        int newXYSize = growXY();
-        int newZSize = growZ(newXYSize);
-        int newWSize = growW(newXYSize, newZSize);
-    }
-
-    private int growXY() {
-        int oldSize = hypercube[hypercube.length / 2][hypercube.length / 2].length;
-        int newSize = hypercube[hypercube.length / 2][hypercube.length / 2].length + 2;
-//        for (int w = 0; w < hypercube.length; w++) {
-            for (int z = 0; z < hypercube[0].length; z++) {
-                char[][] largerXY = new char[newSize][newSize];
-                for (char[] chars : largerXY) {
-                    Arrays.fill(chars, '.');
-                }
-                for (int y = 0; y < oldSize; y++) {
-                    for (int x = 0; x < oldSize; x++) {
-                        largerXY[y + 1][x + 1] = hypercube[0][z][y][x];
-                    }
-                }
-                hypercube[0][z] = largerXY;
-//            }
-        }
-        return newSize;
-    }
-
-    private int growZ(int newSize) {
-        int oldZSize = hypercube[hypercube.length / 2].length;
-        int newZsize = hypercube[hypercube.length / 2].length + 2;
-        //shift existing z-layers up one
-        char[][][] newZ = new char[newZsize][][];
-        for (int w = 0; w < hypercube.length; w++) {
-            for (int z = 0; z < oldZSize; z++) {
-                newZ[z + 1] = SerializationUtils.clone(hypercube[w][z]);
-            }
-        }
-        char[][] newMinZ = new char[newSize][newSize];
-        for (char[] chars : newMinZ) {
-            Arrays.fill(chars, '.');
-        }
-        newZ[0] = newMinZ;
-
-        char[][] newMaxZ = new char[newSize][newSize];
-        for (char[] chars : newMaxZ) {
-            Arrays.fill(chars, '.');
-        }
-        newZ[newZsize - 1] = newMaxZ;
-
-        for (int w = 0; w < hypercube.length; w++) {
-            hypercube[w] = newZ;
-        }
-
-        return newZsize;
-    }
-
-    private int growW(int newXYSize, int newZSize) {
-        int newWSize = hypercube.length + 2;
-        char[][][][] newW = new char[newWSize][][][];
-        for (int w = 0; w < hypercube.length; w++) {
-            newW[w + 1] = SerializationUtils.clone(hypercube[w]);
-        }
-
-        char[][][] newMinW = new char[newZSize][newXYSize][newXYSize];
-        for (char[][] zS : newMinW) {
-            for (char[] chars : zS) {
-                Arrays.fill(chars, '.');
-            }
-        }
-        newW[0] = newMinW;
-
-        char[][][] newMaxW = new char[newZSize][newXYSize][newXYSize];
-        for (char[][] zS : newMaxW) {
-            for (char[] chars : zS) {
-                Arrays.fill(chars, '.');
-            }
-        }
-        newW[newWSize - 1] = newMaxW;
-        hypercube = newW;
-
-        return newWSize;
     }
 }

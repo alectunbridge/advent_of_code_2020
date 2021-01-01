@@ -437,7 +437,7 @@ class DaySeventeenTest {
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
-                        "..#....\n" +
+                        ".......\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -455,7 +455,7 @@ class DaySeventeenTest {
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
-                        "..#....\n" +
+                        ".......\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -472,17 +472,17 @@ class DaySeventeenTest {
                         "z=-2, w=0\n" +
                         ".......\n" +
                         ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
+                        ".###...\n" +
+                        ".##.##.\n" +
+                        ".#...#.\n" +
+                        "..#..#.\n" +
+                        "..###..\n" +
                         "\n" +
                         "z=-1, w=0\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
-                        "..#....\n" +
+                        ".......\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -500,7 +500,7 @@ class DaySeventeenTest {
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
-                        "..#....\n" +
+                        ".......\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -508,11 +508,11 @@ class DaySeventeenTest {
                         "z=2, w=0\n" +
                         ".......\n" +
                         ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
-                        ".......\n" +
+                        ".###...\n" +
+                        ".##.##.\n" +
+                        ".#...#.\n" +
+                        "..#..#.\n" +
+                        "..###..\n" +
                         "\n" +
                         "z=-2, w=1\n" +
                         ".......\n" +
@@ -527,7 +527,7 @@ class DaySeventeenTest {
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
-                        "..#....\n" +
+                        ".......\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -545,7 +545,7 @@ class DaySeventeenTest {
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
-                        "..#....\n" +
+                        ".......\n" +
                         ".......\n" +
                         ".......\n" +
                         ".......\n" +
@@ -607,7 +607,7 @@ class DaySeventeenTest {
     }
 
     @Test
-    void part2Answer() {
+    void part2ExampleAnswer() {
         DaySeventeen daySeventeen = new DaySeventeen(
                 ".#.",
                 "..#",
@@ -629,5 +629,33 @@ class DaySeventeenTest {
         }
         assertThat(count).isEqualTo(848);
     }
-    //300 too low
+
+    @Test
+    void part2Answer() {
+        DaySeventeen daySeventeen = new DaySeventeen(
+                "..#..##.",
+                "#.....##",
+                "##.#.#.#",
+                "..#...#.",
+                ".###....",
+                "######..",
+                ".###..#.",
+                "..#..##."
+        );
+
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        daySeventeen.cycle();
+        int count = 0;
+        for (Character c : daySeventeen.toString().toCharArray()) {
+            if ('#' == c) {
+                count++;
+            }
+        }
+        assertThat(count).isEqualTo(1792);
+    }
 }
