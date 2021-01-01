@@ -115,32 +115,35 @@ public class DaySeventeen {
     }
 
     private int growXY() {
-        int newSize = hypercube[0][0].length + 2;
-        for (int w = 0; w < hypercube.length; w++) {
-            for (int z = 0; z < hypercube[w].length; z++) {
+        int oldSize = hypercube[hypercube.length / 2][hypercube.length / 2].length;
+        int newSize = hypercube[hypercube.length / 2][hypercube.length / 2].length + 2;
+//        for (int w = 0; w < hypercube.length; w++) {
+            for (int z = 0; z < hypercube[0].length; z++) {
                 char[][] largerXY = new char[newSize][newSize];
                 for (char[] chars : largerXY) {
                     Arrays.fill(chars, '.');
                 }
-                for (int y = 0; y < hypercube[w][z].length; y++) {
-                    for (int x = 0; x < hypercube[w][z].length; x++) {
-                        largerXY[y + 1][x + 1] = hypercube[w][z][y][x];
+                for (int y = 0; y < oldSize; y++) {
+                    for (int x = 0; x < oldSize; x++) {
+                        largerXY[y + 1][x + 1] = hypercube[0][z][y][x];
                     }
                 }
-                hypercube[w][z] = largerXY;
-            }
+                hypercube[0][z] = largerXY;
+//            }
         }
         return newSize;
     }
 
     private int growZ(int newSize) {
-        int newZsize = hypercube[0].length + 2;
+        int oldZSize = hypercube[hypercube.length / 2].length;
+        int newZsize = hypercube[hypercube.length / 2].length + 2;
         //shift existing z-layers up one
         char[][][] newZ = new char[newZsize][][];
-        for (int z = 0; z < hypercube[0].length; z++) {
-            newZ[z + 1] = hypercube[0][z];
+        for (int w = 0; w < hypercube.length; w++) {
+            for (int z = 0; z < oldZSize; z++) {
+                newZ[z + 1] = SerializationUtils.clone(hypercube[w][z]);
+            }
         }
-
         char[][] newMinZ = new char[newSize][newSize];
         for (char[] chars : newMinZ) {
             Arrays.fill(chars, '.');
@@ -164,7 +167,7 @@ public class DaySeventeen {
         int newWSize = hypercube.length + 2;
         char[][][][] newW = new char[newWSize][][][];
         for (int w = 0; w < hypercube.length; w++) {
-            newW[w + 1] = hypercube[w];
+            newW[w + 1] = SerializationUtils.clone(hypercube[w]);
         }
 
         char[][][] newMinW = new char[newZSize][newXYSize][newXYSize];
