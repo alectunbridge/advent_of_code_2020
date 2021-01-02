@@ -85,4 +85,29 @@ class DayEighteenTest {
     void part2Example1() {
         assertThat(new DayEighteen("2 * 3 + (4 * 5)").evaluate2()).isEqualTo(46);
     }
+
+    @Test
+    void part2Example2() {
+        assertThat(new DayEighteen("5 + (8 * 3 + 9 + 3 * 4 * 3)").evaluate2()).isEqualTo(1445);
+    }
+
+    @Test
+    void part2Example3() {
+        assertThat(new DayEighteen("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))").evaluate2()).isEqualTo(669060);
+    }
+
+    @Test
+    void part2Example4() {
+        assertThat(new DayEighteen("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2").evaluate2()).isEqualTo(23340);
+    }
+
+    @Test
+    void part2Answer() throws URISyntaxException, IOException {
+        List<String> lines = Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_eighteen.txt").toURI()));
+        long total = 0;
+        for (String line : lines) {
+            total += new DayEighteen(line).evaluate2();
+        }
+        assertThat(total).isEqualTo(201376568795521L);
+    }
 }

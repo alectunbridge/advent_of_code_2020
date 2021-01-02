@@ -66,7 +66,7 @@ public class DayEighteen {
     }
 
     private String squish2(String input) {
-        Matcher additionMatcher = Pattern.compile("(.*)(\\d+ \\+ \\d+)(.*)").matcher(input);
+        Matcher additionMatcher = Pattern.compile("(.*[^\\d])(\\d+ \\+ \\d+)(.*)").matcher(input);
         String rebracketedInput = "";
         while(additionMatcher.find() && additionMatcher.group(2).length() != input.length()){
             rebracketedInput += additionMatcher.group(1);
