@@ -78,6 +78,11 @@ class DayEighteenTest {
         for (String line : lines) {
             total += new DayEighteen(line).evaluate();
         }
-        assertThat(total).isEqualTo(0);
+        assertThat(total).isEqualTo(29839238838303L);
+    }
+
+    @Test
+    void part2Example1() {
+        assertThat(new DayEighteen("2 * 3 + (4 * 5)").evaluate2()).isEqualTo(46);
     }
 }
