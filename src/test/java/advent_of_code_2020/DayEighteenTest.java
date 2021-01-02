@@ -2,6 +2,12 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DayEighteenTest {
@@ -63,5 +69,15 @@ class DayEighteenTest {
     @Test
     void part1BrokenExampleSubsection2() {
         assertThat(new DayEighteen("1 + 2 * (3 + 4) + 5").evaluate()).isEqualTo(26);
+    }
+
+    @Test
+    void part1Answer() throws URISyntaxException, IOException {
+        List<String> lines = Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_eighteen.txt").toURI()));
+        long total = 0;
+        for (String line : lines) {
+            total += new DayEighteen(line).evaluate();
+        }
+        assertThat(total).isEqualTo(0);
     }
 }
