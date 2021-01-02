@@ -54,4 +54,14 @@ class DayEighteenTest {
     void part1FurtherExamples4() {
         assertThat(new DayEighteen("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2").evaluate()).isEqualTo(13632);
     }
+
+    @Test
+    void part1BrokenExampleSubsection1() {
+        assertThat(new DayEighteen("(2 + 4 * 9) * (6 + 9 * 8 + 6) + 6").evaluate()).isEqualTo(6810);
+    }
+
+    @Test
+    void part1BrokenExampleSubsection2() {
+        assertThat(new DayEighteen("1 + 2 * (3 + 4) + 5").evaluate()).isEqualTo(26);
+    }
 }
