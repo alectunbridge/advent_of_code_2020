@@ -4,75 +4,61 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
 
 public class DayEighteen {
 
-    private List<Character> terms = new ArrayList<>();
+    private String input;
 
     public DayEighteen(String input) {
-        for (char c : input.toCharArray()) {
-            if(c != ' '){
-                terms.add(c);
-            }
-        }
+        this.input = input;
     }
 
-    public DayEighteen(List<Character> terms) {
-        this.terms = terms;
-    }
 
     public int evaluate() {
-        BiFunction<Integer, Integer, Integer> function = (a, b) -> a + b;
         int acc = 0;
-        Integer newNumber = null;
-        for (int i = 0; i < terms.size(); i++) {
-            char term = terms.get(i);
-            switch (term) {
-                case '+':
-                    function = (a, b) -> a + b;
-                    break;
-                case '-':
-                    function = (a, b) -> a - b;
-                    break;
-                case '*':
-                    function = (a, b) -> a * b;
-                    break;
-                case '/':
-                    function = (a, b) -> a / b;
-                    break;
-                case '(':
-                    //push onto stack
-                    return function.apply(acc, new DayEighteen(terms.subList(i+1,terms.size())).evaluate());
-                case ')':
-                    //do nowt;
-                    break;
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    try {
-                        newNumber = parseInt(Character.toString(term));
-                    } catch (NumberFormatException e) {
 
-                    }
+        Pattern matchedBracketsPattern = Pattern.compile("(.*)\\(([^()]*)\\)(.*)");
+        Matcher matcher = matchedBracketsPattern.matcher(input);
+
+        while (matcher.matches()) {
+            input = matcher.group(1) + squish(matcher.group(2)) + matcher.group(3);
+            matcher = matchedBracketsPattern.matcher(input);
+        }
+
+        return Integer.parseInt(squish(input));
+    }
+
+    private String squish(String input) {
+        Pattern pattern = Pattern.compile("(\\d+) ([+-/*]) (\\d+)(.*)");
+
+        while(input.contains(" ")) {
+            Matcher matcher = pattern.matcher(input);
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("Squish can't match input: " + input);
+            }
+            int operand1 = Integer.parseInt(matcher.group(1));
+            int operand2 = Integer.parseInt(matcher.group(3));
+            switch (matcher.group(2)) {
+                case "+":
+                    input = String.valueOf(operand1 + operand2) + matcher.group(4);
+                    break;
+                case "-":
+                    input = String.valueOf(operand1 - operand2) + matcher.group(4);
+                    break;
+                case "*":
+                    input = String.valueOf(operand1 * operand2) + matcher.group(4);
+                    break;
+                case "/":
+                    input = String.valueOf(operand1 / operand2) + matcher.group(4);
                     break;
                 default:
-                    throw new IllegalArgumentException("Unexpected token in input: " + term);
-            }
-            if (function != null && newNumber != null) {
-                acc = function.apply(acc, newNumber);
-                function = null;
-                newNumber = null;
+                    throw new RuntimeException("Can't process operator: " + matcher.group(4));
             }
         }
-        return acc;
+        return input;
     }
 }
