@@ -9,8 +9,11 @@ public class Rule {
         this.regex = regex;
     }
 
-    @Override
-    public String toString() {
+    public String getRegex() {
         return regex;
+    }
+
+    public int getRuleNo() {
+        return ruleNo;
     }
 }

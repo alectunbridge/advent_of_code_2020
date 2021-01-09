@@ -6,8 +6,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DayNineteenTest {
     @Test
-    void parseRule() {
+    void parseSingleRule() {
         DayNineteen dayNineteen = new DayNineteen("0: \"a\"");
-        assertThat(dayNineteen.getRegExp()).isEqualTo("a");
+        assertThat(dayNineteen.getRegex()).isEqualTo("a");
+    }
+
+    @Test
+    void parseMultipleRules() {
+        DayNineteen dayNineteen = new DayNineteen("0: \"1\"", "1: \"b\"");
+        assertThat(dayNineteen.getRegex()).isEqualTo("b");
     }
 }
