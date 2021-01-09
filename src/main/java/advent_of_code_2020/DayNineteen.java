@@ -29,17 +29,16 @@ public class DayNineteen {
 
     public String getRegex() {
         String masterRule = rules.get(0).getRegex();
-        while (masterRule.matches("\\d")){
+        while (masterRule.matches(".*\\d.*")){
             String[] ruleNumbers = masterRule.split(" ");
             Arrays.sort(ruleNumbers);
             for (int i = ruleNumbers.length-1; i>=0; i--) {
                 String ruleNumber = ruleNumbers[i];
-                if (!"|".equals(ruleNumber)) {
-                    masterRule = masterRule.replaceAll(ruleNumber, rules.get(parseInt(ruleNumber)).getRegex());
+                if (ruleNumber.matches("\\d+")) {
+                    masterRule = masterRule.replaceAll(ruleNumber, "( "+rules.get(parseInt(ruleNumber)).getRegex()+" )");
                 }
             }
         }
-
-        return masterRule;
+        return masterRule.replaceAll(" ","");
     }
 }
