@@ -42,7 +42,12 @@ public class DayNineteen {
         String ruleRegex = rule.getRegex();
         while (ruleRegex.matches(".*\\d.*")) {
             String[] ruleNumbers = ruleRegex.split(" ");
-            Arrays.sort(ruleNumbers);
+            Arrays.sort(ruleNumbers, (a,b)->{
+                if(a.matches("\\d+") && b.matches("\\d+")){
+                    return Integer.parseInt(a)-Integer.parseInt(b);
+                }
+                return 0;
+            });
             for (int i = ruleNumbers.length - 1; i >= 0; i--) {
                 String ruleNumber = ruleNumbers[i];
                 String subRuleRegex;
@@ -55,6 +60,8 @@ public class DayNineteen {
                     String expandedRegex = ruleRegex.replaceAll(ruleNumber, "( " + subRuleRegex + " )");
                     if (!expandedRegex.matches(".*\\d.*")) {
                         cache.put(""+rule.getRuleNo(), expandedRegex);
+                        ruleRegex = expandedRegex;
+                        break;
                     }
                     ruleRegex = expandedRegex;
                 }
