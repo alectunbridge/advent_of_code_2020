@@ -17,7 +17,7 @@ public class DayNineteen {
         Pattern pattern = Pattern.compile("(\\d+): (.*)");
         rules = new ArrayList<>();
         inputStrings = new ArrayList<>();
-        cache = new HashMap<>();
+        cache = new TreeMap<>();
         for (String ruleAsString : rulesAsStrings) {
             Matcher matcher = pattern.matcher(ruleAsString);
             if (matcher.matches()) {
@@ -42,12 +42,6 @@ public class DayNineteen {
         String ruleRegex = rule.getRegex();
         while (ruleRegex.matches(".*\\d.*")) {
             String[] ruleNumbers = ruleRegex.split(" ");
-            Arrays.sort(ruleNumbers, (a,b)->{
-                if(a.matches("\\d+") && b.matches("\\d+")){
-                    return Integer.parseInt(a)-Integer.parseInt(b);
-                }
-                return 0;
-            });
             for (int i = ruleNumbers.length - 1; i >= 0; i--) {
                 String ruleNumber = ruleNumbers[i];
                 String subRuleRegex;
@@ -55,11 +49,12 @@ public class DayNineteen {
                     if(cache.containsKey(ruleNumber)){
                         subRuleRegex = cache.get(ruleNumber);
                     } else {
-                        subRuleRegex = rules.get(parseInt(ruleNumber)).getRegex();
+                        subRuleRegex = getRegex(rules.get(parseInt(ruleNumber)));
                     }
-                    String expandedRegex = ruleRegex.replaceAll(ruleNumber, "( " + subRuleRegex + " )");
+                    String expandedRegex = ruleRegex.replaceAll("\\b"+ruleNumber+"\\b", "( " + subRuleRegex + " )");
                     if (!expandedRegex.matches(".*\\d.*")) {
                         cache.put(""+rule.getRuleNo(), expandedRegex);
+                        System.out.println(cache.size());
                         ruleRegex = expandedRegex;
                         break;
                     }
@@ -67,7 +62,7 @@ public class DayNineteen {
                 }
             }
         }
-        return ruleRegex.replaceAll(" ", "");
+        return ruleRegex;
     }
 
     public long getCountOfMatchingStrings() {
@@ -76,11 +71,8 @@ public class DayNineteen {
 
     public String getRegex() {
         if (masterRule == null) {
-            for (int i = rules.size()-1; i >= 0; i--) {
-                getRegex(rules.get(i));
-            }
             masterRule = getRegex(rules.get(0));
         }
-        return masterRule;
+        return masterRule.replaceAll(" ", "");
     }
 }
