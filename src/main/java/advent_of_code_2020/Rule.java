@@ -16,4 +16,9 @@ public class Rule {
     public int getRuleNo() {
         return ruleNo;
     }
+
+    @Override
+    public String toString() {
+        return ruleNo + ": " + regex;
+    }
 }

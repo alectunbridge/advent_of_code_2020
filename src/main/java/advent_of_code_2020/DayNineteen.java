@@ -11,11 +11,13 @@ public class DayNineteen {
     private final List<String> inputStrings;
     private List<Rule> rules;
     private String masterRule;
+    private Map<String, String> cache;
 
     public DayNineteen(String... rulesAsStrings) {
         Pattern pattern = Pattern.compile("(\\d+): (.*)");
         rules = new ArrayList<>();
         inputStrings = new ArrayList<>();
+        cache = new HashMap<>();
         for (String ruleAsString : rulesAsStrings) {
             Matcher matcher = pattern.matcher(ruleAsString);
             if (matcher.matches()) {
@@ -31,30 +33,47 @@ public class DayNineteen {
             }
         }
         rules.sort(Comparator.comparing(Rule::getRuleNo));
+        for (Rule rule : rules) {
+            System.out.println(rule);
+        }
     }
 
-    public String getRegex() {
-        if(masterRule == null) {
-            masterRule = rules.get(0).getRegex();
-            int count = 0;
-            while (masterRule.matches(".*\\d.*")) {
-                count++;
-                System.out.println(count);
-                String[] ruleNumbers = masterRule.split(" ");
-                Arrays.sort(ruleNumbers);
-                for (int i = ruleNumbers.length - 1; i >= 0; i--) {
-                    String ruleNumber = ruleNumbers[i];
-                    if (ruleNumber.matches("\\d+")) {
-                        masterRule = masterRule.replaceAll(ruleNumber, "( " + rules.get(parseInt(ruleNumber)).getRegex() + " )");
+    public String getRegex(Rule rule) {
+        String ruleRegex = rule.getRegex();
+        while (ruleRegex.matches(".*\\d.*")) {
+            String[] ruleNumbers = ruleRegex.split(" ");
+            Arrays.sort(ruleNumbers);
+            for (int i = ruleNumbers.length - 1; i >= 0; i--) {
+                String ruleNumber = ruleNumbers[i];
+                String subRuleRegex;
+                if (ruleNumber.matches("\\d+")) {
+                    if(cache.containsKey(ruleNumber)){
+                        subRuleRegex = cache.get(ruleNumber);
+                    } else {
+                        subRuleRegex = rules.get(parseInt(ruleNumber)).getRegex();
                     }
+                    String expandedRegex = ruleRegex.replaceAll(ruleNumber, "( " + subRuleRegex + " )");
+                    if (!expandedRegex.matches(".*\\d.*")) {
+                        cache.put(""+rule.getRuleNo(), expandedRegex);
+                    }
+                    ruleRegex = expandedRegex;
                 }
             }
-            return masterRule.replaceAll(" ", "");
         }
-        return masterRule.replaceAll(" ", "");
+        return ruleRegex.replaceAll(" ", "");
     }
 
     public long getCountOfMatchingStrings() {
-        return inputStrings.stream().filter(s->s.matches(getRegex())).count();
+        return inputStrings.stream().filter(s -> s.matches(getRegex())).count();
+    }
+
+    public String getRegex() {
+        if (masterRule == null) {
+            for (int i = rules.size()-1; i >= 0; i--) {
+                getRegex(rules.get(i));
+            }
+            masterRule = getRegex(rules.get(0));
+        }
+        return masterRule;
     }
 }
