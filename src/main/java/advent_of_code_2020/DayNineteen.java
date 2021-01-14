@@ -25,7 +25,7 @@ public class DayNineteen {
             } else {
                 if (ruleAsString.matches("")) {
                     //do nowt
-                } else if (ruleAsString.matches("[ab]+")) {
+                } else if (ruleAsString.matches("[a-z]+")) {
                     inputStrings.add(ruleAsString);
                 } else {
                     throw new IllegalArgumentException("Can't parse rule from input: " + ruleAsString);
@@ -33,6 +33,8 @@ public class DayNineteen {
             }
         }
         rules.sort(Comparator.comparing(Rule::getRuleNo));
+        rules.set(8, new Rule("8", "42 +"));
+        rules.set(8, new Rule("11", "[ 42 ~ 31 ]"));
         for (Rule rule : rules) {
             System.out.println(rule);
         }
