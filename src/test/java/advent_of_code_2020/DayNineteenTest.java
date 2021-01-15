@@ -78,10 +78,10 @@ public class DayNineteenTest {
     }
 
     @Test
-    void part1Answer() throws URISyntaxException, IOException {
+    void part2Answer() throws URISyntaxException, IOException {
         String[] lines = Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_nineteen.txt").toURI())).toArray(new String[0]);
         DayNineteen dayNineteen = new DayNineteen(lines);
-        assertThat(dayNineteen.getCountOfMatchingStrings()).isEqualTo(0L);
+        assertThat(dayNineteen.getCountOfMatchingStrings()).isEqualTo(374L);
     }
 
     @Test
@@ -135,7 +135,6 @@ public class DayNineteenTest {
                                 "babaaabbbaaabaababbaabababaaab" ,
                                 "aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba"
         );
-        assertThat(dayNineteen.getCountOfMatchingStrings()).isEqualTo(0L);
-        System.out.println("jam");
+        assertThat(dayNineteen.getCountOfMatchingStrings()).isEqualTo(12L);
     }
 }

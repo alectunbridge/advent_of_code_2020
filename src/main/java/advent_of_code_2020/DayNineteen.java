@@ -3,25 +3,31 @@ package advent_of_code_2020;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.valueOf;
 
 public class DayNineteen {
 
     private final List<String> inputStrings;
-    private List<Rule> rules;
+    private Map<Integer, Rule> rules;
     private String masterRule;
     private Map<String, String> cache;
 
+    public List<String> getInputStrings() {
+        return inputStrings;
+    }
+
     public DayNineteen(String... rulesAsStrings) {
         Pattern pattern = Pattern.compile("(\\d+): (.*)");
-        rules = new ArrayList<>();
+        rules = new TreeMap<>();
         inputStrings = new ArrayList<>();
         cache = new TreeMap<>();
         for (String ruleAsString : rulesAsStrings) {
             Matcher matcher = pattern.matcher(ruleAsString);
             if (matcher.matches()) {
-                rules.add(new Rule(matcher.group(1), matcher.group(2).replaceAll("\"", "")));
+                rules.put(valueOf(matcher.group(1)),new Rule(matcher.group(1), matcher.group(2).replaceAll("\"", "")));
             } else {
                 if (ruleAsString.matches("")) {
                     //do nowt
@@ -32,12 +38,8 @@ public class DayNineteen {
                 }
             }
         }
-        rules.sort(Comparator.comparing(Rule::getRuleNo));
-        rules.set(8, new Rule("8", "42 +"));
-        rules.set(8, new Rule("11", "[ 42 ~ 31 ]"));
-        for (Rule rule : rules) {
-            System.out.println(rule);
-        }
+        rules.put(8, new Rule("8", "( 42 ) +"));
+        rules.put(11, new Rule("11", "42 31 | 42 42 31 31 | 42 42 42 31 31 31 | 42 42 42 42 31 31 31 31"));
     }
 
     public String getRegex(Rule rule) {
@@ -68,7 +70,8 @@ public class DayNineteen {
     }
 
     public long getCountOfMatchingStrings() {
-        return inputStrings.stream().filter(s -> s.matches(getRegex())).count();
+        Stream<String> stringStream = inputStrings.stream().filter(s -> s.matches(getRegex()));
+        return stringStream.count();
     }
 
     public String getRegex() {
