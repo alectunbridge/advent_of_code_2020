@@ -90,7 +90,7 @@ public class DayTwenty {
         return tileMap.get(edge);
     }
 
-    public long solve() {
+    public List<Tile> solve() {
         List<Tile> corners = new ArrayList<>();
         for(Tile tile: tiles){
             int edgesWithNoMatches = 0;
@@ -102,7 +102,7 @@ public class DayTwenty {
                 corners.add(tile);
             }
         }
-        return corners.stream().mapToLong(Tile::getId).reduce(1L,(a,b)->a*b);
+        return corners;
     }
 
     private int edgeHasNoMatches(Tile tile, String edge) {

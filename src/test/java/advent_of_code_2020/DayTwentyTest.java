@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -195,6 +196,7 @@ public class DayTwentyTest {
             Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
             dayTwenty.addTile(tile);
         }
-        assertThat(dayTwenty.solve()).isEqualTo(140656720229539L);
+        List<Tile> corners = dayTwenty.solve();
+        assertThat(corners.stream().mapToLong(Tile::getId).reduce(1L,(a,b)->a*b)).isEqualTo(140656720229539L);
     }
 }
