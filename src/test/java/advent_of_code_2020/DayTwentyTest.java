@@ -187,10 +187,13 @@ public class DayTwentyTest {
 
     @Test
     void part1Solution() throws URISyntaxException, IOException {
-        DayTwenty dayTwenty = DayTwenty.getDayTwenty();
+        DayTwenty dayTwenty = new DayTwenty("day_twenty.txt");
         List<Tile> corners = dayTwenty.solve();
         assertThat(corners.stream().mapToLong(Tile::getId).reduce(1,(a,b)->a*b)).isEqualTo(140656720229539L);
     }
 
+    @Test
+    void part2Solution() {
 
+    }
 }

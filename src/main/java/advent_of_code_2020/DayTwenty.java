@@ -74,14 +74,15 @@ public class DayTwenty {
     private MultiValuedMap<String, Tile> tileMap = new HashSetValuedHashMap<>();
     private List<Tile> tiles = new ArrayList<>();
 
-    static DayTwenty getDayTwenty() throws IOException, URISyntaxException {
-        DayTwenty dayTwenty = new DayTwenty();
-        String[] lines = Files.readAllLines(Path.of(DayTwenty.class.getClassLoader().getResource("day_twenty.txt").toURI())).toArray(new String[0]);
+    public DayTwenty() {
+    }
+
+    public DayTwenty(String filename) throws IOException, URISyntaxException {
+        String[] lines = Files.readAllLines(Path.of(DayTwenty.class.getClassLoader().getResource(filename).toURI())).toArray(new String[0]);
         for (int i = 0; i < 144; i++) {
             Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
-            dayTwenty.addTile(tile);
+            addTile(tile);
         }
-        return dayTwenty;
     }
 
     public void addTile(Tile tile) {
