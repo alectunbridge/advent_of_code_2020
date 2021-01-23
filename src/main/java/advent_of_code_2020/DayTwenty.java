@@ -3,6 +3,10 @@ package advent_of_code_2020;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,6 +73,16 @@ public class DayTwenty {
 
     private MultiValuedMap<String, Tile> tileMap = new HashSetValuedHashMap<>();
     private List<Tile> tiles = new ArrayList<>();
+
+    static DayTwenty getDayTwenty() throws IOException, URISyntaxException {
+        DayTwenty dayTwenty = new DayTwenty();
+        String[] lines = Files.readAllLines(Path.of(DayTwenty.class.getClassLoader().getResource("day_twenty.txt").toURI())).toArray(new String[0]);
+        for (int i = 0; i < 144; i++) {
+            Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
+            dayTwenty.addTile(tile);
+        }
+        return dayTwenty;
+    }
 
     public void addTile(Tile tile) {
         tiles.add(tile);

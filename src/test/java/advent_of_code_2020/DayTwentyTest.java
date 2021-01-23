@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
@@ -184,19 +182,15 @@ public class DayTwentyTest {
             Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
             dayTwenty.addTile(tile);
         }
-        assertThat(dayTwenty.solve()).isEqualTo(20899048083289L);
+        assertThat(dayTwenty.solve().stream().mapToLong(Tile::getId).reduce(1,(a,b)->a*b)).isEqualTo(20899048083289L);
     }
 
     @Test
     void part1Solution() throws URISyntaxException, IOException {
-        DayTwenty dayTwenty = new DayTwenty();
-        //read input
-        String[] lines = Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_twenty.txt").toURI())).toArray(new String[0]);
-        for (int i = 0; i < 144; i++) {
-            Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
-            dayTwenty.addTile(tile);
-        }
+        DayTwenty dayTwenty = DayTwenty.getDayTwenty();
         List<Tile> corners = dayTwenty.solve();
-        assertThat(corners.stream().mapToLong(Tile::getId).reduce(1L,(a,b)->a*b)).isEqualTo(140656720229539L);
+        assertThat(corners.stream().mapToLong(Tile::getId).reduce(1,(a,b)->a*b)).isEqualTo(140656720229539L);
     }
+
+
 }
