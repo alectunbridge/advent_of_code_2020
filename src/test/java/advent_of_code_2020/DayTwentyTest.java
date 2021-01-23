@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DayTwentyTest {
@@ -64,7 +64,7 @@ public class DayTwentyTest {
     }
 
     @Test
-    void addAllTiles() {
+    void addAllTilesFromExample() {
         DayTwenty dayTwenty = new DayTwenty();
         String[] lines = {
                 "Tile 2311:",
@@ -179,6 +179,6 @@ public class DayTwentyTest {
             Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
             dayTwenty.addTile(tile);
         }
-        System.out.println("debug");
+        assertThat(dayTwenty.solve()).isEqualTo(20899048083289L);
     }
 }

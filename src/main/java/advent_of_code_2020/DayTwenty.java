@@ -2,10 +2,8 @@ package advent_of_code_2020;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -70,8 +68,11 @@ class Tile {
 public class DayTwenty {
 
     private MultiValuedMap<String, Tile> tileMap = new HashSetValuedHashMap<>();
+    private List<Tile> tiles = new ArrayList<>();
 
     public void addTile(Tile tile) {
+        tiles.add(tile);
+
         tileMap.put(tile.getTopRow(), tile);
         tileMap.put(reverse(tile.getTopRow()), tile);
 
@@ -87,5 +88,31 @@ public class DayTwenty {
 
     public Collection<Tile> getTileByEdge(String edge) {
         return tileMap.get(edge);
+    }
+
+    public long solve() {
+        List<Tile> corners = new ArrayList<>();
+        for(Tile tile: tiles){
+            int edgesWithNoMatches = 0;
+            edgesWithNoMatches += edgeHasNoMatches(tile, tile.getTopRow());
+            edgesWithNoMatches += edgeHasNoMatches(tile, tile.getBottomRow());
+            edgesWithNoMatches += edgeHasNoMatches(tile, tile.getLeftEdge());
+            edgesWithNoMatches += edgeHasNoMatches(tile, tile.getRightEdge());
+            if(edgesWithNoMatches == 2){
+                corners.add(tile);
+            }
+        }
+        return corners.stream().mapToLong(Tile::getId).reduce(1L,(a,b)->a*b);
+    }
+
+    private int edgeHasNoMatches(Tile tile, String edge) {
+        Set<Tile> matchingTiles = new HashSet<>();
+        matchingTiles.addAll(tileMap.get(edge));
+        matchingTiles.addAll(tileMap.get(reverse(edge)));
+        matchingTiles.remove(tile);
+        if (matchingTiles.isEmpty()){
+            return 1;
+        }
+        return 0;
     }
 }
