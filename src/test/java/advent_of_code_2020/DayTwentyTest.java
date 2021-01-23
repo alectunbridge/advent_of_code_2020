@@ -2,6 +2,10 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 import static org.apache.commons.lang3.StringUtils.reverse;
@@ -180,5 +184,17 @@ public class DayTwentyTest {
             dayTwenty.addTile(tile);
         }
         assertThat(dayTwenty.solve()).isEqualTo(20899048083289L);
+    }
+
+    @Test
+    void part1Solution() throws URISyntaxException, IOException {
+        DayTwenty dayTwenty = new DayTwenty();
+        //read input
+        String[] lines = Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_twenty.txt").toURI())).toArray(new String[0]);
+        for (int i = 0; i < 144; i++) {
+            Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
+            dayTwenty.addTile(tile);
+        }
+        assertThat(dayTwenty.solve()).isEqualTo(140656720229539L);
     }
 }
