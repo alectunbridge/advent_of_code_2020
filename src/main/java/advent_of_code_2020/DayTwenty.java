@@ -106,6 +106,25 @@ class Tile {
             lines[lineNo] = StringUtils.reverse(lines[lineNo]);
         }
     }
+
+    public void rotate() {
+        char[][] oldCharacters = new char[10][10];
+        for (int i = 1; i < 11; i++) {
+            oldCharacters[i-1] = lines[i].toCharArray();
+        }
+
+        char[][] newCharacters = new char[10][10];
+
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                newCharacters[y][x] = oldCharacters[10 - x - 1][y];
+            }
+        }
+
+        for (int lineNo = 1; lineNo < 11; lineNo++) {
+            lines[lineNo] = new String(newCharacters[lineNo-1]);
+        }
+    }
 }
 
 public class DayTwenty {
