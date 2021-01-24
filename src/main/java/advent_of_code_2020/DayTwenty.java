@@ -2,6 +2,7 @@ package advent_of_code_2020;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,16 +13,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.lang3.StringUtils.*;
-
 class Tile {
+    public static final int TOP = 0;
+    public static final int RIGHT = 1;
+    public static final int BOTTOM = 2;
+    public static final int LEFT = 3;
     private final int id;
     private final String[] lines;
+    private final List<String> edges;
     private String topRow;
     private String bottomRow;
     private String leftEdge;
     private String rightEdge;
 
+
+    public List<String> getEdges() {
+        return edges;
+    }
 
     public Tile(String... lines) {
         this.lines = lines;
@@ -41,6 +49,12 @@ class Tile {
         }
         leftEdge = leftEdgeBuilder.toString();
         rightEdge = rightEdgeBuilder.toString();
+
+        edges = new ArrayList<>();
+        edges.add(topRow);
+        edges.add(rightEdge);
+        edges.add(bottomRow);
+        edges.add(leftEdge);
     }
 
     @Override
@@ -67,6 +81,31 @@ class Tile {
     public String getRightEdge() {
         return rightEdge;
     }
+
+    public void flipLeftRight() {
+        edges.set(TOP, StringUtils.reverse(edges.get(TOP)));
+        edges.set(BOTTOM, StringUtils.reverse(edges.get(BOTTOM)));
+        String right = edges.get(RIGHT);
+        String left = edges.get(LEFT);
+        edges.set(LEFT, right);
+        edges.set(RIGHT, left);
+    }
+
+    public void flipTopToBottom() {
+        String top = edges.get(TOP);
+        String bottom = edges.get(BOTTOM);
+        edges.set(TOP,bottom);
+        edges.set(BOTTOM,top);
+
+        edges.set(LEFT, StringUtils.reverse(edges.get(LEFT)));
+        edges.set(RIGHT, StringUtils.reverse(edges.get(RIGHT)));
+    }
+
+    public void reverse() {
+        for (int lineNo = 1; lineNo < 11; lineNo++) {
+            lines[lineNo] = StringUtils.reverse(lines[lineNo]);
+        }
+    }
 }
 
 public class DayTwenty {
@@ -89,23 +128,23 @@ public class DayTwenty {
         tiles.add(tile);
 
         tileMap.put(tile.getTopRow(), tile);
-        tileMap.put(reverse(tile.getTopRow()), tile);
+        tileMap.put(StringUtils.reverse(tile.getTopRow()), tile);
 
         tileMap.put(tile.getRightEdge(), tile);
-        tileMap.put(reverse(tile.getRightEdge()), tile);
+        tileMap.put(StringUtils.reverse(tile.getRightEdge()), tile);
 
         tileMap.put(tile.getBottomRow(), tile);
-        tileMap.put(reverse(tile.getBottomRow()), tile);
+        tileMap.put(StringUtils.reverse(tile.getBottomRow()), tile);
 
         tileMap.put(tile.getLeftEdge(), tile);
-        tileMap.put(reverse(tile.getLeftEdge()), tile);
+        tileMap.put(StringUtils.reverse(tile.getLeftEdge()), tile);
     }
 
-    public Collection<Tile> getTileByEdge(String edge) {
+    public Collection<Tile> getTilesByEdge(String edge) {
         return tileMap.get(edge);
     }
 
-    public List<Tile> solve() {
+    public List<Tile> findCorners() {
         List<Tile> corners = new ArrayList<>();
         for(Tile tile: tiles){
             int edgesWithNoMatches = 0;
@@ -123,7 +162,7 @@ public class DayTwenty {
     private int edgeHasNoMatches(Tile tile, String edge) {
         Set<Tile> matchingTiles = new HashSet<>();
         matchingTiles.addAll(tileMap.get(edge));
-        matchingTiles.addAll(tileMap.get(reverse(edge)));
+        matchingTiles.addAll(tileMap.get(StringUtils.reverse(edge)));
         matchingTiles.remove(tile);
         if (matchingTiles.isEmpty()){
             return 1;
