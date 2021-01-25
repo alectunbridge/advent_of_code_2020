@@ -20,15 +20,9 @@ class Tile {
     public static final int LEFT = 3;
     private final int id;
     private final String[] lines;
-    private final List<String> edges;
-    private String topRow;
-    private String bottomRow;
-    private String leftEdge;
-    private String rightEdge;
-
 
     public List<String> getEdges() {
-        return edges;
+        return Arrays.asList(getTopRow(),getRightEdge(),getBottomRow(),getLeftEdge());
     }
 
     public Tile(String... lines) {
@@ -38,23 +32,18 @@ class Tile {
             throw new IllegalArgumentException("Can't parse id from: " + lines[0]);
         }
         id = Integer.parseInt(matcher.group(1));
-        topRow = lines[1];
-        bottomRow = lines[10];
+    }
 
+    private String extractColumn(int index) {
+        return leftEdgeBuilder(index);
+    }
+
+    private String leftEdgeBuilder(int index) {
         StringBuilder leftEdgeBuilder = new StringBuilder();
-        StringBuilder rightEdgeBuilder = new StringBuilder();
         for (int i = 1; i < lines.length; i++) {
-            leftEdgeBuilder.append(lines[i].charAt(0));
-            rightEdgeBuilder.append(lines[i].charAt(9));
+            leftEdgeBuilder.append(lines[i].charAt(index));
         }
-        leftEdge = leftEdgeBuilder.toString();
-        rightEdge = rightEdgeBuilder.toString();
-
-        edges = new ArrayList<>();
-        edges.add(topRow);
-        edges.add(rightEdge);
-        edges.add(bottomRow);
-        edges.add(leftEdge);
+        return leftEdgeBuilder.toString();
     }
 
     @Override
@@ -67,38 +56,19 @@ class Tile {
     }
 
     public String getTopRow() {
-        return topRow;
+        return lines[1];
     }
 
     public String getBottomRow() {
-        return bottomRow;
+        return lines[10];
     }
 
     public String getLeftEdge() {
-        return leftEdge;
+        return extractColumn(0);
     }
 
     public String getRightEdge() {
-        return rightEdge;
-    }
-
-    public void flipLeftRight() {
-        edges.set(TOP, StringUtils.reverse(edges.get(TOP)));
-        edges.set(BOTTOM, StringUtils.reverse(edges.get(BOTTOM)));
-        String right = edges.get(RIGHT);
-        String left = edges.get(LEFT);
-        edges.set(LEFT, right);
-        edges.set(RIGHT, left);
-    }
-
-    public void flipTopToBottom() {
-        String top = edges.get(TOP);
-        String bottom = edges.get(BOTTOM);
-        edges.set(TOP,bottom);
-        edges.set(BOTTOM,top);
-
-        edges.set(LEFT, StringUtils.reverse(edges.get(LEFT)));
-        edges.set(RIGHT, StringUtils.reverse(edges.get(RIGHT)));
+        return extractColumn(9);
     }
 
     public void reverse() {
