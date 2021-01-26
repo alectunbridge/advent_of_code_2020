@@ -254,32 +254,45 @@ public class DayTwentyTest {
 
     @Test
     void part2Solution() throws IOException, URISyntaxException {
+        Tile[][] tileArray = new Tile[12][12];
         DayTwenty dayTwenty = new DayTwenty("day_twenty.txt");
         List<Tile> corners = dayTwenty.findCorners();
-        Tile firstCorner = corners.get(0);
-        List<String> firstCornerEdges = firstCorner.getEdges();
-        for (int cornerEdgeIndex = Tile.TOP; cornerEdgeIndex < Tile.LEFT; cornerEdgeIndex++) {
-            String cornerEdge = firstCornerEdges.get(cornerEdgeIndex);
+        Tile tileToMatch = corners.get(0);
+        dayTwenty.removeFromMap(tileToMatch);
+        tileArray[11][0] = tileToMatch;
+        int tileToMatchEdgeIndex = Tile.TOP;
+        for (int i = 10; i >= 0; i--) {
+            List<String> tileToMatchEdges = tileToMatch.getEdges();
+            String tileToMatchEdge = tileToMatchEdges.get(tileToMatchEdgeIndex);
             Set<Tile> matchingTiles = new HashSet<>();
-            matchingTiles.addAll(dayTwenty.getTilesByEdge(cornerEdge));
-            matchingTiles.addAll(dayTwenty.getTilesByEdge(reverse(cornerEdge)));
-            matchingTiles.remove(firstCorner);
+            matchingTiles.addAll(dayTwenty.getTilesByEdge(tileToMatchEdge));
+            matchingTiles.addAll(dayTwenty.getTilesByEdge(reverse(tileToMatchEdge)));
+            matchingTiles.remove(tileToMatch);
             if (matchingTiles.size() == 1) {
                 Tile neighbour = matchingTiles.iterator().next();
-                List<String> neighbourEdges = neighbour.getEdges();
-                for (int neighbourEdgeIndex = Tile.TOP; neighbourEdgeIndex <= Tile.LEFT; neighbourEdgeIndex++) {
-                    if (cornerEdge.equals(neighbourEdges.get(neighbourEdgeIndex))) {
-                        System.out.println(cornerEdgeIndex + " " + neighbourEdgeIndex);
-                        System.out.println(firstCorner);
-                        System.out.println(neighbour);
-                    } else if (cornerEdge.equals(reverse(neighbourEdges.get(neighbourEdgeIndex)))) {
-                        System.out.println(cornerEdgeIndex + " " + neighbourEdgeIndex);
-                        System.out.println(firstCorner);
-                        System.out.println("Flipped");
-                        System.out.println(neighbour);
+                for (int noOfRotations = 0; noOfRotations < 8 ; noOfRotations++) {
+                    if (tileToMatchEdge.equals(neighbour.getBottomRow())) {
+                        tileArray[i][0] = neighbour;
+                        dayTwenty.removeFromMap(neighbour);
+                        tileToMatch = neighbour;
+                        break;
+                    } else {
+                        neighbour.rotate();
+                    }
+                    if(noOfRotations == 3){
+                        neighbour.reverse();
                     }
                 }
+            } else {
+                throw new RuntimeException("no unique match");
             }
         }
+        for (Tile[] tile : tileArray) {
+            if (tile[0] != null) {
+                System.out.println(tile[0]);
+            }
+        }
+        System.out.println(
+                Arrays.stream(tileArray).filter(t->t[0]!=null).count());
     }
 }

@@ -158,4 +158,11 @@ public class DayTwenty {
         }
         return 0;
     }
+
+    public void removeFromMap(Tile tile) {
+        for (String edge: tile.getEdges()) {
+            tileMap.removeMapping(edge,tile);
+            tileMap.removeMapping(StringUtils.reverse(edge),tile);
+        }
+    }
 }
