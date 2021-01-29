@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.reverse;
+
 class Tile {
     public static final int TOP = 0;
     public static final int RIGHT = 1;
@@ -22,7 +24,7 @@ class Tile {
     private final String[] lines;
 
     public List<String> getEdges() {
-        return Arrays.asList(getTopRow(),getRightEdge(),getBottomRow(),getLeftEdge());
+        return Arrays.asList(getTopRow(), getRightEdge(), getBottomRow(), getLeftEdge());
     }
 
     public Tile(String... lines) {
@@ -80,7 +82,7 @@ class Tile {
     public void rotate() {
         char[][] oldCharacters = new char[10][10];
         for (int i = 1; i < 11; i++) {
-            oldCharacters[i-1] = lines[i].toCharArray();
+            oldCharacters[i - 1] = lines[i].toCharArray();
         }
 
         char[][] newCharacters = new char[10][10];
@@ -92,8 +94,12 @@ class Tile {
         }
 
         for (int lineNo = 1; lineNo < 11; lineNo++) {
-            lines[lineNo] = new String(newCharacters[lineNo-1]);
+            lines[lineNo] = new String(newCharacters[lineNo - 1]);
         }
+    }
+
+    public char getCharacter(int y, int x) {
+        return lines[y+1].charAt(x);
     }
 }
 
@@ -108,7 +114,7 @@ public class DayTwenty {
     public DayTwenty(String filename) throws IOException, URISyntaxException {
         String[] lines = Files.readAllLines(Path.of(DayTwenty.class.getClassLoader().getResource(filename).toURI())).toArray(new String[0]);
         for (int i = 0; i < 144; i++) {
-            Tile tile = new Tile(Arrays.copyOfRange(lines,i*12,i*12+11));
+            Tile tile = new Tile(Arrays.copyOfRange(lines, i * 12, i * 12 + 11));
             addTile(tile);
         }
     }
@@ -135,13 +141,13 @@ public class DayTwenty {
 
     public List<Tile> findCorners() {
         List<Tile> corners = new ArrayList<>();
-        for(Tile tile: tiles){
+        for (Tile tile : tiles) {
             int edgesWithNoMatches = 0;
             edgesWithNoMatches += edgeHasNoMatches(tile, tile.getTopRow());
             edgesWithNoMatches += edgeHasNoMatches(tile, tile.getBottomRow());
             edgesWithNoMatches += edgeHasNoMatches(tile, tile.getLeftEdge());
             edgesWithNoMatches += edgeHasNoMatches(tile, tile.getRightEdge());
-            if(edgesWithNoMatches == 2){
+            if (edgesWithNoMatches == 2) {
                 corners.add(tile);
             }
         }
@@ -153,16 +159,27 @@ public class DayTwenty {
         matchingTiles.addAll(tileMap.get(edge));
         matchingTiles.addAll(tileMap.get(StringUtils.reverse(edge)));
         matchingTiles.remove(tile);
-        if (matchingTiles.isEmpty()){
+        if (matchingTiles.isEmpty()) {
             return 1;
         }
         return 0;
     }
 
     public void removeFromMap(Tile tile) {
-        for (String edge: tile.getEdges()) {
-            tileMap.removeMapping(edge,tile);
-            tileMap.removeMapping(StringUtils.reverse(edge),tile);
+        for (String edge : tile.getEdges()) {
+            tileMap.removeMapping(edge, tile);
+            tileMap.removeMapping(StringUtils.reverse(edge), tile);
         }
+    }
+
+    Tile getUniqueMatch(Tile tileToMatch, int tileToMatchEdge) {
+        Set<Tile> matchingTiles = new HashSet<>();
+        matchingTiles.addAll(getTilesByEdge(tileToMatch.getEdges().get(tileToMatchEdge)));
+        matchingTiles.addAll(getTilesByEdge(reverse(tileToMatch.getEdges().get(tileToMatchEdge))));
+        matchingTiles.remove(tileToMatch);
+        if (matchingTiles.size() != 1) {
+            throw new RuntimeException("no unique match");
+        }
+        return matchingTiles.iterator().next();
     }
 }

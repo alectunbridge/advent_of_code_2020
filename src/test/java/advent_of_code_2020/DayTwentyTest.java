@@ -5,9 +5,14 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
+import static advent_of_code_2020.Tile.RIGHT;
+import static advent_of_code_2020.Tile.TOP;
 import static org.apache.commons.lang3.StringUtils.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 public class DayTwentyTest {
 
@@ -257,42 +262,65 @@ public class DayTwentyTest {
         Tile[][] tileArray = new Tile[12][12];
         DayTwenty dayTwenty = new DayTwenty("day_twenty.txt");
         List<Tile> corners = dayTwenty.findCorners();
+
         Tile tileToMatch = corners.get(0);
         dayTwenty.removeFromMap(tileToMatch);
+        int direction = TOP;
         tileArray[11][0] = tileToMatch;
-        int tileToMatchEdgeIndex = Tile.TOP;
-        for (int i = 10; i >= 0; i--) {
-            List<String> tileToMatchEdges = tileToMatch.getEdges();
-            String tileToMatchEdge = tileToMatchEdges.get(tileToMatchEdgeIndex);
-            Set<Tile> matchingTiles = new HashSet<>();
-            matchingTiles.addAll(dayTwenty.getTilesByEdge(tileToMatchEdge));
-            matchingTiles.addAll(dayTwenty.getTilesByEdge(reverse(tileToMatchEdge)));
-            matchingTiles.remove(tileToMatch);
-            if (matchingTiles.size() == 1) {
-                Tile neighbour = matchingTiles.iterator().next();
-                for (int noOfRotations = 0; noOfRotations < 8 ; noOfRotations++) {
-                    if (tileToMatchEdge.equals(neighbour.getBottomRow())) {
-                        tileArray[i][0] = neighbour;
-                        dayTwenty.removeFromMap(neighbour);
-                        tileToMatch = neighbour;
-                        break;
-                    } else {
-                        neighbour.rotate();
-                    }
-                    if(noOfRotations == 3){
-                        neighbour.reverse();
-                    }
-                }
+
+        fillInRowOrColumn(tileArray, dayTwenty, tileToMatch, direction, 0);
+        for (int rowIndex = 0; rowIndex < 12; rowIndex++) {
+            fillInRowOrColumn(tileArray, dayTwenty, tileArray[rowIndex][0], RIGHT, rowIndex);
+        }
+
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < 120; i++) {
+            for (int j = 0; j < 120; j++) {
+                output.append(tileArray[i/10][j/10].getCharacter(i%10,j%10));
+            }
+            output.append("\n");
+        }
+        System.out.println(output);
+    }
+
+    private void fillInRowOrColumn(Tile[][] tileArray, DayTwenty dayTwenty, Tile tileToMatch, int direction, int startIndex) {
+        int indexStart = 0;
+        int increment = 0;
+        Predicate<Integer> predicate = null;
+        if(direction == TOP){
+            indexStart = 10;
+            increment = -1;
+            predicate = index -> index >= 0;
+        } else if (direction == RIGHT){
+            indexStart = 1;
+            increment = 1;
+            predicate = index -> index < 12;
+        }
+        for (int rowOrColumnIndex = indexStart; predicate.test(rowOrColumnIndex); rowOrColumnIndex += increment) {
+            Tile neighbour = dayTwenty.getUniqueMatch(tileToMatch, direction);
+            rotateAndFlipTile(tileToMatch, direction, neighbour);
+            
+            dayTwenty.removeFromMap(neighbour);
+            if(direction == TOP){
+                tileArray[rowOrColumnIndex][startIndex] = neighbour;
+            } else if (direction == RIGHT){
+                tileArray[startIndex][rowOrColumnIndex] = neighbour;
+            }
+            tileToMatch = neighbour;
+        }
+    }
+
+    private void rotateAndFlipTile(Tile tileToMatch, int tileToMatchEdgeIndex, Tile neighbour) {
+        for (int noOfRotations = 0; noOfRotations < 8; noOfRotations++) {
+            if (tileToMatch.getEdges().get(tileToMatchEdgeIndex).equals(neighbour.getEdges().get((tileToMatchEdgeIndex + 2) % 4))) {
+                break;
             } else {
-                throw new RuntimeException("no unique match");
+                neighbour.rotate();
+            }
+            if (noOfRotations == 3) {
+                neighbour.reverse();
             }
         }
-        for (Tile[] tile : tileArray) {
-            if (tile[0] != null) {
-                System.out.println(tile[0]);
-            }
-        }
-        System.out.println(
-                Arrays.stream(tileArray).filter(t->t[0]!=null).count());
     }
 }
+
