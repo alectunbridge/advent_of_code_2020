@@ -259,21 +259,13 @@ public class DayTwentyTest {
         DayTwenty dayTwenty = new DayTwenty("day_twenty.txt");
         List<Tile> corners = dayTwenty.findCorners();
 
-        dayTwenty.getTileArray()[11][0] = corners.get(0);
-        dayTwenty.removeFromMap(corners.get(0));
+        dayTwenty.setTile(11,0,corners.get(0));
         dayTwenty.fillInRowOrColumn(corners.get(0), TOP, 0);
         for (int rowIndex = 0; rowIndex < 12; rowIndex++) {
-            dayTwenty.fillInRowOrColumn(dayTwenty.getTileArray()[rowIndex][0], RIGHT, rowIndex);
+            dayTwenty.fillInRowOrColumn(dayTwenty.getTile(rowIndex,0), RIGHT, rowIndex);
         }
 
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < 120; i++) {
-            for (int j = 0; j < 120; j++) {
-                output.append(dayTwenty.getTileArray()[i/10][j/10].getCharacter(i%10,j%10));
-            }
-            output.append("\n");
-        }
-        System.out.println(output);
+        System.out.println(dayTwenty);
     }
 
 }

@@ -102,7 +102,7 @@ class Tile {
     }
 
     public char getCharacter(int y, int x) {
-        return lines[y+1].charAt(x);
+        return lines[y + 1].charAt(x);
     }
 
     void rotateAndFlipTile(Tile tileToMatch, int tileToMatchEdgeIndex) {
@@ -208,11 +208,11 @@ public class DayTwenty {
         int indexStart = 0;
         int increment = 0;
         Predicate<Integer> predicate = null;
-        if(direction == TOP){
+        if (direction == TOP) {
             indexStart = 10;
             increment = -1;
             predicate = index -> index >= 0;
-        } else if (direction == RIGHT){
+        } else if (direction == RIGHT) {
             indexStart = 1;
             increment = 1;
             predicate = index -> index < 12;
@@ -222,12 +222,39 @@ public class DayTwenty {
             neighbour.rotateAndFlipTile(tileToMatch, direction);
 
             removeFromMap(neighbour);
-            if(direction == TOP){
+            if (direction == TOP) {
                 tileArray[rowOrColumnIndex][startIndex] = neighbour;
-            } else if (direction == RIGHT){
+            } else if (direction == RIGHT) {
                 tileArray[startIndex][rowOrColumnIndex] = neighbour;
             }
             tileToMatch = neighbour;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < 120; i++) {
+            int y = i % 10;
+            for (int j = 0; j < 120; j++) {
+                int x = j % 10;
+                if (y != 0 && y != 9 && x != 0 && x != 9) {
+                    output.append(getTileArray()[i / 10][j / 10].getCharacter(y, x));
+                }
+            }
+            if(y != 0 && y != 9 ) {
+                output.append("\n");
+            }
+        }
+        return output.toString();
+    }
+
+    public Tile getTile(int y, int x) {
+        return tileArray[y][x];
+    }
+
+    public void setTile(int y, int x, Tile tile) {
+        tileArray[y][x] = tile;
+        removeFromMap(tile);
     }
 }
