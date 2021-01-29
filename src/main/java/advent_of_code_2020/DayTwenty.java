@@ -9,10 +9,13 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static advent_of_code_2020.Tile.RIGHT;
+import static advent_of_code_2020.Tile.TOP;
 import static org.apache.commons.lang3.StringUtils.reverse;
 
 class Tile {
@@ -101,14 +104,32 @@ class Tile {
     public char getCharacter(int y, int x) {
         return lines[y+1].charAt(x);
     }
+
+    void rotateAndFlipTile(Tile tileToMatch, int tileToMatchEdgeIndex) {
+        for (int noOfRotations = 0; noOfRotations < 8; noOfRotations++) {
+            if (tileToMatch.getEdges().get(tileToMatchEdgeIndex).equals(getEdges().get((tileToMatchEdgeIndex + 2) % 4))) {
+                break;
+            } else {
+                rotate();
+            }
+            if (noOfRotations == 3) {
+                reverse();
+            }
+        }
+    }
 }
 
 public class DayTwenty {
 
     private MultiValuedMap<String, Tile> tileMap = new HashSetValuedHashMap<>();
     private List<Tile> tiles = new ArrayList<>();
+    private Tile[][] tileArray = new Tile[12][12];
 
     public DayTwenty() {
+    }
+
+    public Tile[][] getTileArray() {
+        return tileArray;
     }
 
     public DayTwenty(String filename) throws IOException, URISyntaxException {
@@ -181,5 +202,32 @@ public class DayTwenty {
             throw new RuntimeException("no unique match");
         }
         return matchingTiles.iterator().next();
+    }
+
+    void fillInRowOrColumn(Tile tileToMatch, int direction, int startIndex) {
+        int indexStart = 0;
+        int increment = 0;
+        Predicate<Integer> predicate = null;
+        if(direction == TOP){
+            indexStart = 10;
+            increment = -1;
+            predicate = index -> index >= 0;
+        } else if (direction == RIGHT){
+            indexStart = 1;
+            increment = 1;
+            predicate = index -> index < 12;
+        }
+        for (int rowOrColumnIndex = indexStart; predicate.test(rowOrColumnIndex); rowOrColumnIndex += increment) {
+            Tile neighbour = getUniqueMatch(tileToMatch, direction);
+            neighbour.rotateAndFlipTile(tileToMatch, direction);
+
+            removeFromMap(neighbour);
+            if(direction == TOP){
+                tileArray[rowOrColumnIndex][startIndex] = neighbour;
+            } else if (direction == RIGHT){
+                tileArray[startIndex][rowOrColumnIndex] = neighbour;
+            }
+            tileToMatch = neighbour;
+        }
     }
 }
