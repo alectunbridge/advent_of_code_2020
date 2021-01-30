@@ -134,25 +134,27 @@ public class DayTwenty {
         Pattern lineTwoPattern = Pattern.compile("#....##....##....###");
         Pattern lineThreePattern = Pattern.compile(".#..#..#..#..#..#...");
 
-        Matcher lineOneMatcher = lineOnePattern.matcher(input.split("\n")[0]);
-        Matcher lineTwoMatcher = lineTwoPattern.matcher(input.split("\n")[1]);
-        Matcher lineThreeMatcher = lineThreePattern.matcher(input.split("\n")[2]);
-        boolean foundLineOne = false;
-        do {
-            foundLineOne = lineOneMatcher.find();
-            boolean foundLineTwo = false;
-            boolean foundLineThree = false;
-            if (foundLineOne) {
-                foundLineTwo = lineTwoMatcher.find(lineOneMatcher.start());
-                if (foundLineTwo && lineTwoMatcher.start() == lineOneMatcher.start()) {
-                    foundLineThree = lineThreeMatcher.find(lineOneMatcher.start());
-                    if (foundLineThree && lineThreeMatcher.start() == lineOneMatcher.start()) {
-                        noFound++;
+
+        String[] inputLines = input.split("\n");
+        for (int i = 0; i < inputLines.length-2; i++) {
+
+            Matcher lineOneMatcher = lineOnePattern.matcher(inputLines[i]);
+            Matcher lineTwoMatcher = lineTwoPattern.matcher(inputLines[i+1]);
+            Matcher lineThreeMatcher = lineThreePattern.matcher(inputLines[i+2]);
+            boolean foundLineOne;
+            do {
+                foundLineOne = lineOneMatcher.find();
+                if (foundLineOne) {
+                    boolean foundLineTwo = lineTwoMatcher.find(lineOneMatcher.start());
+                    if (foundLineTwo && lineTwoMatcher.start() == lineOneMatcher.start()) {
+                        boolean foundLineThree = lineThreeMatcher.find(lineOneMatcher.start());
+                        if (foundLineThree && lineThreeMatcher.start() == lineOneMatcher.start()) {
+                            noFound++;
+                        }
                     }
                 }
-            }
-        } while (foundLineOne);
-
+            } while (foundLineOne);
+        }
         return noFound;
     }
 
