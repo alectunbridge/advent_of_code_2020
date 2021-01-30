@@ -259,10 +259,10 @@ public class DayTwentyTest {
         DayTwenty dayTwenty = new DayTwenty("day_twenty.txt");
         List<Tile> corners = dayTwenty.findCorners();
 
-        dayTwenty.setTile(11,0,corners.get(0));
+        dayTwenty.setTile(11, 0, corners.get(0));
         dayTwenty.fillInRowOrColumn(corners.get(0), TOP, 0);
         for (int rowIndex = 0; rowIndex < 12; rowIndex++) {
-            dayTwenty.fillInRowOrColumn(dayTwenty.getTile(rowIndex,0), RIGHT, rowIndex);
+            dayTwenty.fillInRowOrColumn(dayTwenty.getTile(rowIndex, 0), RIGHT, rowIndex);
         }
 
         System.out.println(dayTwenty);
@@ -271,10 +271,19 @@ public class DayTwentyTest {
     @Test
     void findMonster() {
         assertThat(DayTwenty.findMonster(
-        "                  # \n" +
-             "#    ##    ##    ###\n" +
-             " #  #  #  #  #  #   "
-        )).isTrue();
+                "                  # \n" +
+                        "#    ##    ##    ###\n" +
+                        " #  #  #  #  #  #   "
+        )).isEqualTo(1);
+    }
+
+    @Test
+    void findMultipleMonsters() {
+        assertThat(DayTwenty.findMonster(
+                        "                  # " + "                  # " + "\n" +
+                        "#    ##    ##    ###" + "#    ##    ##    ###" + "\n" +
+                        " #  #  #  #  #  #   " + " #  #  #  #  #  #   "
+        )).isEqualTo(2);
     }
 }
 

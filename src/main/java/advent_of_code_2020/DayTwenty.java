@@ -128,7 +128,8 @@ public class DayTwenty {
     public DayTwenty() {
     }
 
-    public static boolean findMonster(String input) {
+    public static int findMonster(String input) {
+        int noFound = 0;
         Pattern lineOnePattern = Pattern.compile("..................#.");
         Pattern lineTwoPattern = Pattern.compile("#....##....##....###");
         Pattern lineThreePattern = Pattern.compile(".#..#..#..#..#..#...");
@@ -136,19 +137,23 @@ public class DayTwenty {
         Matcher lineOneMatcher = lineOnePattern.matcher(input.split("\n")[0]);
         Matcher lineTwoMatcher = lineTwoPattern.matcher(input.split("\n")[1]);
         Matcher lineThreeMatcher = lineThreePattern.matcher(input.split("\n")[2]);
-        boolean foundLineOne = lineOneMatcher.find();
-        boolean foundLineTwo = false;
-        boolean foundLineThree = false;
-        if(foundLineOne){
-            foundLineTwo = lineTwoMatcher.find(lineOneMatcher.start());
-            if(foundLineTwo && lineTwoMatcher.start() == lineOneMatcher.start()){
-                foundLineThree = lineThreeMatcher.find(lineOneMatcher.start());
-                if(foundLineThree && lineThreeMatcher.start() == lineOneMatcher.start()){
-                    return true;
+        boolean foundLineOne = false;
+        do {
+            foundLineOne = lineOneMatcher.find();
+            boolean foundLineTwo = false;
+            boolean foundLineThree = false;
+            if (foundLineOne) {
+                foundLineTwo = lineTwoMatcher.find(lineOneMatcher.start());
+                if (foundLineTwo && lineTwoMatcher.start() == lineOneMatcher.start()) {
+                    foundLineThree = lineThreeMatcher.find(lineOneMatcher.start());
+                    if (foundLineThree && lineThreeMatcher.start() == lineOneMatcher.start()) {
+                        noFound++;
+                    }
                 }
             }
-        }
-        return false;
+        } while (foundLineOne);
+
+        return noFound;
     }
 
     public Tile[][] getTileArray() {
@@ -265,7 +270,7 @@ public class DayTwenty {
                     output.append(getTileArray()[i / 10][j / 10].getCharacter(y, x));
                 }
             }
-            if(y != 0 && y != 9 ) {
+            if (y != 0 && y != 9) {
                 output.append("\n");
             }
         }
