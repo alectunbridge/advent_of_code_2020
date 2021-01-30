@@ -128,6 +128,29 @@ public class DayTwenty {
     public DayTwenty() {
     }
 
+    public static boolean findMonster(String input) {
+        Pattern lineOnePattern = Pattern.compile("..................#.");
+        Pattern lineTwoPattern = Pattern.compile("#....##....##....###");
+        Pattern lineThreePattern = Pattern.compile(".#..#..#..#..#..#...");
+
+        Matcher lineOneMatcher = lineOnePattern.matcher(input.split("\n")[0]);
+        Matcher lineTwoMatcher = lineTwoPattern.matcher(input.split("\n")[1]);
+        Matcher lineThreeMatcher = lineThreePattern.matcher(input.split("\n")[2]);
+        boolean foundLineOne = lineOneMatcher.find();
+        boolean foundLineTwo = false;
+        boolean foundLineThree = false;
+        if(foundLineOne){
+            foundLineTwo = lineTwoMatcher.find(lineOneMatcher.start());
+            if(foundLineTwo && lineTwoMatcher.start() == lineOneMatcher.start()){
+                foundLineThree = lineThreeMatcher.find(lineOneMatcher.start());
+                if(foundLineThree && lineThreeMatcher.start() == lineOneMatcher.start()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public Tile[][] getTileArray() {
         return tileArray;
     }

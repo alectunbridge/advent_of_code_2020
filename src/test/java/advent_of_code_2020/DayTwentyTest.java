@@ -268,5 +268,13 @@ public class DayTwentyTest {
         System.out.println(dayTwenty);
     }
 
+    @Test
+    void findMonster() {
+        assertThat(DayTwenty.findMonster(
+        "                  # \n" +
+             "#    ##    ##    ###\n" +
+             " #  #  #  #  #  #   "
+        )).isTrue();
+    }
 }
 
