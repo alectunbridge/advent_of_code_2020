@@ -1,15 +1,18 @@
 package advent_of_code_2020;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static advent_of_code_2020.Tile.RIGHT;
 import static advent_of_code_2020.Tile.TOP;
 import static org.apache.commons.lang3.StringUtils.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 public class DayTwentyTest {
 
@@ -265,12 +268,52 @@ public class DayTwentyTest {
             dayTwenty.fillInRowOrColumn(dayTwenty.getTile(rowIndex, 0), RIGHT, rowIndex);
         }
 
-        System.out.println(dayTwenty);
+        System.out.println("Monsters found: " + DayTwenty.findMonsters(dayTwenty.toString()));
+        String[] wholeGridAsStringArray = dayTwenty.toString().split("\n");
+
+        int monsters = 0;
+        WEIRD: while(true) {
+            for (int i = 0; i < 3; i++) {
+                DayTwenty.rotate(wholeGridAsStringArray);
+                monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
+                if(monsters !=0){
+                    break WEIRD;
+                }
+            }
+
+            for (int lineNo = 0; lineNo < wholeGridAsStringArray.length; lineNo++) {
+                wholeGridAsStringArray[lineNo] = StringUtils.reverse(wholeGridAsStringArray[lineNo]);
+            }
+            monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
+            if(monsters !=0){
+                break WEIRD;
+            }
+
+            for (int i = 0; i < 3; i++) {
+                DayTwenty.rotate(wholeGridAsStringArray);
+                monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
+                if(monsters !=0){
+                    break WEIRD;
+                }
+            }
+        }
+
+        int totalHashes = 0;
+        for (String line : wholeGridAsStringArray) {
+            totalHashes += line.chars().filter(c->'#'==c).count();
+        }
+
+        int totalDots = 0;
+        for (String line : wholeGridAsStringArray) {
+            totalDots += line.chars().filter(c->'.'==c).count();
+        }
+
+        System.out.println(totalHashes - monsters*15);
     }
 
     @Test
     void findMonster() {
-        assertThat(DayTwenty.findMonster(
+        assertThat(DayTwenty.findMonsters(
                 "                  # \n" +
                         "#    ##    ##    ###\n" +
                         " #  #  #  #  #  #   "
@@ -279,15 +322,47 @@ public class DayTwentyTest {
 
     @Test
     void findMultipleMonsters() {
-        assertThat(DayTwenty.findMonster(
-                        "                  # " + "                  # " + "\n" +
-                        "#    ##    ##    ###" + "#    ##    ##    ###" + "\n" +
-                        " #  #  #  #  #  #   " + " #  #  #  #  #  #   " + "\n" +
-                        "                  # " + "                  # " + "\n" +
-                        "#    ##    ##    ###" + "#    ##    ##    ###" + "\n" +
-                        " #  #  #  #  #  #   " + " #  #  #  #  #  #   " + "\n"
+        assertThat(DayTwenty.findMonsters(
+                        "                        #    " + "                  #    " + "\n" +
+                        "      #    ##    ##    ###   " + "#    ##    ##    ###   " + "\n" +
+                        "       #  #  #  #  #  #      " + " #  #  #  #  #  #      " + "\n" +
+                        "                     #    " + "                  #       " + "\n" +
+                        "   #    ##    ##    ###   " + "#    ##    ##    ###      " + "\n" +
+                        "    #  #  #  #  #  #      " + " #  #  #  #  #  #         " + "\n"
 
         )).isEqualTo(4);
+    }
+
+    @Test
+    void exampleMonsterCount() {
+        String input =
+        ".#.#..#.##...#.##..#####" + "\n" +
+        "###....#.#....#..#......" + "\n" +
+        "##.##.###.#.#..######..." + "\n" +
+        "###.#####...#.#####.#..#" + "\n" +
+        "##.#....#.##.####...#.##" + "\n" +
+        "...########.#....#####.#" + "\n" +
+        "....#..#...##..#.#.###.." + "\n" +
+        ".####...#..#.....#......" + "\n" +
+        "#..#.##..#..###.#.##...." + "\n" +
+        "#.####..#.####.#.#.###.." + "\n" +
+        "###.#.#...#.######.#..##" + "\n" +
+        "#.####....##..########.#" + "\n" +
+        "##..##.#...#...#.#.#.#.." + "\n" +
+        "...#..#..#.#.##..###.###" + "\n" +
+        ".#.#....#.##.#...###.##." + "\n" +
+        "###.#...#..#.##.######.." + "\n" +
+        ".#.#.###.##.##.#..#.##.." + "\n" +
+        ".####.###.#...###.#..#.#" + "\n" +
+        "..#.#..#..#.#.#.####.###" + "\n" +
+        "#..####...#.#.#.###.###." + "\n" +
+        "#####..#####...###....##" + "\n" +
+        "#.##..#..#...#..####...#" + "\n" +
+        ".#.###..##..##..####.##." + "\n" +
+        "...###...##...#...#..###";
+        assertThat(DayTwenty.findMonsters(input)).isEqualTo(2);
+
+
     }
 }
 

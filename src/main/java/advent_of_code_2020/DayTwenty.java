@@ -82,7 +82,7 @@ class Tile {
         }
     }
 
-    public void rotate() {
+    public void rotate(){
         char[][] oldCharacters = new char[10][10];
         for (int i = 1; i < 11; i++) {
             oldCharacters[i - 1] = lines[i].toCharArray();
@@ -128,7 +128,7 @@ public class DayTwenty {
     public DayTwenty() {
     }
 
-    public static int findMonster(String input) {
+    public static int findMonsters(String input) {
         int noFound = 0;
         Pattern lineOnePattern = Pattern.compile("..................#.");
         Pattern lineTwoPattern = Pattern.compile("#....##....##....###");
@@ -156,6 +156,26 @@ public class DayTwenty {
             } while (foundLineOne);
         }
         return noFound;
+    }
+
+    public static void rotate(String[] lines) {
+        int arrayLength = lines.length;
+        char[][] oldCharacters = new char[arrayLength][arrayLength];
+        for (int i = 0; i < arrayLength; i++) {
+            oldCharacters[i] = lines[i].toCharArray();
+        }
+
+        char[][] newCharacters = new char[arrayLength][arrayLength];
+
+        for (int y = 0; y < arrayLength; y++) {
+            for (int x = 0; x < arrayLength; x++) {
+                newCharacters[y][x] = oldCharacters[arrayLength - x - 1][y];
+            }
+        }
+
+        for (int lineNo = 0; lineNo < arrayLength; lineNo++) {
+            lines[lineNo] = new String(newCharacters[lineNo]);
+        }
     }
 
     public Tile[][] getTileArray() {
