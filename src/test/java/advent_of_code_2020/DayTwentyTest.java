@@ -12,7 +12,6 @@ import static advent_of_code_2020.Tile.RIGHT;
 import static advent_of_code_2020.Tile.TOP;
 import static org.apache.commons.lang3.StringUtils.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 public class DayTwentyTest {
 
@@ -323,13 +322,12 @@ public class DayTwentyTest {
     @Test
     void findMultipleMonsters() {
         assertThat(DayTwenty.findMonsters(
-                        "                        #    " + "                  #    " + "\n" +
-                        "      #    ##    ##    ###   " + "#    ##    ##    ###   " + "\n" +
-                        "       #  #  #  #  #  #      " + " #  #  #  #  #  #      " + "\n" +
-                        "                     #    " + "                  #       " + "\n" +
-                        "   #    ##    ##    ###   " + "#    ##    ##    ###      " + "\n" +
-                        "    #  #  #  #  #  #      " + " #  #  #  #  #  #         " + "\n"
-
+                        "........................#...." + "..................#...." + "\n" +
+                        "......#....##....##....###..." + "#....##....##....###..." + "\n" +
+                        ".......#..#..#..#..#..#......" + ".#..#..#..#..#..#......" + "\n" +
+                        ".....................#...." + "..................#......." + "\n" +
+                        "...#....##....##....###..." + "#....##....##....###......" + "\n" +
+                        "....#..#..#..#..#..#......" + ".#..#..#..#..#..#........." + "\n"
         )).isEqualTo(4);
     }
 
@@ -360,9 +358,68 @@ public class DayTwentyTest {
         "#.##..#..#...#..####...#" + "\n" +
         ".#.###..##..##..####.##." + "\n" +
         "...###...##...#...#..###";
+
+        String[] wholeGridAsStringArray = input.split("\n");
+        int monsters = 0;
+        WEIRD: while(true) {
+            for (int i = 0; i < 3; i++) {
+                DayTwenty.rotate(wholeGridAsStringArray);
+                monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
+                if(monsters !=0){
+                    break WEIRD;
+                }
+            }
+
+            for (int lineNo = 0; lineNo < wholeGridAsStringArray.length; lineNo++) {
+                wholeGridAsStringArray[lineNo] = StringUtils.reverse(wholeGridAsStringArray[lineNo]);
+            }
+            monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
+            if(monsters !=0){
+                break WEIRD;
+            }
+
+            for (int i = 0; i < 3; i++) {
+                DayTwenty.rotate(wholeGridAsStringArray);
+                Arrays.stream(wholeGridAsStringArray).forEach(System.out::println);
+                monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
+                if(monsters !=0){
+                    break WEIRD;
+                }
+                System.out.println();
+            }
+            break WEIRD;
+        }
+        System.out.println(monsters);
+    }
+
+    @Test
+    void name() {
+        String input = ".####...#####..#...###..\n" +
+                "#####..#..#.#.####..#.#.\n" +
+                ".#.#...#.###...#.##.##..\n" +
+                "#.#.##.###.#.##.##.#####\n" +
+                "..##.###.####..#.####.##\n" +
+                "...#.#..##.##...#..#..##\n" +
+                "#.##.#..#.#..#..##.#.#..\n" +
+                ".###.##.....#...###.#...\n" +
+                "#.####.#.#....##.#..#.#.\n" +
+                "##...#..#....#..#...####\n" +
+                "..#.##...###..#.#####..#\n" +
+                "....#.##.#.#####....#...\n" +
+                "..##.##.###.....#.##..#.\n" +
+                "#...#...###..####....##.\n" +
+                ".#.##...#.##.#.#.###...#\n" +
+                "#.###.#..####...##..#...\n" +
+                "#.###...#.##...#.######.\n" +
+                ".###.###.#######..#####.\n" +
+                "..##.#..#..#.#######.###\n" +
+                "#.#..##.########..#..##.\n" +
+                "#.#####..#.#...##..#....\n" +
+                "#....##..#.#########..##\n" +
+                "#...#.....#..##...###.##\n" +
+                "#..###....##.#...##.##.#";
+
         assertThat(DayTwenty.findMonsters(input)).isEqualTo(2);
-
-
     }
 }
 
