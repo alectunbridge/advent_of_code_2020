@@ -380,7 +380,6 @@ public class DayTwentyTest {
 
             for (int i = 0; i < 3; i++) {
                 DayTwenty.rotate(wholeGridAsStringArray);
-                Arrays.stream(wholeGridAsStringArray).forEach(System.out::println);
                 monsters = DayTwenty.findMonsters(Arrays.stream(wholeGridAsStringArray).collect(Collectors.joining("\n")));
                 if(monsters !=0){
                     break WEIRD;
@@ -389,37 +388,17 @@ public class DayTwentyTest {
             }
             break WEIRD;
         }
-        System.out.println(monsters);
-    }
+        int totalHashes = 0;
+        for (String line : wholeGridAsStringArray) {
+            totalHashes += line.chars().filter(c->'#'==c).count();
+        }
 
-    @Test
-    void name() {
-        String input = ".####...#####..#...###..\n" +
-                "#####..#..#.#.####..#.#.\n" +
-                ".#.#...#.###...#.##.##..\n" +
-                "#.#.##.###.#.##.##.#####\n" +
-                "..##.###.####..#.####.##\n" +
-                "...#.#..##.##...#..#..##\n" +
-                "#.##.#..#.#..#..##.#.#..\n" +
-                ".###.##.....#...###.#...\n" +
-                "#.####.#.#....##.#..#.#.\n" +
-                "##...#..#....#..#...####\n" +
-                "..#.##...###..#.#####..#\n" +
-                "....#.##.#.#####....#...\n" +
-                "..##.##.###.....#.##..#.\n" +
-                "#...#...###..####....##.\n" +
-                ".#.##...#.##.#.#.###...#\n" +
-                "#.###.#..####...##..#...\n" +
-                "#.###...#.##...#.######.\n" +
-                ".###.###.#######..#####.\n" +
-                "..##.#..#..#.#######.###\n" +
-                "#.#..##.########..#..##.\n" +
-                "#.#####..#.#...##..#....\n" +
-                "#....##..#.#########..##\n" +
-                "#...#.....#..##...###.##\n" +
-                "#..###....##.#...##.##.#";
+        int totalDots = 0;
+        for (String line : wholeGridAsStringArray) {
+            totalDots += line.chars().filter(c->'.'==c).count();
+        }
 
-        assertThat(DayTwenty.findMonsters(input)).isEqualTo(2);
+        System.out.println(totalHashes - monsters*15);
     }
 }
 

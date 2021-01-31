@@ -142,17 +142,20 @@ public class DayTwenty {
             Matcher lineTwoMatcher = lineTwoPattern.matcher(inputLines[i+1]);
             Matcher lineThreeMatcher = lineThreePattern.matcher(inputLines[i+2]);
             boolean foundLineOne;
+            int startIndex = 0;
             do {
-                foundLineOne = lineOneMatcher.find();
+                foundLineOne = lineOneMatcher.find(startIndex);
                 if (foundLineOne) {
                     boolean foundLineTwo = lineTwoMatcher.find(lineOneMatcher.start());
                     if (foundLineTwo && lineTwoMatcher.start() == lineOneMatcher.start()) {
                         boolean foundLineThree = lineThreeMatcher.find(lineOneMatcher.start());
                         if (foundLineThree && lineThreeMatcher.start() == lineOneMatcher.start()) {
+                            startIndex+=19;
                             noFound++;
                         }
                     }
                 }
+                startIndex++;
             } while (foundLineOne);
         }
         return noFound;
