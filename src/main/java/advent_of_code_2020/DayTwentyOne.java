@@ -4,6 +4,7 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -17,16 +18,23 @@ public class DayTwentyOne {
         Pattern foodPattern = Pattern.compile("(.*)\\(contains (.*)\\)");
 
         for (String food : foods) {
-
             Matcher foodMatcher = foodPattern.matcher(food);
             if(!foodMatcher.matches()){
                 throw new IllegalArgumentException("Unable to parse food: " + food);
             }
-            ingredients.put(foodMatcher.group(2), new HashSet<>(Arrays.asList(foodMatcher.group(1).split(" "))));
+            String[] allergens = foodMatcher.group(2).replaceAll(" ","").split(",");
+            for (String allergen : allergens) {
+                ingredients.put(allergen, new HashSet<>(Arrays.asList(foodMatcher.group(1).split(" "))));
+            }
         }
     }
 
     public Set<String> getIngredientsByAllergen(String allergen) {
-        return ingredients.get(allergen).iterator().next();
+        Collection<Set<String>> allIngredientsForAllergen = ingredients.get(allergen);
+        Set<String> intersection = new HashSet<>(allIngredientsForAllergen.iterator().next());
+        for (Set<String> ingredients : allIngredientsForAllergen) {
+            intersection.retainAll(ingredients);
+        }
+        return intersection;
     }
 }
