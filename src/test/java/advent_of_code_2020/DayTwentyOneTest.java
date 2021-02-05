@@ -10,6 +10,6 @@ class DayTwentyOneTest {
     void createMap() {
         assertThat(new DayTwentyOne("trh fvjkl sbzzf mxmxvkd (contains dairy)")
                 .getIngredientsByAllergen("dairy"))
-                .containsExactly("trh fvjkl sbzzf mxmxvkd");
+                .containsOnly("trh", "fvjkl", "sbzzf", "mxmxvkd");
     }
 }
