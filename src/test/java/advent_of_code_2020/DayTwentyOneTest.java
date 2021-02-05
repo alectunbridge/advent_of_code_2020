@@ -3,6 +3,8 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DayTwentyOneTest {
@@ -49,9 +51,17 @@ class DayTwentyOneTest {
                 "sqjhc mxmxvkd sbzzf (contains fish)"
         );
 
-        assertThat(dayTwentyOne.getIngredientsByAllergen("dairy")).containsOnly("mxmxvkd");
-        assertThat(dayTwentyOne.getIngredientsByAllergen("fish")).containsOnly("sqjhc");
-        assertThat(dayTwentyOne.getIngredientsByAllergen("soy")).containsOnly("fvkl");
+        assertThat(dayTwentyOne.findAllergens()).containsExactlyInAnyOrderEntriesOf(
+                Map.of(
+                        "fish", "sqjhc",
+                        "dairy", "mxmxvkd",
+                        "soy", "fvjkl"
+                )
+        );
+
+        assertThat(dayTwentyOne.getAllergenFreeIngredients()).containsOnly(
+                "kfcds","nhms","sbzzf","trh"
+        );
     }
 
 }
