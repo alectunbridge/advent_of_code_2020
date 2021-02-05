@@ -1,5 +1,6 @@
 package advent_of_code_2020;
 
+import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
@@ -34,7 +35,7 @@ public class DayTwentyOne {
         return allergenToIngredientsMap.get(allergen).iterator().next();
     }
 
-    public Map<String,String> findAllergens() {
+    public Map<String, String> findAllergens() {
         while (allergenToIngredientsMap.keySet().size() != foundAllergens.size()) {
             for (String allergen : allergenToIngredientsMap.keySet()) {
                 Set<String> intersection = new HashSet<>(allergenToIngredientsMap.get(allergen).iterator().next());
@@ -52,8 +53,23 @@ public class DayTwentyOne {
 
 
     public Set<String> getAllergenFreeIngredients() {
-        Set<String> intersection = new HashSet<>(uniqueIngredients);
-        intersection.removeAll(foundAllergens.values());
-        return intersection;
+        Set<String> result = new HashSet<>(uniqueIngredients);
+        result.removeAll(foundAllergens.values());
+        return result;
+    }
+
+    public int getCountOfAllergenFreeIngredientOccurences() {
+        int count = 0;
+        for (String ingredient : getAllergenFreeIngredients()) {
+            //TODO multiple entries per allergen of same ingredient list
+            MapIterator<String, Set<String>> iterator = allergenToIngredientsMap.mapIterator();
+            while (iterator.hasNext()) {
+                String allergen = iterator.next();
+                if(iterator.getValue().contains(ingredient)){
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }

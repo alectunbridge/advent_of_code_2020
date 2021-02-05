@@ -62,6 +62,8 @@ class DayTwentyOneTest {
         assertThat(dayTwentyOne.getAllergenFreeIngredients()).containsOnly(
                 "kfcds","nhms","sbzzf","trh"
         );
+
+        assertThat(dayTwentyOne.getCountOfAllergenFreeIngredientOccurences()).isEqualTo(5);
     }
 
 }
