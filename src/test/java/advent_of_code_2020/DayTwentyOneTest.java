@@ -3,6 +3,10 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,10 +64,17 @@ class DayTwentyOneTest {
         );
 
         assertThat(dayTwentyOne.getAllergenFreeIngredients()).containsOnly(
-                "kfcds","nhms","sbzzf","trh"
+                "kfcds", "nhms", "sbzzf", "trh"
         );
 
         assertThat(dayTwentyOne.getCountOfAllergenFreeIngredientOccurences()).isEqualTo(5);
     }
 
+    @Test
+    void part1Solution() throws URISyntaxException, IOException {
+        DayTwentyOne dayTwentyOne = new DayTwentyOne(
+                Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_twenty_one.txt").toURI())).toArray(new String[0]));
+        dayTwentyOne.findAllergens();
+        assertThat(dayTwentyOne.getCountOfAllergenFreeIngredientOccurences()).isEqualTo(2211);
+    }
 }
