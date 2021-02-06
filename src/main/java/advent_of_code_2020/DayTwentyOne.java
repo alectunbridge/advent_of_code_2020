@@ -7,12 +7,13 @@ import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class DayTwentyOne {
 
     private Set<String> uniqueIngredients = new HashSet<>();
     private MultiValuedMap<String, Set<String>> allergenToIngredientsMap = new HashSetValuedHashMap<>();
-    private Map<String, String> foundAllergens = new HashMap<>();
+    private Map<String, String> foundAllergens = new TreeMap<>();
 
     public DayTwentyOne(String... foods) {
         Pattern foodPattern = Pattern.compile("(.*)\\(contains (.*)\\)");
@@ -76,5 +77,9 @@ public class DayTwentyOne {
             }
         }
         return count;
+    }
+
+    public String getDangerousIngredientsByAllergenAlphabetically() {
+        return foundAllergens.values().stream().collect(Collectors.joining(","));
     }
 }

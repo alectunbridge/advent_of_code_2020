@@ -77,4 +77,27 @@ class DayTwentyOneTest {
         dayTwentyOne.findAllergens();
         assertThat(dayTwentyOne.getCountOfAllergenFreeIngredientOccurences()).isEqualTo(2211);
     }
+
+    @Test
+    void part2Example() {
+        DayTwentyOne dayTwentyOne = new DayTwentyOne(
+                "mxmxvkd kfcds sqjhc nhms (contains dairy, fish)",
+                "trh fvjkl sbzzf mxmxvkd (contains dairy)",
+                "sqjhc fvjkl (contains soy)",
+                "sqjhc mxmxvkd sbzzf (contains fish)"
+        );
+
+        dayTwentyOne.findAllergens();
+        assertThat(dayTwentyOne.getDangerousIngredientsByAllergenAlphabetically()).isEqualTo(
+                "mxmxvkd,sqjhc,fvjkl"
+        );
+    }
+
+    @Test
+    void part2Solution() throws URISyntaxException, IOException {
+        DayTwentyOne dayTwentyOne = new DayTwentyOne(
+                Files.readAllLines(Path.of(this.getClass().getClassLoader().getResource("day_twenty_one.txt").toURI())).toArray(new String[0]));
+        dayTwentyOne.findAllergens();
+        assertThat(dayTwentyOne.getDangerousIngredientsByAllergenAlphabetically()).isEqualTo("vv,nlxsmb,rnbhjk,bvnkk,ttxvphb,qmkz,trmzkcfg,jpvz");
+    }
 }
