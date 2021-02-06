@@ -59,13 +59,18 @@ public class DayTwentyOne {
     }
 
     public int getCountOfAllergenFreeIngredientOccurences() {
+        MapIterator<String, Set<String>> iterator = allergenToIngredientsMap.mapIterator();
+
+        Set<Set<String>> deduped = new HashSet<>();
+        while (iterator.hasNext()) {
+            iterator.next();
+            deduped.add(iterator.getValue());
+        }
+
         int count = 0;
         for (String ingredient : getAllergenFreeIngredients()) {
-            //TODO multiple entries per allergen of same ingredient list
-            MapIterator<String, Set<String>> iterator = allergenToIngredientsMap.mapIterator();
-            while (iterator.hasNext()) {
-                String allergen = iterator.next();
-                if(iterator.getValue().contains(ingredient)){
+            for (Set<String> ingredients : deduped) {
+                if (ingredients.contains(ingredient)){
                     count++;
                 }
             }
