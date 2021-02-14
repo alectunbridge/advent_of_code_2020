@@ -2,6 +2,13 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DayTwentyTwoTest {
@@ -105,4 +112,15 @@ public class DayTwentyTwoTest {
         assertThat(dayTwentyTwo.completeGame()).isEqualTo(306);
     }
 
+    @Test
+    void part1Solution() throws URISyntaxException, IOException {
+        URI fileURI = this.getClass().getClassLoader()
+                .getResource("day_twenty_two.txt")
+                .toURI();
+        List<String> lines = Files.readAllLines(Path.of(fileURI));
+
+        DayTwentyTwo dayTwentyTwo = new DayTwentyTwo( lines.toArray(new String[0]));
+
+        assertThat(dayTwentyTwo.completeGame()).isEqualTo(33434);
+    }
 }
