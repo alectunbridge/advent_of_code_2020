@@ -102,7 +102,7 @@ public class DayTwentyTwoTest {
                 "10"
         );
 
-        assertThat(dayTwentyTwo.completeGame() == 29);
+        assertThat(dayTwentyTwo.completeGame()).isEqualTo(29);
     }
 
 }

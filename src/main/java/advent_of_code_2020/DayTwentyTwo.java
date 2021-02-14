@@ -43,7 +43,7 @@ public class DayTwentyTwo {
             playerTwoDeck.addLast(playerTwoCard);
             playerTwoDeck.addLast(playerOneCard);
         }
-        return playerOneDeck.isEmpty()||playerTwoDeck.isEmpty();
+        return playerOneDeck.isEmpty() || playerTwoDeck.isEmpty();
     }
 
     public Deque<Integer> getPlayerOneDeck() {
@@ -55,8 +55,8 @@ public class DayTwentyTwo {
     }
 
     public int completeGame() {
-        int roundCount = 0;
-        while (playRound()) {
+        int roundCount = 1;
+        while (!playRound()) {
             roundCount++;
         }
         return roundCount;
