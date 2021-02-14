@@ -59,6 +59,21 @@ public class DayTwentyTwo {
         while (!playRound()) {
             roundCount++;
         }
-        return roundCount;
+
+        Deque<Integer> winnersDeck = null;
+        if(playerOneDeck.isEmpty()){
+            winnersDeck = playerTwoDeck;
+        } else {
+            winnersDeck = playerOneDeck;
+        }
+
+        int score = 0;
+        int multiplier = winnersDeck.size();
+        for (Integer cardValue : winnersDeck) {
+            score += cardValue * multiplier;
+            multiplier--;
+        }
+
+        return score;
     }
 }
