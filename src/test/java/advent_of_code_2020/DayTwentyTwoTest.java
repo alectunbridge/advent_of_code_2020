@@ -138,4 +138,25 @@ public class DayTwentyTwoTest {
         );
         assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(105);
     }
+
+    @Test
+    void recursiveExample() {
+        DayTwentyTwo dayTwentyTwo = new DayTwentyTwo(
+        "Player 1:", "9", "2", "6", "3", "1",
+        "Player 2:", "5", "8", "4", "7", "10"
+        );
+        assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(291);
+    }
+
+    @Test
+    void part2Solution() throws URISyntaxException, IOException {
+        URI fileURI = this.getClass().getClassLoader()
+                .getResource("day_twenty_two.txt")
+                .toURI();
+        List<String> lines = Files.readAllLines(Path.of(fileURI));
+
+        DayTwentyTwo dayTwentyTwo = new DayTwentyTwo(lines.toArray(new String[0]));
+
+        assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(0);
+    }
 }
