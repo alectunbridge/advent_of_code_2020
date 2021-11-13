@@ -119,8 +119,23 @@ public class DayTwentyTwoTest {
                 .toURI();
         List<String> lines = Files.readAllLines(Path.of(fileURI));
 
-        DayTwentyTwo dayTwentyTwo = new DayTwentyTwo( lines.toArray(new String[0]));
+        DayTwentyTwo dayTwentyTwo = new DayTwentyTwo(lines.toArray(new String[0]));
 
         assertThat(dayTwentyTwo.completeGame()).isEqualTo(33434);
+    }
+
+    @Test
+    void infinteRecursion() {
+        DayTwentyTwo dayTwentyTwo = new DayTwentyTwo(
+                "Player 1:",
+                "43",
+                "19",
+                "",
+                "Player 2:",
+                "2",
+                "29",
+                "14"
+        );
+        assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(105);
     }
 }

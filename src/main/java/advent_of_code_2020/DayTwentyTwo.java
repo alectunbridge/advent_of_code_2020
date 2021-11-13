@@ -1,12 +1,15 @@
 package advent_of_code_2020;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class DayTwentyTwo {
 
     private Deque<Integer> playerOneDeck;
     private Deque<Integer> playerTwoDeck;
+    private List<String> previousStates = new ArrayList<>();
 
     public DayTwentyTwo(String... lines) {
         playerOneDeck = new ArrayDeque<>();
@@ -75,5 +78,53 @@ public class DayTwentyTwo {
         }
 
         return score;
+    }
+
+    public int completeRecursiveGame() {
+        int roundCount = 1;
+        Deque<Integer> winnersDeck = null;
+        do{
+            winnersDeck = playRecursiveRound();
+            roundCount++;
+        } while (winnersDeck == null);
+
+        int score = 0;
+        int multiplier = winnersDeck.size();
+        for (Integer cardValue : winnersDeck) {
+            score += cardValue * multiplier;
+            multiplier--;
+        }
+
+        return score;
+    }
+
+    private Deque<Integer> playRecursiveRound() {
+        String currentState = playerOneDeck.toString() + playerTwoDeck.toString();
+        if(previousStates.contains(currentState)){
+            return playerOneDeck;
+        } else {
+            previousStates.add(currentState);
+        }
+
+        Integer playerOneCard = drawPlayer1();
+        Integer playerTwoCard = drawPlayer2();
+
+        if (playerOneCard > playerTwoCard) {
+            playerOneDeck.addLast(playerOneCard);
+            playerOneDeck.addLast(playerTwoCard);
+        } else {
+            playerTwoDeck.addLast(playerTwoCard);
+            playerTwoDeck.addLast(playerOneCard);
+        }
+
+        Deque<Integer> winnersDeck = null;
+        if(playerOneDeck.isEmpty()){
+            winnersDeck = playerTwoDeck;
+        }
+        if(playerTwoDeck.isEmpty()) {
+            winnersDeck = playerOneDeck;
+        }
+
+        return winnersDeck;
     }
 }
