@@ -1,15 +1,14 @@
 package advent_of_code_2020;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class DayTwentyTwo {
 
     private Deque<Integer> playerOneDeck;
     private Deque<Integer> playerTwoDeck;
     private List<String> previousStates;
+
+    static Map<String,Result> previousWinners = new HashMap<>();
 
     public DayTwentyTwo(String... lines) {
         previousStates = new ArrayList<>();
@@ -30,12 +29,7 @@ public class DayTwentyTwo {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append("Player 1:\n");
-        playerOneDeck.forEach(card->result.append(card+"\n"));
-        result.append("Player 2:\n");
-        playerTwoDeck.forEach(card->result.append(card+"\n"));
-        return result.toString();
+        return toString(playerOneDeck.size(),playerTwoDeck.size());
     }
 
     public int drawPlayer1() {
@@ -91,9 +85,15 @@ public class DayTwentyTwo {
         return score;
     }
 
-    public int completeRecursiveGame() {
-        int roundCount = 1;
+    public Result completeRecursiveGame() {
+        String startState = toString();
         Integer winningPlayerNo = null;
+
+        if(previousWinners.containsKey(startState)){
+            System.out.println("memo: " +toString().replaceAll("\n",",")+ " " + previousWinners.get(startState));
+            return previousWinners.get(startState);
+        }
+        int roundCount = 1;
         do{
             winningPlayerNo = playRecursiveRound();
             roundCount++;
@@ -113,12 +113,14 @@ public class DayTwentyTwo {
             multiplier--;
         }
 
-        return score;
+        previousWinners.put(startState,new Result(winningPlayerNo, score));
+
+        return new Result(winningPlayerNo,score);
     }
 
     private Integer playRecursiveRound() {
-        System.out.println(this);
-        String currentState = playerOneDeck.toString() + playerTwoDeck.toString();
+        int winnerOfRound;
+        String currentState = toString();
         if(previousStates.contains(currentState)){
             return 1;
         } else {
@@ -127,33 +129,24 @@ public class DayTwentyTwo {
 
         Integer playerOneCard = drawPlayer1();
         Integer playerTwoCard = drawPlayer2();
-
         if(playerOneDeck.size()<playerOneCard || playerTwoDeck.size()<playerTwoCard) {
             if (playerOneCard > playerTwoCard) {
-                playerOneDeck.addLast(playerOneCard);
-                playerOneDeck.addLast(playerTwoCard);
+                winnerOfRound = 1;
             } else {
-                playerTwoDeck.addLast(playerTwoCard);
-                playerTwoDeck.addLast(playerOneCard);
+                winnerOfRound = 2;
             }
         } else {
             //recurse
-            System.out.println("recurse");
-            StringBuilder result = new StringBuilder();
-            result.append("Player 1:\n");
-            playerOneDeck.stream().limit(playerOneCard).forEach(card->result.append(card+"\n"));
-            result.append("Player 2:\n");
-            playerTwoDeck.stream().limit(playerTwoCard).forEach(card->result.append(card+"\n"));
-            String s = result.toString();
-            String[] split = s.replaceAll("[]\\]\\[]", "").split("\n");
-            int winnerOfSubGame =  new DayTwentyTwo(split).completeRecursiveGame();
-            if (winnerOfSubGame==1) {
-                playerOneDeck.addLast(playerOneCard);
-                playerOneDeck.addLast(playerTwoCard);
-            } else {
-                playerTwoDeck.addLast(playerTwoCard);
-                playerTwoDeck.addLast(playerOneCard);
-            }
+            String[] subGameInInputFormat = toString(playerOneCard,playerTwoCard).split("\n");
+            winnerOfRound = new DayTwentyTwo(subGameInInputFormat).completeRecursiveGame().getWinningPlayerNo();
+        }
+
+        if (winnerOfRound==1) {
+            playerOneDeck.addLast(playerOneCard);
+            playerOneDeck.addLast(playerTwoCard);
+        } else {
+            playerTwoDeck.addLast(playerTwoCard);
+            playerTwoDeck.addLast(playerOneCard);
         }
 
         Integer winnersDeck = null;
@@ -165,5 +158,14 @@ public class DayTwentyTwo {
         }
 
         return winnersDeck;
+    }
+
+    private String toString(Integer playerOneCard, Integer playerTwoCard) {
+        StringBuilder result = new StringBuilder();
+        result.append("Player 1:\n");
+        playerOneDeck.stream().limit(playerOneCard).forEach(card->result.append(card+"\n"));
+        result.append("Player 2:\n");
+        playerTwoDeck.stream().limit(playerTwoCard).forEach(card->result.append(card+"\n"));
+        return result.toString();
     }
 }

@@ -136,7 +136,7 @@ public class DayTwentyTwoTest {
                 "29",
                 "14"
         );
-        assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(105);
+        assertThat(dayTwentyTwo.completeRecursiveGame().getScore()).isEqualTo(105);
     }
 
     @Test
@@ -145,7 +145,7 @@ public class DayTwentyTwoTest {
         "Player 1:", "9", "2", "6", "3", "1",
         "Player 2:", "5", "8", "4", "7", "10"
         );
-        assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(291);
+        assertThat(dayTwentyTwo.completeRecursiveGame().getScore()).isEqualTo(291);
     }
 
     @Test
@@ -157,6 +157,9 @@ public class DayTwentyTwoTest {
 
         DayTwentyTwo dayTwentyTwo = new DayTwentyTwo(lines.toArray(new String[0]));
 
-        assertThat(dayTwentyTwo.completeRecursiveGame()).isEqualTo(0);
+        int actual = dayTwentyTwo.completeRecursiveGame().getScore();
+        assertThat(actual).isLessThan(34997);
+        assertThat(actual).isLessThan(32261);
+        assertThat(actual).isEqualTo(31657);
     }
 }
