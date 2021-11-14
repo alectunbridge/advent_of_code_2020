@@ -74,4 +74,14 @@ public class DayTwentyThreeTest {
         }
         assertThat(dayTwentyThree.answer()).isEqualTo("97245386");
     }
+
+    @Test
+    void part2Example() {
+        DayTwentyThree dayTwentyThreePartTwo = new DayTwentyThreePartTwo(3, 8, 9, 1, 2, 5, 4, 6, 7);
+        assertThat(dayTwentyThreePartTwo.getCups()).hasSize(1_000_000);
+        for (int i = 0; i < 10_000_000; i++) {
+            dayTwentyThreePartTwo.move();
+        }
+        assertThat(dayTwentyThreePartTwo.answer()).isEqualTo("934001");
+    }
 }

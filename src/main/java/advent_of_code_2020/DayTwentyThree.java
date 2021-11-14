@@ -7,13 +7,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class DayTwentyThree {
-    private List<Integer> cups;
-    private int currentCupIndex;
+    protected List<Integer> cups;
+    protected int currentCupIndex;
+
+    public DayTwentyThree() {
+        currentCupIndex = 0;
+        cups = new ArrayList<>();
+    }
 
     public DayTwentyThree(Integer... cups) {
         this.cups = new ArrayList<>();
         this.cups.addAll(Arrays.asList(cups));
-        currentCupIndex = 0;
     }
 
     @Override
@@ -72,5 +76,9 @@ public class DayTwentyThree {
             i%=cups.size();
         }
         return result;
+    }
+
+    public List<Integer> getCups() {
+        return cups;
     }
 }
