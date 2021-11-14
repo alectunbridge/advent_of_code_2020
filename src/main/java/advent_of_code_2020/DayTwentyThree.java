@@ -31,6 +31,7 @@ public class DayTwentyThree {
             if(indexToRemove == cups.size()) {
                 indexToRemove = 0;
                 currentCupIndex--;
+
             }
             removedCups.add(cups.remove(indexToRemove));
         }
@@ -46,11 +47,30 @@ public class DayTwentyThree {
         }
 
         int insertionIndex = cups.indexOf(destinationCup)+1;
-        if(insertionIndex<currentCupIndex) {
+        if(insertionIndex<=currentCupIndex) {
             currentCupIndex+=removedCups.size();
         }
         cups.addAll(insertionIndex, removedCups);
         currentCupIndex++;
         currentCupIndex %= cups.size();
+    }
+
+    public String answer() {
+        String result = "";
+        boolean found1 = false;
+        int i = 0;
+        while (result.length() < cups.size()-1) {
+            Integer cup = cups.get(i);
+            if (cup == 1) {
+                found1 = true;
+            } else {
+                if (found1) {
+                    result += cup;
+                }
+            }
+            i++;
+            i%=cups.size();
+        }
+        return result;
     }
 }
