@@ -2,6 +2,13 @@ package advent_of_code_2020;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DayTwentyFourTest {
@@ -55,5 +62,17 @@ class DayTwentyFourTest {
                 "wseweeenwnesenwwwswnew"
         );
         assertThat(dayTwentyFour.getBlackTiles()).hasSize(10);
+    }
+
+    @Test
+    void part1() throws IOException, URISyntaxException {
+        URI fileURI = this.getClass().getClassLoader()
+                .getResource("day_twenty_four.txt")
+                .toURI();
+        List<String> lines = Files.readAllLines(Path.of(fileURI));
+
+        DayTwentyFour day = new DayTwentyFour(lines.toArray(new String[0]));
+
+        assertThat(day.getBlackTiles()).hasSize(388);
     }
 }
