@@ -16,35 +16,35 @@ public class DayTwentyThreeTest {
         DayTwentyThree dayTwentyThree = new DayTwentyThree(3, 8, 9, 1, 2, 5, 4, 6, 7);
 
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("3 *2 8 9 1 5 4 6 7");
+        assertThat(dayTwentyThree).asString().isEqualTo("*2 8 9 1 5 4 6 7 3");
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("3 2 *5 4 6 7 8 9 1");
+        assertThat(dayTwentyThree).asString().isEqualTo("*5 4 6 7 8 9 1 3 2");
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("3 4 6 7 2 5 *8 9 1");
+        assertThat(dayTwentyThree).asString().isEqualTo("*8 9 1 3 4 6 7 2 5");
 
         dayTwentyThree.move();
         assertThat(dayTwentyThree).asString().isEqualTo("*4 6 7 9 1 3 2 5 8");
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("4 *1 3 6 7 9 2 5 8");
+        assertThat(dayTwentyThree).asString().isEqualTo("*1 3 6 7 9 2 5 8 4");
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("4 1 *9 3 6 7 2 5 8");
+        assertThat(dayTwentyThree).asString().isEqualTo("*9 3 6 7 2 5 8 4 1");
 
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("4 1 9 *2 5 8 3 6 7");
+        assertThat(dayTwentyThree).asString().isEqualTo("*2 5 8 3 6 7 4 1 9");
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("4 1 5 8 3 9 2 *6 7");
+        assertThat(dayTwentyThree).asString().isEqualTo("*6 7 4 1 5 8 3 9 2");
         dayTwentyThree.move();
         assertThat(dayTwentyThree).asString().isEqualTo("*5 7 4 1 8 3 9 2 6");
 
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("5 *8 3 7 4 1 9 2 6");
+        assertThat(dayTwentyThree).asString().isEqualTo("*8 3 7 4 1 9 2 6 5");
 
         assertThat(dayTwentyThree.answer()).isEqualTo("92658374");
 
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("5 8 *1 9 2 6 3 7 4");
+        assertThat(dayTwentyThree).asString().isEqualTo("*1 9 2 6 3 7 4 5 8");
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("5 8 9 2 6 1 *3 7 4");
+        assertThat(dayTwentyThree).asString().isEqualTo("*3 7 4 5 8 9 2 6 1");
     }
 
     @Test
@@ -63,7 +63,7 @@ public class DayTwentyThreeTest {
         assertThat(dayTwentyThree).asString().isEqualTo("*7 2 5 8 4 1 9 3 6");
 
         dayTwentyThree.move();
-        assertThat(dayTwentyThree).asString().isEqualTo("7 *4 1 9 3 6 2 5 8");
+        assertThat(dayTwentyThree).asString().isEqualTo("*4 1 9 3 6 2 5 8 7");
     }
 
     @Test
@@ -82,6 +82,6 @@ public class DayTwentyThreeTest {
         for (int i = 0; i < 10_000_000; i++) {
             dayTwentyThreePartTwo.move();
         }
-        assertThat(dayTwentyThreePartTwo.answer()).isEqualTo("934001");
+        assertThat(dayTwentyThreePartTwo.answer()).isEqualTo("149245887792");
     }
 }

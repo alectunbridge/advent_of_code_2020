@@ -1,84 +1,81 @@
 package advent_of_code_2020;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Map;
 
 public class DayTwentyThree {
-    protected List<Integer> cups;
-    protected int currentCupIndex;
+    protected LinkedHashMap<Integer,Integer> cups;
+    protected int currentCup;
 
-    public DayTwentyThree() {
-        currentCupIndex = 0;
-        cups = new ArrayList<>();
-    }
 
     public DayTwentyThree(Integer... cups) {
-        this.cups = new ArrayList<>();
-        this.cups.addAll(Arrays.asList(cups));
+        this.cups = new LinkedHashMap<>();
+        for (int i = 0; i < cups.length; i++) {
+             if (i == cups.length-1){
+                 this.cups.put(cups[i], cups[0]);
+             } else {
+                 this.cups.put(cups[i], cups[i + 1]);
+             }
+        }
+        currentCup = cups[0];
     }
 
     @Override
     public String toString() {
-        return IntStream
-                .range(0, cups.size())
-                .mapToObj(i -> i == currentCupIndex ? "*"+cups.get(i) : cups.get(i).toString())
-                .collect(Collectors.joining(" "));
+        StringBuilder sb = new StringBuilder();
+        sb.append("*");
+        sb.append(currentCup);
+        sb.append(" ");
+        int nextCup = cups.get(currentCup);
+        for (int i = 0; i < cups.size()-1; i++) {
+
+            sb.append(nextCup);
+            sb.append(" ");
+            nextCup = cups.get(nextCup);
+        }
+        return sb.toString().trim();
     }
 
     public void move() {
-        List<Integer> removedCups = new ArrayList<>();
+        List<Integer> cupsToMove = new ArrayList<>();
+        int nextCup = cups.get(currentCup);
         for (int i = 1; i <= 3; i++) {
-            int indexToRemove = currentCupIndex + 1;
-            if(indexToRemove == cups.size()) {
-                indexToRemove = 0;
-                currentCupIndex--;
-
-            }
-            removedCups.add(cups.remove(indexToRemove));
+            cupsToMove.add(nextCup);
+            nextCup = cups.get(nextCup);
         }
-        int destinationCup = cups.get(currentCupIndex) - 1;
+        int destinationCup = currentCup-1;
         if(destinationCup == 0) {
-            destinationCup = cups.size()+removedCups.size();
+            destinationCup = cups.size();
         }
-        while(removedCups.contains(destinationCup)) {
+        while(cupsToMove.contains(destinationCup)) {
             destinationCup--;
             if(destinationCup == 0) {
-                destinationCup = cups.size()+removedCups.size();
+                destinationCup = cups.size();
             }
         }
 
-        int insertionIndex = cups.indexOf(destinationCup)+1;
-        if(insertionIndex<=currentCupIndex) {
-            currentCupIndex+=removedCups.size();
-        }
-        cups.addAll(insertionIndex, removedCups);
-        currentCupIndex++;
-        currentCupIndex %= cups.size();
+        cups.put(currentCup, cups.get(cupsToMove.get(cupsToMove.size()-1)));
+
+        int cupAfterDestination = cups.get(destinationCup);
+        cups.put(destinationCup, cupsToMove.get(0));
+        cups.put(cupsToMove.get(cupsToMove.size()-1),cupAfterDestination);
+        currentCup = cups.get(currentCup);
     }
 
     public String answer() {
         String result = "";
-        boolean found1 = false;
-        int i = 0;
+        int nextCup = cups.get(1);
+        result+= nextCup;
         while (result.length() < cups.size()-1) {
-            Integer cup = cups.get(i);
-            if (cup == 1) {
-                found1 = true;
-            } else {
-                if (found1) {
-                    result += cup;
-                }
-            }
-            i++;
-            i%=cups.size();
+            result += cups.get(nextCup);
+            nextCup = cups.get(nextCup);
         }
         return result;
     }
 
-    public List<Integer> getCups() {
+    public Map<Integer, Integer> getCups() {
         return cups;
     }
 }
