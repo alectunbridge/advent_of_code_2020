@@ -157,4 +157,16 @@ class DayTwentyFourTest {
         DayTwentyFour dayTwentyFour = new DayTwentyFour();
         assertThat(dayTwentyFour.getWhiteNeighbours(new HexTile(0, 0))).hasSize(6);
     }
+
+    @Test
+    void part2Solution() throws IOException, URISyntaxException {
+        URI fileURI = this.getClass().getClassLoader()
+                .getResource("day_twenty_four.txt")
+                .toURI();
+        List<String> lines = Files.readAllLines(Path.of(fileURI));
+
+        DayTwentyFour day = new DayTwentyFour(lines.toArray(new String[0]));
+        IntStream.rangeClosed(1,100).forEach(i->day.flip());
+        assertThat(day.getBlackTiles()).hasSize(4002);
+    }
 }
